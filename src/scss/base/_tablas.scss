@@ -1,0 +1,36 @@
+.contenedor-tabla{
+    height: 49rem;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 95%;
+        border: 1px solid #ddd;
+        margin: 0 auto;
+        th{
+            background-color: $azul;
+            color: $blanco;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 16px;
+        }
+
+        .acciones{
+            display: flex;
+             i{
+                 margin-right: 2rem;
+                 cursor: pointer;
+             }
+        }
+
+        tr:nth-child(even) {
+        background-color: #f2f2f2;
+        }
+      }
+     
+}

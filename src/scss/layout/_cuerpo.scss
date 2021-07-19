@@ -1,0 +1,93 @@
+.contenedor-principal{
+    background-color: $blanco;
+    
+
+    .encabezado{
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $grisMedio;
+
+        .semestre{
+            margin-left: 1rem;
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+           
+ 
+            .openbtn{
+                @include boton(transparent, inline-block);
+                font-size:3rem;
+
+            }
+
+            h2{
+                color: $blanco;
+                margin: 0;
+                font-weight: $regular;
+            }
+        }
+
+        
+    }
+}
+
+
+.perfil{
+            
+
+    .boton-perfil{
+        display: flex;
+        font-size: 2rem;
+        border: none;
+        background-color:transparent;
+        cursor: pointer;  
+        align-items: center;
+        color: $blanco;
+    }
+    i{
+        font-size: 4rem;
+                
+    }
+
+    .contenido-perfil{
+        visibility: hidden;
+        display: flex;              
+        padding:.5rem 1rem;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        background-color: $blanco;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        width: 12.1rem;
+        opacity: 0;
+        transition: visibility .1s ease-in-out, opacity 0.2s linear, height .2s linear;
+
+
+        button{
+            @include boton($azul, block);
+            font-size: 1.5rem;
+            width: 100%;  
+            padding: 0.5rem;
+            color: $blanco;
+            
+        }
+        a{
+            width: 100%;
+            .boton-salir{
+                @include boton(red, inline-block);
+            
+            }
+
+        }
+            
+
+    }
+
+    .mostrar{
+        visibility: visible;
+        opacity: 1;
+    }
+  
+}

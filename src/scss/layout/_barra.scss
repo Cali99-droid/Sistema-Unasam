@@ -1,0 +1,116 @@
+.contenedor-barra{
+ 
+    background-color: $azul;
+    color: $blanco;
+    box-shadow: darken($color: $gris, $amount: 1);
+    width: 20rem;
+    transition: width .3s ease-in-out, opacity 0.5s linear, height .5s linear;
+
+   
+    
+}
+
+.contenido-cabecera{
+  visibility: visible;
+  transition: visibility .1s ease-out, opacity 0.5s linear, height .5s linear;
+}
+
+.mostrar-logo{
+    visibility: hidden;
+}
+.contenedor-logo{
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    
+
+    .logo-unasam{
+      width: 9rem;
+        
+    }
+    
+
+  
+}
+
+.ocultar{
+    width: 4rem;
+   
+   
+}
+
+
+.texto-unasam{
+    h3{
+        margin: 0;
+    }
+    
+    h3::after{
+        content: '';
+        display: block;
+        width: 100%;
+        height: .1rem;
+        background-color: $gris;   
+    }
+
+}
+
+.items{
+
+    
+        a{
+            color: $blanco;             
+            margin-bottom: 1rem;
+            display: flex;
+            padding: .5rem;
+            font-size: 1.8rem;
+            overflow: hidden;
+            
+
+            i{
+                padding-right: 1rem;
+                font-size: 3rem;
+                justify-content: center;
+            }
+
+            &:hover{
+                background-color: darken($color: $azul, $amount: 8);
+                color: $blanco;
+            }
+
+            &:last-of-type{
+                margin-bottom: 0;
+            }
+                     
+        }
+
+        .sub-item{ 
+            margin-left: 2rem;
+            display: none;
+           
+
+                 
+        }
+
+        .mostrar-sub{
+            display: block;
+           
+         
+           
+        }
+    
+    
+}
+
+
+
+.contenido-cabecera{
+    a{
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 1rem;
+        color: $blanco;
+    }
+}
