@@ -2,10 +2,13 @@
     
     .titulo-grupos{
         h2{
-            text-align: left;
-            padding-left: 2rem;
+            text-align: center;
+            //padding-left: 2rem;
             font-weight: $bold;
-            font-size: 2rem;
+            font-size: 3rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: $azul;
 
             
         }
@@ -15,7 +18,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 95%;
+        width: 94%;
         margin: 0 auto;
 
         .buscar{
@@ -26,6 +29,7 @@
                 border-left: 0px;
                 border-right: 0px;
                 border-color: $azul;  
+                background-color: transparent;
             }
             i{
                 color: $azul;
@@ -39,8 +43,6 @@
                 @include boton($azul, block);
                 padding:1rem;
                 margin: 0;
-
-
             }
         }
     }
@@ -178,6 +180,13 @@
         label{
             font-weight: $bold;
             margin: 8px 0;
+        }
+
+        button {
+            @include boton($azul, block);
+            padding:1rem;
+            margin: 0;
+            margin-top: 2rem;
         }
         
     }

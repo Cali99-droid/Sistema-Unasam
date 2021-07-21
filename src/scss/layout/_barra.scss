@@ -1,18 +1,19 @@
 .contenedor-barra{
  
     background-color: $azul;
+    z-index: 1;
     color: $blanco;
-    box-shadow: darken($color: $gris, $amount: 1);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 12px 0 rgba(0,0,0,0.19);
     width: 20rem;
     transition: width .3s ease-in-out, opacity 0.5s linear, height .5s linear;
-
-   
+ 
     
 }
 
 .contenido-cabecera{
   visibility: visible;
   transition: visibility .1s ease-out, opacity 0.5s linear, height .5s linear;
+
 }
 
 .mostrar-logo{
@@ -88,17 +89,15 @@
 
         .sub-item{ 
             margin-left: 2rem;
-            display: none;
-           
-
-                 
+            visibility: hidden;    
+            opacity: .1;         
         }
 
         .mostrar-sub{
-            display: block;
-           
-         
-           
+            visibility: visible;
+            transition: visibility .1s ease-in-out, opacity 0.4s linear, height .5s linear;
+            opacity: 1;
+
         }
     
     

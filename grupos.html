@@ -81,11 +81,12 @@
                     <i class="fas fa-search"></i>
                     <input type="text" placeholder="Buscar" >
                 </div>
-
+ 
                 <div class="nuevo-grupo">
-                    <button type="button" class="boton-grupo" id="boton-agregar-grupo">
-                        <i class="fas fa-plus-circle"></i>  Agregar Grupo
-                    </button>
+                    <button type="button" class="boton-grupo" id="boton-agregar-grupo" 
+                    onclick="modal('modal-agregar', 'boton-agregar-grupo', 'close')">
+                        <i class="fas fa-plus-circle"></i>  Agregar Grupo </button>
+                    
                 </div>
             </div>
 
@@ -227,7 +228,10 @@
                 <div>
                     <label for="imagen-grupo">Imagen de Grupo</label>
                     <input type="file" name="imagen-grupo"> 
-                </div>
+                </div>     
+
+                    <button class="" type="submit">Aceptar</button>
+              
             </form> 
 
        </div>

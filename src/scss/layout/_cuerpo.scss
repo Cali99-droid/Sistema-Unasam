@@ -1,5 +1,5 @@
 .contenedor-principal{
-    background-color: $blanco;
+    background-color: $gris;
     
 
     .encabezado{
@@ -17,15 +17,18 @@
            
  
             .openbtn{
-                @include boton(transparent, inline-block);
+                @include boton($blanco, inline-block);
                 font-size:3rem;
+                color: $negro;
+               
 
             }
 
             h2{
-                color: $blanco;
+                font-size: 2.5rem;
+                color: $negro;
                 margin: 0;
-                font-weight: $regular;
+                font-weight: $bold;
             }
         }
 
@@ -44,7 +47,7 @@
         background-color:transparent;
         cursor: pointer;  
         align-items: center;
-        color: $blanco;
+        color: $negro;
     }
     i{
         font-size: 4rem;
