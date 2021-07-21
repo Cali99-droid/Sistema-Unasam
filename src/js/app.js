@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(){
     eventListeners();
+    modal();
 
 
 });
@@ -66,4 +67,27 @@ function items(){
         admin.classList.remove('mostrar-sub');
     }
 
+}
+
+
+function modal(){
+var modal = document.getElementById("modal-agregar");
+
+var btn = document.getElementById("boton-agregar-grupo");
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
 }

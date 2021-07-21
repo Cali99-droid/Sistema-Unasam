@@ -5,9 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema</title>
-    <link rel="stylesheet" href="build/css/app.css">
+
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="build/css/app.css">
 </head>
 <body>
 
@@ -81,7 +83,9 @@
                 </div>
 
                 <div class="nuevo-grupo">
-                    <button type="button" class="boton-grupo"><i class="fas fa-plus-circle"></i>  Agregar Grupo</button>
+                    <button type="button" class="boton-grupo" id="boton-agregar-grupo">
+                        <i class="fas fa-plus-circle"></i>  Agregar Grupo
+                    </button>
                 </div>
             </div>
 
@@ -194,11 +198,45 @@
         </div>
 
         </div>
-       
-
-
     </div>
    </div>
+
+   <div class="modal-agregar" id="modal-agregar">
+       
+   
+       <div class="contenido-modal-grupo">
+        <div class="encabezado-modal">
+            <h2>Nuevo Grupo</h2>
+            <span class="close">&times;</span>
+
+        </div>
+            <form action="" class="formulario">
+                
+                <label for="nombre-grupo">Nombre del grupo</label>
+                <input type="text" name="nombre-grupo" id="nombre-grupo">
+        
+                <label for="resolucion">Resolucion</label>
+                <input type="text" name="resolucion" id="resolucion">
+        
+                <label for="tipo-grupo">Tipo de Grupo</label>
+                <select name="tipo-grupo" id="tipo-grupo">
+                    <option value="">Academico</option>
+                    <option value="">Artístico</option>
+                </select>
+                
+                <div>
+                    <label for="imagen-grupo">Imagen de Grupo</label>
+                    <input type="file" name="imagen-grupo"> 
+                </div>
+            </form> 
+
+       </div>
+       
+   </div>
+
+
+
+   
  <script src="build/js/bundle.min.js"></script>
 </body>
 </html>
