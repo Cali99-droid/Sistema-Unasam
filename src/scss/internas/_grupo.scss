@@ -1,0 +1,27 @@
+.titulo-grup{
+    h2, p{
+        text-align: left;
+     
+        font-weight: $bold;
+        margin: 0;
+        margin-left: 2rem;
+    }
+}
+
+.tab-integrantes{
+    margin: 0;
+    height: 0;
+
+    .pie-tabla{
+        display: flex;
+        justify-content: space-between;
+        width: 95%;
+        margin: 0 auto;
+    }
+}
+
+.botones-grupo{
+    button{
+        width: 100%;
+    }
+}

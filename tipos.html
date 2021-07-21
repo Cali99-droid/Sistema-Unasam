@@ -81,7 +81,9 @@
                 </div>
 
                 <div class="nuevo-grupo">
-                    <button type="button" class="boton-grupo"><i class="fas fa-plus-circle"></i>  Agregar Tipos</button>
+                    <button type="button" class="boton-grupo" id="boton-agregar-tipo" 
+                    onclick="modal('modal-agregar', 'boton-agregar-tipo', 'close')">
+                        <i class="fas fa-plus-circle"></i>  Agregar Tipos</button>
                 </div>
             </div>
 
@@ -121,6 +123,29 @@
 
     </div>
    </div>
+
+   <!--ventana modal-->
+   <div class="modal-agregar" id="modal-agregar">
+       
+   
+    <div class="contenido-modal-grupo">
+     <div class="encabezado-modal">
+         <h2>Nuevo Tipo de Grupo</h2>
+         <span class="close">&times;</span>
+
+     </div>
+         <form action="" class="formulario-grupo">
+             
+             <label for="nombre-tipo">Nombre del tipo</label>
+             <input type="text" name="nombre-tipo" id="nombre-tipo">
+
+             <button class="" type="submit">Aceptar</button>
+   
+         </form> 
+
+    </div>
+    
+</div>
  <script src="build/js/bundle.min.js"></script>
 </body>
 </html>

@@ -81,7 +81,9 @@
                 </div>
 
                 <div class="nuevo-grupo">
-                    <button type="button" class="boton-grupo"><i class="fas fa-plus-circle"></i>  Agregar Semestre</button>
+                    <button type="button" class="boton-grupo" id="boton-agregar-semestre" 
+                    onclick="modal('modal-agregar', 'boton-agregar-semestre', 'close')"">
+                        <i class="fas fa-plus-circle"></i>  Agregar Semestre</button>
                 </div>
             </div>
 
@@ -133,6 +135,35 @@
 
     </div>
    </div>
+
+   <!--ventana modal-->
+   <div class="modal-agregar" id="modal-agregar">
+       
+   
+    <div class="contenido-modal-grupo">
+     <div class="encabezado-modal">
+         <h2>Nuevo Semestre</h2>
+         <span class="close">&times;</span>
+
+     </div>
+         <form action="" class="formulario-grupo">
+             
+             <label for="nombre-semestre">Nombre del Semestre</label>
+             <input type="text" name="nombre-semestre" id="nombre-semestre">
+     
+             <label for="fecha-inicio">Fecha inicio</label>
+             <input type="date" name="fecha-inicio" id="fecha-inicio">
+
+             <label for="fecha-fin">Fecha fin</label>
+             <input type="date" name="fecha-fin" id="fecha-fin">
+
+             <button class="" type="submit">Aceptar</button>
+   
+         </form> 
+
+    </div>
+    
+</div>
  <script src="build/js/bundle.min.js"></script>
 </body>
 </html>

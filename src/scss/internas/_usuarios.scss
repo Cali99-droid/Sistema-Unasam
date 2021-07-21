@@ -1,0 +1,48 @@
+.modal-agregar{
+     
+    .modal-usuarios{
+
+        width: 70%;
+
+
+        .formulario-grupo{
+            .buscar{
+                text-align: center;
+
+                input{
+                    border-radius: 50px;
+                }
+            }
+
+            input[type = 'text'], input[type = 'select'], input[type = 'password'], input[type = 'number'], input[type = 'email'] {
+                height: 4rem
+            }
+            
+            .contenedor-usuario{
+                @include grid(2, 1rem);
+                
+                .columna-usuario{
+                    display: flex;
+                    flex-direction: column;
+                    
+                }
+                
+            }
+
+            .estado{
+                display: flex;
+                align-items: center;
+                gap: 2rem;
+
+                margin-top: 2rem;
+            }
+        }
+
+    }
+
+
+
+}
+
+
+

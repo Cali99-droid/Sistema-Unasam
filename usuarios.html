@@ -81,7 +81,9 @@
                 </div>
 
                 <div class="nuevo-grupo">
-                    <button type="button" class="boton-grupo"><i class="fas fa-plus-circle"></i>  Agregar Usuario</button>
+                    <button type="button" class="boton-grupo" id="boton-agregar-usuario" 
+                    onclick="modal('modal-agregar', 'boton-agregar-usuario', 'close')">
+                        <i class="fas fa-plus-circle"></i>  Agregar Usuario</button>
                 </div>
             </div>
 
@@ -133,6 +135,80 @@
 
     </div>
    </div>
+
+   <!--ventana modal-->
+   <div class="modal-agregar" id="modal-agregar">
+       
+   
+    <div class="contenido-modal-grupo modal-usuarios">
+     <div class="encabezado-modal">
+         <h2>Nuevo Usuario</h2>
+         <span class="close">&times;</span>
+
+     </div>
+         <form action="" class="formulario-grupo">
+
+            <div class="buscar">
+                <label for="nombre-evento">Buscar</label>
+                <input type="text" name="nombre-evento" id="nombre-evento">
+            </div>
+
+            <div class="contenedor-usuario">
+                <div class="columna-usuario">
+                    <label for="nombre-usuario">Nombre</label>
+                    <input type="text" name="nombre-usuario" id="nombre-usuario">
+            
+                    <label for="apellido-usuario">Apellido</label>
+                    <input type="text" name="apellido-usuario" id="apellido-usuario">
+
+
+                    <label for="genero">Genero</label>
+                    <select name="genero" id="">
+                        <option value="">Masculino</option>
+                        <option value="">Femenino</option>
+                    </select>
+
+                    <label for="direccion">Direccion</label>
+                    <input type="text" name="direccion" id="direccion">
+
+                    <label for="email-usuario">Email</label>
+                    <input type="email" name="email-usuario" id="email-usuario">
+
+                    
+                </div>
+
+                <div class="columna-usuario">
+                
+
+                    <label for="telefono">Teléfono</label>
+                    <input type="number" name="telefono" id="telefono" placeholder="Ingrese teléfono">
+
+                    <label for="nombre-usu"nombre-usu>Nombre de Usuario</label>
+                    <input type="text" name="nombre-usu" placeholder="Ingrese nombre de Usuario">
+
+                    <label for="pass-usuario">Clave de Usuario</label>
+                    <input type="password"  name="pass-usuario" placeholder="Ingrese Password de Usuario">
+                    <div class="estado">
+                        <label for="estado">Estado</label>
+                        <input type="checkbox" name="estado">
+
+                    </div>
+                   
+                    <button class="" type="submit">Aceptar</button>
+
+                </div>
+
+            </div>
+             
+             
+
+             
+   
+         </form> 
+
+    </div>
+    
+</div>
  <script src="build/js/bundle.min.js"></script>
 </body>
 </html>

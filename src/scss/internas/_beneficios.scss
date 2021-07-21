@@ -1,0 +1,38 @@
+.modal-agregar{
+    .modal-beneficio{
+        width: 60%;
+        .formulario-beneficio{
+            @include grid(2, 1rem);
+            
+        
+            .columna-beneficio{
+                display: flex;
+                flex-direction: column;
+               
+
+                label{
+                    margin-top: 1.5rem;
+                    font-weight: $bold;
+                }
+                
+                input[type='text'], select,input[type='date'] {
+                    padding: 1rem 2rem;
+                    
+                }
+
+                button {
+                    @include boton($azul, block);
+                    padding:1rem 2rem;
+                    margin: 0;
+                    margin-top: 1rem;
+                }
+            }
+        }
+    }
+
+}
+
+
+
+
+
