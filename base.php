@@ -61,91 +61,21 @@
                 
                 <div class="contenido-perfil" id="contenido-perfil">
                     <button >Ver Perfil</button>
-                    <button class="boton">Salir</button>
+                    <a  href="login.html" ><button class="boton-salir">Salir</button></a>
                 </div>
+
                 
             </div>
-
-
         </div>
-
-        <div class="contenedor-grupos">
-            <div class="titulo-grupos">
-                <h2 class="no-margin">Gestión de Tipos</h2>
-            </div>
-
-            <div class="acciones-grupo">
-                <div class="buscar">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Buscar" >
-                </div>
-
-                <div class="nuevo-grupo">
-                    <button type="button" class="boton-grupo" id="boton-agregar-tipo" 
-                    onclick="modal('modal-agregar', 'boton-agregar-tipo', 'close')">
-                        <i class="fas fa-plus-circle"></i>  Agregar Tipos</button>
-                </div>
-            </div>
-
-            <div class="contenedor-tabla tab-beneficio">
-
-                    <table>
-                        <tr>
-                          <th>Tipos</th>
-                          <th>Acciones</th>
-                          
-                        </tr>
-                        <tr>
-                          <td>Jill</td>
-                          <td class="acciones"><i class="far fa-edit"></i><i class="far fa-trash-alt"></i></td>
-                          
-                        </tr>
-                        <tr>
-                          <td>Eve</td>
-                          <td class="acciones"><i class="far fa-edit"></i><i class="far fa-trash-alt"></i></td>
-                          
-                        </tr>
-                        <tr>
-                          <td>Adam</td>
-                          <td class="acciones"><i class="far fa-edit"></i><i class="far fa-trash-alt"></i></td>
-                          
-                        </tr>
-                      </table>
-          
-            </div>
-
-
-        </div>
-
-        </div>
+        <h3>Espacio para añadir contenido</h3>
        
-
-
+<!--
+        <div class="contenido-dash">
+            <iframe width="100%" height="588rem" src="https://app.powerbi.com/reportEmbed?reportId=12c334fc-301b-413b-be98-b15b4b66428c&autoAuth=true&ctid=c5d23b09-af01-4aec-ab74-7a5d1da01084&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXBhYXMtMS1zY3VzLXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0LyJ9" frameborder="0" allowFullScreen="true"></iframe>
+        </div>
+-->
+        </div>
     </div>
-   </div>
-
-   <!--ventana modal-->
-   <div class="modal-agregar" id="modal-agregar">
-       
-   
-    <div class="contenido-modal-grupo">
-     <div class="encabezado-modal">
-         <h2>Nuevo Tipo de Grupo</h2>
-         <span class="close">&times;</span>
-
-     </div>
-         <form action="" class="formulario-grupo">
-             
-             <label for="nombre-tipo">Nombre del tipo</label>
-             <input type="text" name="nombre-tipo" id="nombre-tipo">
-
-             <button class="" type="submit">Aceptar</button>
-   
-         </form> 
-
-    </div>
-    
-</div>
- <script src="build/js/bundle.min.js"></script>
-</body>
-</html>
+    <script src="build/js/bundle.min.js"></script>
+    </body>
+    </html>

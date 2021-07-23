@@ -1,14 +1,10 @@
 document.addEventListener('DOMContentLoaded', function(){
     eventListeners();
     
-
-
 });
 
 
-function mostrarPerfil(){
-    document.getElementById("contenido-perfil").classList.toggle("mostrar");   
-}
+
 
 function navegacion(){
     const contenedor = document.querySelector('.contenedor-barra');
@@ -50,6 +46,7 @@ function mostrarAdmin(){
 
 function eventListeners(){
     const mobileMenu = document.querySelector('.openbtn');
+
     mobileMenu.addEventListener('click', navegacion);
 /*
     const ad = document.querySelector('.administrador');
@@ -90,7 +87,6 @@ var btn = document.getElementById(boton);
 
 var span = document.getElementsByClassName(close)[0];
 
-
   modal.style.display = "block";
   console.log('dieste click ' + modal);
 
@@ -102,6 +98,7 @@ span.onclick = function() {
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
+    console.log('click ventana')
   }
 }
 }

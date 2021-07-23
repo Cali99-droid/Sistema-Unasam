@@ -41,7 +41,7 @@
                 <label for="psw"><b>Contraseña</b></label>
                 <input type="password" placeholder="Ingrese su contraseña" name="psw" required class="login-text">
 
-                <a href="index.html">
+                <a href="index.php">
   
                 <button type="button"  class="boton-acceder">Acceder</button>
                 </a>
