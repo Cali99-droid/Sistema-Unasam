@@ -4,7 +4,7 @@ require 'includes/funciones.php';
 require 'includes/config/database.php';
 
 $db = conectarDB();
-$query = "SELECT * FROM grupo_universitario";
+$query = "SELECT * FROM vista_grupo_universitario";
 
 $resultado = mysqli_query($db, $query);
 
@@ -92,12 +92,13 @@ incluirTemplate('barra');
             <?php while ($grupo = mysqli_fetch_assoc($resultado)) : ?>
 
                 <div class="grupo">
-                    <a href="grupo.php">
+                    <a href="grupo.php?id=<?php echo $grupo['idgrupo_universitario']; ?>">
                         <img src="<?php echo $grupo['imagen']; ?>" alt="Avatar" class="grupo-imagen">
                         <div class="container">
                             <h4 class="no-margin"><?php echo $grupo['nombre_grupo']; ?></h4>
-                            <p>Creación: <?php echo $grupo['fecha_creacion']; ?></p>
+                            <p> <?php echo $grupo['nombre_tipo']; ?></p>
                         </div>
+
                     </a>
                 </div>
 
