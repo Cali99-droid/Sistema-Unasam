@@ -1,0 +1,17 @@
+{
+    "name": "carlos/sistema",
+    "description": "sistema unasam",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Carlos Orellano",
+            "email": "orellano428@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "./classes"
+        }
+    }
+}
