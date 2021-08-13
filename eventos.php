@@ -23,7 +23,7 @@ incluirTemplate('barra');
         </div>
 
         <div class="nuevo-grupo">
-            <button type="button" class="boton-grupo" id="boton-agregar-evento" onclick="modal('modal-agregar', 'boton-agregar-evento', 'close')">
+            <button type="button" class="boton-grupo" id="boton-agregar-evento" onclick="modal('modal-agregar', 'boton-agregar-evento', 'close-evento')">
                 <i class="fas fa-plus-circle"></i> Agregar Evento
             </button>
         </div>
@@ -68,31 +68,10 @@ incluirTemplate('barra');
 
 </div>
 </div>
-<!--ventana modal-->
-<div class="modal-agregar" id="modal-agregar">
 
 
-    <div class="contenido-modal-grupo">
-        <div class="encabezado-modal">
-            <h2>Nuevo Evento</h2>
-            <span class="close">&times;</span>
+<?php
 
-        </div>
-        <form action="" class="formulario-grupo">
+incluirTemplate('modales/modEvento');
 
-            <label for="nombre-evento">Nombre del Evento</label>
-            <input type="text" name="nombre-evento" id="nombre-evento">
-
-            <label for="fecha-inicio">Fecha inicio</label>
-            <input type="date" name="fecha-inicio" id="fecha-inicio">
-
-            <label for="fecha-fin">Fecha fin</label>
-            <input type="date" name="fecha-fin" id="fecha-fin">
-
-            <button class="" type="submit">Aceptar</button>
-
-        </form>
-
-        <?php
-
-        incluirTemplate('cierre');
+incluirTemplate('cierre');

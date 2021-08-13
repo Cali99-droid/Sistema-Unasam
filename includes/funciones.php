@@ -1,5 +1,27 @@
 <?php
-require 'app.php';
-function incluirTemplate(string $nombre, bool $inicio = false){
+define('TEMPLATES_URL', __DIR__ . '/templates');
+define('FUNCIONES_URL', __DIR__ .  'funciones.php');
+define('CARPETA_IMAGENES', __DIR__ . '/../imagenes/');
+
+function incluirTemplate(string $nombre, bool $inicio = false)
+{
     include TEMPLATES_URL . "/${nombre}.php";
+}
+
+//escapa / sanitizar el html
+function s($html): string
+{
+    $s = htmlspecialchars($html);
+    return $s;
+}
+
+
+//
+function debugear($varable)
+{
+    echo '<pre>';
+    var_dump($varable);
+    echo '</pre>';
+
+    exit;
 }

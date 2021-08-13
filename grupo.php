@@ -1,21 +1,18 @@
 <?php
 
-require 'includes/funciones.php';
-require 'includes/config/database.php';
-$db = conectarDB();
+require 'includes/app.php';
+
+use App\Grupo;
 
 $id  = $_GET['id'];
 
-$query = "SELECT * FROM  vista_grupo_universitario WHERE idgrupo_universitario = '$id'";
-$resultado = mysqli_query($db, $query);
-$grupo = mysqli_fetch_assoc($resultado);
+$grupo = Grupo::getGrupo($id);
 
-$queryIntegrantes = "SELECT * FROM  vista_alumno_x_grupo WHERE idgrupo_universitario = '$id'";
-$resultadoIntegrantes = mysqli_query($db, $queryIntegrantes);
+$integrantes = $grupo->getIntegrantes();
 
-// echo '<pre>';
 
-// echo '</pre>';
+$consulta = "SELECT * FROM tipo_grupo";
+$tipos = mysqli_query($db, $consulta);
 
 
 
@@ -24,8 +21,8 @@ incluirTemplate('barra');
 
 <div class="contenedor-grupos">
     <div class="titulo-grup">
-        <h2 class="no-margin"><?php echo $grupo['nombre_grupo'] ?></h2>
-        <p><?php echo $grupo['nombre_tipo'] ?> </p>
+        <h2 class="no-margin"><?php echo $grupo->nombre_grupo;  ?></h2>
+        <p><?php echo  $grupo->getTipo() . ' - ' . $grupo->fecha_creacion ?> </p>
     </div>
 
     <div class="acciones-grupo">
@@ -35,64 +32,60 @@ incluirTemplate('barra');
         </div>
 
         <div class="nuevo-grupo botones-grupo">
-            <button type="button" class="boton-grupo" id="boton-agregar-evento" onclick="modal('modal-agregar', 'boton-agregar-evento', 'close')">
-                <i class="fas fa-plus-circle"></i> Agregar Evento
+            <button type="button" class="boton-grupo" id="boton-agregar-evento" onclick="modal('modal-agregar', 'boton-agregar-evento', 'close-evento')">
+                <i class="fas fa-plus-circle"></i> Asignar Evento
             </button>
 
-            <button type="button" class="boton-grupo" id="boton-agregar-integrante" onclick="modal('modal-agregar', 'boton-agregar-integrante', 'close')">
+            <button type="button" class="boton-grupo" id="boton-agregar-integrante" onclick="modal('modal-integrante', 'boton-agregar-integrante', 'close-integrante')">
                 <i class="fas fa-plus-circle"></i> Agregar Integrante
             </button>
 
-            <button type="button" class="boton-grupo" id="boton-agregar-evento" onclick="modal('modal-agregar', 'boton-agregar-evento', 'close')">
+            <button type="button" class="boton-grupo" id="boton-agregar-grupo" onclick="modal('modal-grupo', 'boton-agregar-grupo', 'close-grupo')"">
                 Editar Grupo
             </button>
         </div>
     </div>
 
-    <div class="contenedor-tabla tab-integrantes">
+    <div class=" contenedor-tabla tab-integrantes">
 
-        <table>
-            <thead>
-                <tr>
-                    <th>DNI</th>
-                    <th>Nombres</th>
-                    <th>Codigo</th>
-                    <th>Acciones</th>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>DNI</th>
+                            <th>Nombres</th>
+                            <th>Codigo</th>
+                            <th>Acciones</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($integrantes = mysqli_fetch_assoc($resultadoIntegrantes)) : ?>
-                    <tr>
-                        <td><?php echo $integrantes['dni']; ?></td>
-                        <td><?php echo $integrantes['nombre']; ?></td>
-                        <td><?php echo $integrantes['codigo_alumno']; ?></td>
-                        <td>
-                            <form method="POST" class="w-100">
-                                <input type="hidden" name="id" value="<?php echo $integrantes['dni']; ?>">
-                                <input type="submit" class="boton-rojo-block" value="Eliminar">
-                            </form>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($integrante = $integrantes->fetch_assoc()) : ?>
+                            <tr>
+                                <td><?php echo $integrante['dni']; ?></td>
+                                <td><?php echo $integrante['nombre']; ?></td>
+                                <td><?php echo $integrante['codigo_alumno']; ?></td>
+                                <td>
+                                    <form method="POST" class="w-100">
+                                        <input type="hidden" name="id" value="<?php echo $integrante['dni']; ?>">
+                                        <input type="submit" class="boton-rojo-block" value="Eliminar">
+                                    </form>
 
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
 
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
 
-        <div class="pie-tabla">
+                <div class="pie-tabla">
 
-            <a href="">Ver Eventos</a>
+                    <a href="">Ver Eventos</a>
+
+                </div>
 
         </div>
 
-
-
     </div>
-
-
-
-</div>
 
 
 
@@ -102,71 +95,67 @@ incluirTemplate('barra');
 </div>
 </div>
 <!--ventana modal-->
-
-
-<div class="modal-agregar" id="modal-agregar">
-
-
-    <div class="contenido-modal-grupo modal-usuarios">
+<div class="modal-agregar " id="modal-grupo">
+    <div class="contenido-modal-grupo ">
         <div class="encabezado-modal">
-            <h2>Nuevo Integrante</h2>
-            <span class="close">&times;</span>
+            <h2>Editar Grupo</h2>
+            <span class="close close-grupo">&times;</span>
 
         </div>
-        <form action="" class="formulario-grupo">
+        <form class="formulario-grupo" method="POST" enctype="multipart/form-data">
 
-            <div class="buscar">
-                <label for="nombre-evento">Buscar</label>
-                <input type="text" name="nombre-evento" id="nombre-evento">
-            </div>
+            <label for="nombre_grupo">Nombre del grupo</label>
+            <input type="text" name="nombre_grupo" id="nombre-grupo" value="<?php echo $grupo->nombre_grupo;  ?>" required>
 
-            <div class="contenedor-usuario">
-                <div class="columna-usuario">
-                    <label for="nombre-usuario">Nombre</label>
-                    <input type="text" name="nombre-usuario" id="nombre-usuario">
+            <label for="fecha_creacion">Fecha de Creacion</label>
+            <input type="date" name="fecha_creacion" id="fecha_creacion" value="<?php echo $grupo->fecha_creacion;  ?>">
 
-                    <label for="apellido-usuario">Apellido</label>
-                    <input type="text" name="apellido-usuario" id="apellido-usuario">
+            <label for="resolucion_creacion">Resolucion</label>
+            <input type="text" name="resolucion_creacion" id="resolucion" value="<?php echo $grupo->resolucion_creacion;  ?>">
 
+            <div class="contenido-tipos">
+                <div class="cont-tip">
+                    <label for="idTipoGrupo">Tipo de Grupo</label>
+                    <select name="idTipoGrupo" id="tipo-grupo">
+                        <option value="" selected>--Seleccione--</option>
 
-                    <label for="genero">Genero</label>
-                    <select name="genero" id="">
-                        <option value="">Masculino</option>
-                        <option value="">Femenino</option>
+                        <?php while ($row = mysqli_fetch_assoc($tipos)) : ?>
+                            <option <?php echo $grupo->idTipoGrupo == $row['idTipoGrupo'] ? 'selected' : '' ?> value="<?php echo $row['idTipoGrupo']; ?>"><?php echo $row['nombre_tipo']; ?>
+                            <?php endwhile; ?>
+                            <!--  <? //php echo $tipo === $row['idTipoGrupo'] ? 'selected' : '' 
+                                    ?>-->
+
                     </select>
-
-                    <label for="direccion">Direccion</label>
-                    <input type="text" name="direccion" id="direccion">
-
-                    <label for="email-usuario">Email</label>
-                    <input type="email" name="email-usuario" id="email-usuario">
-
-
                 </div>
 
-                <div class="columna-usuario">
-
-
-                    <label for="telefono">Teléfono</label>
-                    <input type="number" name="telefono" id="telefono" placeholder="Ingrese teléfono">
-
-                    <label for="nombre-usu" nombre-usu>Nombre de Usuario</label>
-                    <input type="text" name="nombre-usu" placeholder="Ingrese nombre de Usuario">
-
-                    <label for="pass-usuario">Clave de Usuario</label>
-                    <input type="password" name="pass-usuario" placeholder="Ingrese Password de Usuario">
-                    <div class="estado">
-                        <label for="estado">Estado</label>
-                        <input type="checkbox" name="estado">
-
-                    </div>
-
-                    <button class="" type="submit">Aceptar</button>
+                <div class="cont-tip">
+                    <button class="" type="button" id="boton-agregar-tipo" onclick="modal('modal-tipo', 'boton-agregar-tipo', 'close-tipo')">
+                        <i class="fas fa-plus-circle"></i> Nuevo tipo
+                    </button>
 
                 </div>
 
             </div>
-        </form>
-        <?php
 
-        incluirTemplate('cierre');
+
+            <div>
+                <label for="imagen">Imagen de Grupo</label>
+                <input type="file" name="imagen">
+            </div>
+
+            <button type="submit">Aceptar</button>
+
+        </form>
+
+    </div>
+</div>
+
+
+
+<?php
+
+
+incluirTemplate('modales/modIntegrante');
+incluirTemplate('modales/modEvento');
+
+incluirTemplate('cierre');

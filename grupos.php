@@ -1,68 +1,48 @@
 <?php
 
-require 'includes/funciones.php';
-require 'includes/config/database.php';
+require 'includes/app.php';
 
-$db = conectarDB();
-$query = "SELECT * FROM vista_grupo_universitario";
+use App\Grupo;
+use Intervention\Image\ImageManagerStatic as Image;
 
-$resultado = mysqli_query($db, $query);
+//obtener todos los grupos
+$grupos = Grupo::all();
+
 
 $consulta = "SELECT * FROM tipo_grupo";
 $tipos = mysqli_query($db, $consulta);
 
-// echo '<pre>';
-// var_dump(mysqli_fetch_assoc($resultado));
-// echo '</pre>';
-// exit;
-
 /**Insercion */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //instancia de grupo
+    $grupo = new Grupo($_POST);
 
-    $nombre_grupo = $_POST['nombre_grupo'];
-    $fecha_creacion = $_POST['fecha_creacion'];
-    $resolucion_creacion = $_POST['resolucion_creacion'];
-    $idTipoGrupo = $_POST['idTipoGrupo'];
-    $imagen = $_FILES['imagen'] ?? null;
+    /**Generar nombre unico */
+    $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+
+    /**Setear imagen */
+    if ($_FILES['imagen']['tmp_name']) {
+        $image = Image::make($_FILES['imagen']['tmp_name'])->fit(800, 600);
+        $grupo->setImagen($nombreImagen);
+    }
+
 
     /**Subida de Imagenes */
-    $carpetaImagenes = 'imagenes/';
-    $rutaImagen = '';
-    if (!is_dir($carpetaImagenes)) {
-        mkdir($carpetaImagenes);
+    //crear carpeta
+    if (!is_dir(CARPETA_IMAGENES)) {
+        mkdir(CARPETA_IMAGENES);
     }
 
-    if ($imagen) {
-        $imagePath = $carpetaImagenes . md5(uniqid(rand(), true))  . $imagen['name'];
+    //guarda la imagen en el servidor
+    $image->save(CARPETA_IMAGENES . $nombreImagen);
+    //guarda en la base de datos
+    $resultado = $grupo->guardar();
 
-        // var_dump($imagePath);
-
-        // mkdir(dirname($imagePath));
-
-        // var_dump($imagen);
-
-        move_uploaded_file($imagen['tmp_name'], $imagePath);
-        $rutaImagen = $imagePath;
+    //mensaje de exito o error
+    if ($resultado) {
+        header('Location: /grupos.php');
     }
-
-
-
-
-    // Insertar en la BD.
-    //echo "No hay errores";
-
-    $query = "INSERT INTO grupo_universitario ( nombre_grupo, fecha_creacion, resolucion_creacion, imagen, idtipogrupo) VALUES ( '$nombre_grupo', '$fecha_creacion','$resolucion_creacion', '$rutaImagen', '$idTipoGrupo')";
-
-    // echo $query;
-
-    mysqli_query($db, $query) or die(mysqli_error($db));
-    // var_dump($resultado);
-    // printf("Nuevo registro con el id %d.\n", mysqli_insert_id($db));
-    header('Location: /grupos.php');
 }
-
-
-
 
 incluirTemplate('barra');
 ?>
@@ -89,23 +69,20 @@ incluirTemplate('barra');
 
         <div class="contenido-grupos">
 
-            <?php while ($grupo = mysqli_fetch_assoc($resultado)) : ?>
+            <?php foreach ($grupos as $grupo) : ?>
 
                 <div class="grupo">
-                    <a href="grupo.php?id=<?php echo $grupo['idgrupo_universitario']; ?>">
-                        <img src="<?php echo $grupo['imagen']; ?>" alt="Avatar" class="grupo-imagen">
+                    <a href="grupo.php?id=<?php echo $grupo->idgrupo_universitario ?>">
+                        <img src="/imagenes/<?php echo  $grupo->imagen; ?>" alt="Avatar" class="grupo-imagen">
                         <div class="container">
-                            <h4 class="no-margin"><?php echo $grupo['nombre_grupo']; ?></h4>
-                            <p> <?php echo $grupo['nombre_tipo']; ?></p>
+                            <h4 class="no-margin"><?php echo $grupo->nombre_grupo; ?></h4>
+                            <p> <?php echo $grupo->getTipo(); ?></p>
                         </div>
 
                     </a>
                 </div>
 
-            <?php endwhile; ?>
-
-
-
+            <?php endforeach; ?>
         </div>
         <!--Fin conteniodo grupos-->
 
@@ -116,7 +93,6 @@ incluirTemplate('barra');
 </div>
 
 <div class="modal-agregar " id="modal-grupo">
-
     <div class="contenido-modal-grupo ">
         <div class="encabezado-modal">
             <h2>Nuevo Grupo</h2>
@@ -126,10 +102,10 @@ incluirTemplate('barra');
         <form class="formulario-grupo" method="POST" enctype="multipart/form-data">
 
             <label for="nombre_grupo">Nombre del grupo</label>
-            <input type="text" name="nombre_grupo" id="nombre-grupo" require>
+            <input type="text" name="nombre_grupo" id="nombre-grupo" required>
 
             <label for="fecha_creacion">Fecha de Creacion</label>
-            <input type="date" name="fecha_creacion" id="nombre-grupo">
+            <input type="date" name="fecha_creacion" id="fecha_creacion">
 
             <label for="resolucion_creacion">Resolucion</label>
             <input type="text" name="resolucion_creacion" id="resolucion">
@@ -167,10 +143,14 @@ incluirTemplate('barra');
 
         </form>
 
+    </div>
+</div>
+
+<?php
 
 
-        <?php
+incluirTemplate('modales/modalTipo');
 
-        incluirTemplate('modales/modalTipo');
+incluirTemplate('cierre');
 
-        incluirTemplate('cierre');
+?>
