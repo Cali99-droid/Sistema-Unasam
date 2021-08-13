@@ -14,9 +14,9 @@
 <body>
 
     <div class="contenedor-todo">
-        <div class="contenedor-barra" id="cont-barra">
+        <div class="contenedor-barra ocultar" id="cont-barra">
             <nav class="navegacion ">
-                <div class="contenido-cabecera">
+                <div class="contenido-cabecera mostrar-logo">
 
                     <div class="contenedor-logo">
                         <img src="./build/img/escudoUNASAM.webp" alt="escudo unasam" class="logo-unasam">
@@ -29,13 +29,13 @@
                 </div>
                 <div class="items">
 
-                    <a href="index.php"><i class='bx bxs-home' style='color:#e1e1e1'></i>Inicio</a>
-                    <a href="grupos.php"><i class='bx bx-group'></i>Grupos</a>
-                    <a href="beneficios.php"><i class='bx bx-medal'></i> Beneficios</a>
-                    <a href="eventos.php"><i class='bx bxs-calendar'></i>Eventos</a>
+                    <a href="index.php" title="Tnicio"><i class='bx bxs-home' style='color:#e1e1e1'></i>Inicio</a>
+                    <a href="grupos.php" title="Grupos"><i class='bx bx-group'></i>Grupos</a>
+                    <a href="beneficios.php" title="Beneficios"><i class='bx bx-medal'></i> Beneficios</a>
+                    <a href="eventos.php" title="Eventos"><i class='bx bxs-calendar'></i>Eventos</a>
                     <div class="item">
-                        <a href="javascript:void(0)" class="administrador" onclick="mostrarAdmin()"><i class="fas fa-user-tie"></i>Administrador</a>
-                        <div class="sub-item" id="sub-item">
+                        <a href="javascript:void(0)" class="administrador" onclick="mostrarAdmin()"><i class="fas fa-user-tie" title="Administrador"></i>Administrador</a>
+                        <div class="sub-item " id="sub-item">
                             <a href="tipos.php">Tipos de Grupos</a>
                             <a href="usuarios.php">Usuarios</a>
                             <a href="semestre.php">Semestres</a>

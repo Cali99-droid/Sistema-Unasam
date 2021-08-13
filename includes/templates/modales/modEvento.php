@@ -8,7 +8,7 @@
             <span class="close close-evento">&times;</span>
 
         </div>
-        <form action="" class="formulario-grupo">
+        <form class="formulario-grupo" method="POST">
 
             <label for="nombre-evento">Nombre del Evento</label>
             <input type="text" name="nombre-evento" id="nombre-evento">
@@ -19,7 +19,9 @@
             <label for="fecha-fin">Fecha fin</label>
             <input type="date" name="fecha-fin" id="fecha-fin">
 
+            <input type="hidden" name="cod" value="1">
             <button class="" type="submit">Aceptar</button>
+
 
         </form>
 

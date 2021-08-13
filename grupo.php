@@ -3,11 +3,11 @@
 require 'includes/app.php';
 
 use App\Grupo;
+use Intervention\Image\ImageManagerStatic as Image;
 
 $id  = $_GET['id'];
 
 $grupo = Grupo::getGrupo($id);
-
 $integrantes = $grupo->getIntegrantes();
 
 
@@ -15,6 +15,39 @@ $consulta = "SELECT * FROM tipo_grupo";
 $tipos = mysqli_query($db, $consulta);
 
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    if ($_POST['cod'] == 1) {
+        debugear('Asginando evento');
+    } elseif ($_POST['cod'] == 2) {
+        debugear('agreando integarante');
+    } else {
+        $arg = $_POST['grupo'];
+        $grupo->sincronizar($arg);
+
+        /**Generar nombre unico */
+        $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+
+        /**Setear imagen */
+        if ($_FILES['grupo']['tmp_name']['imagen']) {
+            $image = Image::make($_FILES['grupo']['tmp_name']['imagen'])->fit(800, 600);
+            $grupo->updImagen($nombreImagen);
+        }
+
+
+        /**Subida de Imagenes */
+
+        //guarda la imagen en el servidor
+        $image->save(CARPETA_IMAGENES . $nombreImagen);
+        //guarda en la base de datos
+        $resultado = $grupo->actualizar();
+
+        //mensaje de exito o error
+        if ($resultado) {
+            header('Location: /grupos.php');
+        }
+    }
+}
 
 incluirTemplate('barra');
 ?>
@@ -31,69 +64,73 @@ incluirTemplate('barra');
             <input type="text" placeholder="Buscar">
         </div>
 
-        <div class="nuevo-grupo botones-grupo">
-            <button type="button" class="boton-grupo" id="boton-agregar-evento" onclick="modal('modal-agregar', 'boton-agregar-evento', 'close-evento')">
-                <i class="fas fa-plus-circle"></i> Asignar Evento
+        <div class=" nuevo-grupo botones-grupo">
+
+
+            <button type="submit" id="boton-agregar-evento" onclick="modal('modal-agregar', 'boton-agregar-evento', 'close-evento')">
+                <i class="far fa-calendar-plus"></i> Asignar Evento
             </button>
 
-            <button type="button" class="boton-grupo" id="boton-agregar-integrante" onclick="modal('modal-integrante', 'boton-agregar-integrante', 'close-integrante')">
-                <i class="fas fa-plus-circle"></i> Agregar Integrante
+            <button type="submit" n class="boton-grupo" id="boton-agregar-integrante" onclick="modal('modal-integrante', 'boton-agregar-integrante', 'close-integrante')">
+                <i class="fas fa-user-plus"></i> Nuevo Integrante
             </button>
 
-            <button type="button" class="boton-grupo" id="boton-agregar-grupo" onclick="modal('modal-grupo', 'boton-agregar-grupo', 'close-grupo')"">
-                Editar Grupo
+            <button type="submit" id=" boton-agregar-grupo" onclick="modal('modal-grupo', 'boton-agregar-grupo', 'close-grupo')"">
+            <i class=" fas fa-pencil-alt"></i> Editar Grupo
             </button>
+
         </div>
     </div>
 
     <div class=" contenedor-tabla tab-integrantes">
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>DNI</th>
-                            <th>Nombres</th>
-                            <th>Codigo</th>
-                            <th>Acciones</th>
+        <table>
+            <thead>
+                <tr>
+                    <th>DNI</th>
+                    <th>Nombres</th>
+                    <th>Codigo</th>
+                    <th>Acciones</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while ($integrante = $integrantes->fetch_assoc()) : ?>
-                            <tr>
-                                <td><?php echo $integrante['dni']; ?></td>
-                                <td><?php echo $integrante['nombre']; ?></td>
-                                <td><?php echo $integrante['codigo_alumno']; ?></td>
-                                <td>
-                                    <form method="POST" class="w-100">
-                                        <input type="hidden" name="id" value="<?php echo $integrante['dni']; ?>">
-                                        <input type="submit" class="boton-rojo-block" value="Eliminar">
-                                    </form>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($integrante = $integrantes->fetch_assoc()) : ?>
+                    <tr>
+                        <td><?php echo $integrante['dni']; ?></td>
+                        <td><?php echo $integrante['nombre']; ?></td>
+                        <td><?php echo $integrante['codigo_alumno']; ?></td>
+                        <td>
+                            <form method="POST" class="w-100">
+                                <input type="hidden" name="id" value="<?php echo $integrante['dni']; ?>">
+                                <input type="submit" class="boton-rojo-block" value="Eliminar">
+                            </form>
 
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
 
-                    </tbody>
-                </table>
+            </tbody>
+        </table>
 
-                <div class="pie-tabla">
+        <div class="pie-tabla">
 
-                    <a href="">Ver Eventos</a>
-
-                </div>
+            <a href="">Ver Eventos</a>
 
         </div>
 
     </div>
 
-
-
 </div>
-
 
 </div>
 </div>
+
+
+
+
+
+
 <!--ventana modal-->
 <div class="modal-agregar " id="modal-grupo">
     <div class="contenido-modal-grupo ">
@@ -104,52 +141,17 @@ incluirTemplate('barra');
         </div>
         <form class="formulario-grupo" method="POST" enctype="multipart/form-data">
 
-            <label for="nombre_grupo">Nombre del grupo</label>
-            <input type="text" name="nombre_grupo" id="nombre-grupo" value="<?php echo $grupo->nombre_grupo;  ?>" required>
 
-            <label for="fecha_creacion">Fecha de Creacion</label>
-            <input type="date" name="fecha_creacion" id="fecha_creacion" value="<?php echo $grupo->fecha_creacion;  ?>">
+            <?php include 'includes/templates/modales/formGrupo.php';  ?>
 
-            <label for="resolucion_creacion">Resolucion</label>
-            <input type="text" name="resolucion_creacion" id="resolucion" value="<?php echo $grupo->resolucion_creacion;  ?>">
-
-            <div class="contenido-tipos">
-                <div class="cont-tip">
-                    <label for="idTipoGrupo">Tipo de Grupo</label>
-                    <select name="idTipoGrupo" id="tipo-grupo">
-                        <option value="" selected>--Seleccione--</option>
-
-                        <?php while ($row = mysqli_fetch_assoc($tipos)) : ?>
-                            <option <?php echo $grupo->idTipoGrupo == $row['idTipoGrupo'] ? 'selected' : '' ?> value="<?php echo $row['idTipoGrupo']; ?>"><?php echo $row['nombre_tipo']; ?>
-                            <?php endwhile; ?>
-                            <!--  <? //php echo $tipo === $row['idTipoGrupo'] ? 'selected' : '' 
-                                    ?>-->
-
-                    </select>
-                </div>
-
-                <div class="cont-tip">
-                    <button class="" type="button" id="boton-agregar-tipo" onclick="modal('modal-tipo', 'boton-agregar-tipo', 'close-tipo')">
-                        <i class="fas fa-plus-circle"></i> Nuevo tipo
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div>
-                <label for="imagen">Imagen de Grupo</label>
-                <input type="file" name="imagen">
-            </div>
-
+            <input type="hidden" name="cod" value="3">
             <button type="submit">Aceptar</button>
+
 
         </form>
 
     </div>
 </div>
-
 
 
 <?php

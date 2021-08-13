@@ -7,11 +7,11 @@
             <span class=" close close-integrante">&times;</span>
 
         </div>
-        <form action="" class="formulario-grupo">
+        <form method="POST" class="formulario-grupo">
 
             <div class="buscar">
-                <label for="nombre-evento">Buscar</label>
-                <input type="text" name="nombre-evento" id="nombre-evento">
+                <label for="buscar">Buscar</label>
+                <input type="text" name="buscar" id="buscar">
             </div>
 
             <div class="contenedor-usuario">
@@ -54,8 +54,9 @@
                         <input type="checkbox" name="estado">
 
                     </div>
-
+                    <input type="hidden" name="cod" value="2">
                     <button class="" type="submit">Aceptar</button>
+
 
                 </div>
 

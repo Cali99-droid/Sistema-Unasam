@@ -2,6 +2,8 @@
 
 namespace App;
 
+use GuzzleHttp\Psr7\Query;
+
 class Grupo
 {
     //Base de datos
@@ -17,9 +19,6 @@ class Grupo
     public $imagen;
     public $resolucion_creacion;
     public $idTipoGrupo;
-
-
-
 
     public function __construct($args = [])
     {
@@ -37,7 +36,8 @@ class Grupo
         self::$db = $dataBase;
     }
 
-    public function guardar()
+
+    public function crear()
     {
         //sanitizar datos
         $atributos = $this->sanitizarAtributos();
@@ -48,24 +48,28 @@ class Grupo
         $query .= join("', '", array_values($atributos));
         $query .= " ')";
 
-
         $resultado = self::$db->query($query);
+
+
         return $resultado;
     }
 
-    public function update()
+    public function actualizar()
     {
-        //sanitizar datos
+
         $atributos = $this->sanitizarAtributos();
-        //insertar en la base de da
-        $query = "INSERT INTO grupo_universitario(";
-        $query .= join(', ', array_keys($atributos));
-        $query .= " ) VALUES(' ";
-        $query .= join("', '", array_values($atributos));
-        $query .= " ')";
+        $valores = [];
+        foreach ($atributos as $key => $value) {
+            $valores[] = "{$key}='{$value}'";
+        }
+
+        $query = " UPDATE grupo_universitario SET ";
+        $query .= join(', ', $valores);
+        $query .= " WHERE idgrupo_universitario = '" . self::$db->escape_string($this->idgrupo_universitario) . "' ";
+        $query .= " LIMIT 1 ";
+
 
         $resultado = self::$db->query($query);
-        return $resultado;
     }
 
     public function atributos()
@@ -94,7 +98,22 @@ class Grupo
 
     public function setImagen($imagen)
     {
+
         //asignar al atributo de imagen el nombre de la imagen
+        if ($imagen) {
+            $this->imagen = $imagen;
+        }
+    }
+
+    public function updImagen($imagen)
+    {
+
+        //comprobar si existe el archivo
+        $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
+        if ($existeArchivo) {
+            unlink(CARPETA_IMAGENES . $this->imagen);
+        }
+
         if ($imagen) {
             $this->imagen = $imagen;
         }
@@ -119,6 +138,17 @@ class Grupo
     public function setIntegrante($arg = [])
     {
     }
+
+    //sincroniza el objeto en memoria con los cambios realizados por el susario
+    public function sincronizar($args = [])
+    {
+        foreach ($args as $key => $value) {
+            if (property_exists($this, $key) && !is_null($value)) {
+                $this->$key = $value;
+            }
+        }
+    }
+
 
 
 

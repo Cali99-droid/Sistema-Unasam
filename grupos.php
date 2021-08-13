@@ -8,6 +8,8 @@ use Intervention\Image\ImageManagerStatic as Image;
 //obtener todos los grupos
 $grupos = Grupo::all();
 
+$grupo = new Grupo();
+
 
 $consulta = "SELECT * FROM tipo_grupo";
 $tipos = mysqli_query($db, $consulta);
@@ -15,14 +17,14 @@ $tipos = mysqli_query($db, $consulta);
 /**Insercion */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //instancia de grupo
-    $grupo = new Grupo($_POST);
+    $grupo = new Grupo($_POST['grupo']);
 
     /**Generar nombre unico */
     $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
     /**Setear imagen */
-    if ($_FILES['imagen']['tmp_name']) {
-        $image = Image::make($_FILES['imagen']['tmp_name'])->fit(800, 600);
+    if ($_FILES['grupo']['tmp_name']['imagen']) {
+        $image = Image::make($_FILES['grupo']['tmp_name']['imagen'])->fit(800, 600);
         $grupo->setImagen($nombreImagen);
     }
 
@@ -35,9 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //guarda la imagen en el servidor
     $image->save(CARPETA_IMAGENES . $nombreImagen);
-    //guarda en la base de datos
-    $resultado = $grupo->guardar();
 
+    //guarda en la base de datos
+    $resultado = $grupo->crear();
     //mensaje de exito o error
     if ($resultado) {
         header('Location: /grupos.php');
@@ -69,14 +71,14 @@ incluirTemplate('barra');
 
         <div class="contenido-grupos">
 
-            <?php foreach ($grupos as $grupo) : ?>
+            <?php foreach ($grupos as $grup) : ?>
 
                 <div class="grupo">
-                    <a href="grupo.php?id=<?php echo $grupo->idgrupo_universitario ?>">
-                        <img src="/imagenes/<?php echo  $grupo->imagen; ?>" alt="Avatar" class="grupo-imagen">
+                    <a href="grupo.php?id=<?php echo $grup->idgrupo_universitario ?>">
+                        <img src="/imagenes/<?php echo  $grup->imagen; ?>" alt="Avatar" class="grupo-imagen">
                         <div class="container">
-                            <h4 class="no-margin"><?php echo $grupo->nombre_grupo; ?></h4>
-                            <p> <?php echo $grupo->getTipo(); ?></p>
+                            <h4 class="no-margin"><?php echo $grup->nombre_grupo; ?></h4>
+                            <p> <?php echo $grup->getTipo(); ?></p>
                         </div>
 
                     </a>
@@ -101,43 +103,11 @@ incluirTemplate('barra');
         </div>
         <form class="formulario-grupo" method="POST" enctype="multipart/form-data">
 
-            <label for="nombre_grupo">Nombre del grupo</label>
-            <input type="text" name="nombre_grupo" id="nombre-grupo" required>
-
-            <label for="fecha_creacion">Fecha de Creacion</label>
-            <input type="date" name="fecha_creacion" id="fecha_creacion">
-
-            <label for="resolucion_creacion">Resolucion</label>
-            <input type="text" name="resolucion_creacion" id="resolucion">
-
-            <div class="contenido-tipos">
-                <div class="cont-tip">
-                    <label for="idTipoGrupo">Tipo de Grupo</label>
-                    <select name="idTipoGrupo" id="tipo-grupo">
-                        <option value="" selected>--Seleccione--</option>
-                        <?php while ($row = mysqli_fetch_assoc($tipos)) : ?>
-                            <option value="<?php echo $row['idTipoGrupo']; ?>"><?php echo $row['nombre_tipo']; ?>
-                            <?php endwhile; ?>
-                            <!--  <? //php echo $tipo === $row['idTipoGrupo'] ? 'selected' : '' 
-                                    ?>-->
-
-                    </select>
-                </div>
-
-                <div class="cont-tip">
-                    <button class="" type="button" id="boton-agregar-tipo" onclick="modal('modal-tipo', 'boton-agregar-tipo', 'close-tipo')">
-                        <i class="fas fa-plus-circle"></i> Nuevo tipo
-                    </button>
-
-                </div>
-
-            </div>
+            <?php include 'includes/templates/modales/formGrupo.php';
+            ?>
 
 
-            <div>
-                <label for="imagen">Imagen de Grupo</label>
-                <input type="file" name="imagen">
-            </div>
+
 
             <button type="submit">Aceptar</button>
 
@@ -152,5 +122,6 @@ incluirTemplate('barra');
 incluirTemplate('modales/modalTipo');
 
 incluirTemplate('cierre');
+
 
 ?>

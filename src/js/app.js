@@ -46,7 +46,6 @@ function mostrarAdmin(){
 
 function eventListeners(){
     const mobileMenu = document.querySelector('.openbtn');
-
     mobileMenu.addEventListener('click', navegacion);
 /*
     const ad = document.querySelector('.administrador');
