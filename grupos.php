@@ -75,7 +75,7 @@ incluirTemplate('barra');
 
                 <div class="grupo">
                     <a href="grupo.php?id=<?php echo $grup->idgrupo_universitario ?>">
-                        <img src="/imagenes/<?php echo  $grup->imagen; ?>" alt="Avatar" class="grupo-imagen">
+                        <img src="./imagenes/<?php echo  $grup->imagen; ?>" alt="Avatar" class="grupo-imagen">
                         <div class="container">
                             <h4 class="no-margin"><?php echo $grup->nombre_grupo; ?></h4>
                             <p> <?php echo $grup->getTipo(); ?></p>
@@ -105,9 +105,6 @@ incluirTemplate('barra');
 
             <?php include 'includes/templates/modales/formGrupo.php';
             ?>
-
-
-
 
             <button type="submit">Aceptar</button>
 

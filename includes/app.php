@@ -8,5 +8,7 @@ require __DIR__ . '/../vendor/autoload.php';
 $db = conectarDB();
 
 use App\Grupo;
+use App\Beneficio;
 
 Grupo::setDB($db);
+Beneficio::setDB($db);

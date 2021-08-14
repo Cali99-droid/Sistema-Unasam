@@ -1,12 +1,16 @@
 <?php
 
-require 'includes/funciones.php';
-require 'includes/config/database.php';
+require 'includes/app.php';
 
-$db = conectarDB();
+use App\Beneficio;
 
-$query = 'SELECT * FROM beneficio ';
-$resultado = mysqli_query($db, $query);
+$beneficios = Beneficio::all();
+
+//cargar tipos
+$consulta = "SELECT * FROM tipo_grupo";
+$tipos = mysqli_query($db, $consulta);
+
+$bene = new Beneficio();
 
 incluirTemplate('barra');
 ?>
@@ -35,7 +39,7 @@ incluirTemplate('barra');
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Resolucion</th>
+                    <th>NºResolucion</th>
                     <th>Fecha de Emision</th>
                     <th>Estado</th>
                     <th>Acciones</th>
@@ -43,21 +47,21 @@ incluirTemplate('barra');
                 </tr>
             </thead>
             <tbody>
-                <?php while ($beneficios = mysqli_fetch_assoc($resultado)) : ?>
+                <?php foreach ($beneficios as $beneficio) : ?>
                     <tr>
-                        <td><?php echo $beneficios['nombre']; ?></td>
-                        <td><?php echo $beneficios['nombre']; ?></td>
-                        <td><?php echo  $beneficios['nombre']; ?></td>
-                        <td><?php echo $beneficios['nombre']; ?></td>
+                        <td><?php echo $beneficio->getBeneficio(); ?></td>
+                        <td><?php echo $beneficio->numero; ?></td>
+                        <td><?php echo  $beneficio->fecha_emision; ?></td>
+                        <td><?php echo $beneficio->estado; ?></td>
                         <td>
                             <form method="POST" class="w-100">
-                                <input type="hidden" name="id" value="<?php echo $beneficios['idBeneficio']; ?>">
+                                <input type="hidden" name="id" value="<?php echo $beneficio->idBeneficio; ?>">
                                 <input type="submit" class="boton-rojo-block" value="Eliminar">
                             </form>
 
                         </td>
                     </tr>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
 
             </tbody>
 
@@ -74,8 +78,6 @@ incluirTemplate('barra');
 
 </div>
 </div>
-
-
 <div class="modal-agregar" id="modal-agregar">
 
 
@@ -87,42 +89,18 @@ incluirTemplate('barra');
         </div>
         <form action="" class="formulario-beneficio">
 
-            <div class="columna-beneficio">
-                <label for="inputEmail">Nombre del Beneficio</label>
-                <input type="text" id="inputEmai" placeholder="Ingrese el Beneficio">
+            <?php include 'includes/templates/modales/modBeneficio.php';
 
-                <label for="inputEmail4">Noº de Resolución</label>
-                <input type="text" id="inputEmail4" placeholder="Ingrese el Nº de Resolución de Beneficio">
-
-                <label for="">Fecha de Emisión</label>
-                <input type="date" style="margin: .4rem 0;" class="form-control" placeholder="First name">
-
-            </div>
-
-            <div class="columna-beneficio">
-                <label for="">Estado</label>
-                <select name="Estado" id="Estado">
-
-                    <option value="1">ACTIVO</option>
-                    <option value="2">INACTIVO</option>
-                </select>
-
-                <label for="inputEmai">Seleccione Tipo de Grupos a Asignar</label>
-                <select name="EstadoU" id="EstadoU">
-                    <option value="1">DANZA</option>
-                    <option value="2">MÚSICA</option>
-                    <option value="3">CANTO</option>
-                </select>
-
-                <button class="" type="submit">Aceptar</button>
-
-            </div>
-
-
-
+            ?>
 
 
         </form>
-        <?php
 
-        incluirTemplate('cierre');
+    </div>
+</div>
+
+
+<?php
+//
+
+incluirTemplate('cierre');
