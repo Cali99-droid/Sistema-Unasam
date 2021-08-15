@@ -2,17 +2,29 @@
 
 require 'includes/app.php';
 
+use App\Estudiante;
 use App\Grupo;
 use Intervention\Image\ImageManagerStatic as Image;
 
 $id  = $_GET['id'];
 
 $grupo = Grupo::getGrupo($id);
-$integrantes = $grupo->getIntegrantes();
+$integrantes = Estudiante::getIntegrantes($id);
+$errores = Estudiante::getErrores();
+
+
+
+$estudiante = new Estudiante();
 
 
 $consulta = "SELECT * FROM tipo_grupo";
 $tipos = mysqli_query($db, $consulta);
+
+$consultaEsc = "SELECT * FROM escuela";
+$escuelas = mysqli_query($db, $consultaEsc);
+
+$consultaCondi = "SELECT * FROM condicion_economica";
+$condiciones = mysqli_query($db, $consultaCondi);
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -20,7 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['cod'] == 1) {
         debugear('Asginando evento');
     } elseif ($_POST['cod'] == 2) {
-        debugear('agreando integarante');
+        $arg = $_POST['integrante'];
+        $arg['idgrupo_universitario'] = $grupo->idgrupo_universitario;
+
+        $alumno = new Estudiante($arg);
+        $grupo->setIntegrante($alumno);
     } else {
         $arg = $_POST['grupo'];
         $grupo->sincronizar($arg);
@@ -31,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         /**Setear imagen */
         if ($_FILES['grupo']['tmp_name']['imagen']) {
             $image = Image::make($_FILES['grupo']['tmp_name']['imagen'])->fit(800, 600);
-            $grupo->updImagen($nombreImagen);
+            $grupo->setImagen($nombreImagen);
         }
 
 
@@ -53,9 +69,14 @@ incluirTemplate('barra');
 ?>
 
 <div class="contenedor-grupos">
+    <!-- <div class="alerta error">
+        <?php //echo isset($_GET['mensaje']) ? $_GET['mensaje'] : ''; 
+        ?> 
+    </div> -->
     <div class="titulo-grup">
         <h2 class="no-margin"><?php echo $grupo->nombre_grupo;  ?></h2>
         <p><?php echo  $grupo->getTipo() . ' - ' . $grupo->fecha_creacion ?> </p>
+
     </div>
 
     <div class="acciones-grupo">
@@ -63,6 +84,10 @@ incluirTemplate('barra');
             <i class="fas fa-search"></i>
             <input type="text" placeholder="Buscar">
         </div>
+
+
+
+
 
         <div class=" nuevo-grupo botones-grupo">
 
@@ -95,20 +120,20 @@ incluirTemplate('barra');
                 </tr>
             </thead>
             <tbody>
-                <?php while ($integrante = $integrantes->fetch_assoc()) : ?>
+                <?php foreach ($integrantes as $integrante) :  ?>
                     <tr>
-                        <td><?php echo $integrante['dni']; ?></td>
-                        <td><?php echo $integrante['nombre']; ?></td>
-                        <td><?php echo $integrante['codigo_alumno']; ?></td>
+                        <td><?php echo $integrante->dni; ?></td>
+                        <td><?php echo $integrante->nombre . " " . $integrante->apellido; ?></td>
+                        <td><?php echo $integrante->codigo_alumno; ?></td>
                         <td>
                             <form method="POST" class="w-100">
-                                <input type="hidden" name="id" value="<?php echo $integrante['dni']; ?>">
+                                <input type="hidden" name="id" value="<?php echo $integrante->codigo; ?>">
                                 <input type="submit" class="boton-rojo-block" value="Eliminar">
                             </form>
 
                         </td>
                     </tr>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
 
             </tbody>
         </table>
@@ -145,6 +170,7 @@ incluirTemplate('barra');
             <?php include 'includes/templates/modales/formGrupo.php';  ?>
 
             <input type="hidden" name="cod" value="3">
+
             <button type="submit">Aceptar</button>
 
 
@@ -154,10 +180,31 @@ incluirTemplate('barra');
 </div>
 
 
+<div class="modal-agregar" id="modal-integrante">
+
+    <div class="contenido-modal-grupo modal-usuarios">
+        <div class="encabezado-modal">
+            <h2>Nuevo Integrante</h2>
+            <span class=" close close-integrante">&times;</span>
+
+        </div>
+        <form method="POST" class="formulario-grupo">
+
+            <?php include 'includes/templates/modales/modIntegrante.php';  ?>
+
+
+
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
 <?php
 
-
-incluirTemplate('modales/modIntegrante');
 incluirTemplate('modales/modEvento');
 
 incluirTemplate('cierre');

@@ -3,31 +3,51 @@
 namespace App;
 
 
-class Grupo
+class Estudiante
 {
     //Base de datos
     protected static $db;
-    protected static $columnaDB = ['idgrupo_universitario', 'nombre_grupo', 'fecha_creacion', 'resolucion_creacion',  'imagen', 'idTipoGrupo'];
+    protected static $columnaDB = ['idAlumno', 'codigo_alumno', 'dni', 'nombre', 'apellido', 'genero', 'email', 'telefono', 'idEscuela', 'nombre_procedencia', 'idCondicionEconomica', 'descripcion', 'direccion', 'fecha_inscripcion', 'estado', 'idgrupo_universitario'];
 
     //errores
     protected static $errores = [];
 
+    public $idAlumno;
+    public $codigo_alumno;
+    public $dni;
+    public $nombre;
+    public $apellido;
+    public $genero;
+    public $email;
+    public $telefono;
+    public $idEscuela;
+    public $idCondicionEconomica;
+    public $nombre_procedencia;
+    public $descripcion;
+    public $direccion;
+    public $fecha_inscripcion;
+    public $estado;
     public $idgrupo_universitario;
-    public $nombre_grupo;
-    public $fecha_creacion;
-    public $imagen;
-    public $resolucion_creacion;
-    public $idTipoGrupo;
-
 
     public function __construct($args = [])
     {
+
+        $this->idAlumno = $args['idAlumno'] ?? '';
+        $this->codigo_alumno = $args['codigo_alumno'] ?? '';
+        $this->dni = $args['dni'] ?? '';
+        $this->nombre = $args['nombre'] ?? '';
+        $this->apellido = $args['apellido'] ?? '';
+        $this->genero = $args['genero'] ?? '';
+        $this->email = $args['email'] ?? '';
+        $this->telefono = $args['telefono'] ?? '';
+        $this->idEscuela = $args['idEscuela'] ?? '';
+        $this->nombre_procedencia = $args['nombre_procedencia'] ?? '';
+        $this->idCondicionEconomica = $args['idCondicionEconomica'] ?? '';
+        $this->descripcion = $args['descripcion'] ?? '';
+        $this->direccion = $args['direccion'] ?? '';
+        $this->fecha_inscripcion = $args['fecha_inscripcion'] ?? date('Y-m-d');
+        $this->estado = $args['estado'] ?? '';
         $this->idgrupo_universitario = $args['idgrupo_universitario'] ?? '';
-        $this->nombre_grupo = $args['nombre_grupo'] ?? '';
-        $this->fecha_creacion = $args['fecha_creacion'] ?? '';
-        $this->imagen = $args['imagen'] ?? '';
-        $this->resolucion_creacion = $args['resolucion_creacion'] ?? '';
-        $this->idTipoGrupo = $args['idTipoGrupo'] ?? '';
     }
 
     //definir la conexion a la bd
@@ -56,11 +76,13 @@ class Grupo
 
     public function actualizar()
     {
+
         $atributos = $this->sanitizarAtributos();
         $valores = [];
         foreach ($atributos as $key => $value) {
             $valores[] = "{$key}='{$value}'";
         }
+
         $query = " UPDATE grupo_universitario SET ";
         $query .= join(', ', $valores);
         $query .= " WHERE idgrupo_universitario = '" . self::$db->escape_string($this->idgrupo_universitario) . "' ";
@@ -94,49 +116,24 @@ class Grupo
         return $sanitizado;
     }
 
-    public function setImagen($imagen)
+
+
+
+    public function asignarGrupo($id)
     {
 
-        if (!is_null($this->idgrupo_universitario)) {
-            //comprobar si existe el archivo
-            $this->borrarImagen();
+        $query = "CALL p_insertarAlumno ('" . $this->dni . "' ,'" . $this->nombre . "','" . $this->apellido . "' ,'" . $this->genero . "','" . $this->direccion . " ','" . $this->email . " ','" . $this->telefono . "',
+        '" . $this->codigo_alumno . "' , " . $this->idEscuela . " , '" . $this->nombre_procedencia . "' ," . $this->idCondicionEconomica . ", '" . $this->descripcion . "' ,
+        '" . $this->fecha_inscripcion . "' , '" . $this->estado . "', " . $id . ")";
+
+        $resultado = self::consulta($query)->fetch_object();
+
+        if ($resultado->valor == '1') {
+            // self::$errores[] = 'El DNI ya existe';
+            header('Location: /grupo.php?id=' . $id . "&mensaje=El DNI ya Existe");
+        } else {
+            header('Location: /grupo.php?id=' . $id);
         }
-        //asignar al atributo de imagen el nombre de la imagen
-        if ($imagen) {
-            $this->imagen = $imagen;
-        }
-    }
-
-    //eliminar imagen
-    public function borrarImagen()
-    {
-        $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
-        if ($existeArchivo) {
-            unlink(CARPETA_IMAGENES . $this->imagen);
-        }
-    }
-
-    public function getTipo(): string
-    {
-        $tipo = $this->idTipoGrupo;
-        $query = "SELECT  nombre_tipo FROM tipo_grupo WHERE idTipoGrupo = ${tipo}";
-        $resultado = self::consulta($query)->fetch_assoc();
-        return $resultado['nombre_tipo'];
-    }
-
-    public function getIntegrantes()
-    {
-        $idgrupo = $this->idgrupo_universitario;
-        $query = "SELECT * FROM vista_alumno_x_grupo WHERE idgrupo_universitario = ${idgrupo}";
-        $resultado = self::consulta($query);
-        return $resultado;
-    }
-
-    public function setIntegrante($alumno)
-    {
-
-        $resultado = $alumno->asignarGrupo($this->idgrupo_universitario);
-
 
         return $resultado;
     }
@@ -163,6 +160,8 @@ class Grupo
 
     public function validar()
     {
+
+
 
         if (!$this->titulo) {
             self::$errores[] = "Debes Añadir un titulo";
@@ -204,16 +203,17 @@ class Grupo
     // lista todas los grupos
     public static function all()
     {
-        $query = "SELECT * FROM vista_grupo_universitario";
+        $query = "SELECT * FROM Vista_Estudiantes";
         $resultado = self::consultarSQL($query);
         return $resultado;
     }
     // trae un grupo
-    public static function getGrupo($id): Grupo
+    public static function getIntegrantes($id)
     {
-        $query = "SELECT * FROM vista_grupo_universitario WHERE idgrupo_universitario = ${id}";
+        $query = "SELECT * FROM Vista_Estudiantes WHERE idgrupo_universitario = ${id}";
         $resultado = self::consultarSQL($query);
-        return $resultado[0];
+
+        return $resultado;
     }
 
     public static function consulta($query)
