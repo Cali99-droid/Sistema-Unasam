@@ -127,8 +127,17 @@ incluirTemplate('barra');
                         <td><?php echo $integrante->codigo_alumno; ?></td>
                         <td>
                             <form method="POST" class="w-100">
+
                                 <input type="hidden" name="id" value="<?php echo $integrante->codigo; ?>">
                                 <input type="submit" class="boton-rojo-block" value="Eliminar">
+
+                                <input type="hidden" name="id" value="<?php echo $integrante->codigo; ?>">
+                                <input type="submit" class="boton-rojo-block" value="Beneficio">
+
+                                <input type="hidden" name="id" value="<?php echo $integrante->codigo; ?>">
+                                <input type="submit" class="boton-rojo-block" value="Eventos">
+
+
                             </form>
 
                         </td>
@@ -198,8 +207,39 @@ incluirTemplate('barra');
     </div>
 
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#btnBuscarDNI').click(function() {
+            dni = $("#buscar").val();
+            $.ajax({
+                type: "POST",
+                data: "dni=" + dni,
+                url: "obtenDatos.php",
+                success: function(r) {
 
+                    datos = jQuery.parseJSON(r); // vas a castear el array json uno a uno
 
+                    $('#dni').val(datos['dni']);
+                    $('#nombre').val(datos['nombre']);
+                    $('#apellido').val(datos['apellido']);
+                    $('#direccion').val(datos['direccion']);
+
+                    var recepcionaDatos = datos['genero'];
+                    if (recepcionaDatos === 'Masculino') {
+                        $("#genero option[value='Masculino'").attr("selected", true);
+                    } else {
+                        $("#genero option[value='Femenino'").attr("selected", true);
+                    }
+                    //$('#genero').val(datos['dni']);
+                    // $('#nombre').val(datos['nombre']);
+                    // $('#apellido').val(datos['apellido']);
+                    // $('#direccion').val(datos['direccion']);
+
+                }
+            });
+        });
+    });
+</script>
 
 
 

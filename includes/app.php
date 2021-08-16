@@ -10,7 +10,9 @@ $db = conectarDB();
 use App\Grupo;
 use App\Beneficio;
 use App\Estudiante;
+use App\TipoGrupo;
 
 Grupo::setDB($db);
 Beneficio::setDB($db);
 Estudiante::setDB($db);
+TipoGrupo::setDB($db);

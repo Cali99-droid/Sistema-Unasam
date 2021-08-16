@@ -207,6 +207,13 @@ class Estudiante
         $resultado = self::consultarSQL($query);
         return $resultado;
     }
+
+    public static function find($dni)
+    {
+        $query = "SELECT * FROM Vista_Estudiantes WHERE dni = " . $dni;
+        $resultado = self::consulta($query)->fetch_assoc();
+        return $resultado;
+    }
     // trae un grupo
     public static function getIntegrantes($id)
     {

@@ -1,6 +1,7 @@
 <div class="buscar">
     <label for="buscar">Buscar</label>
-    <input type="text" name="buscar" id="buscar">
+    <input type="text" name="buscar" id="buscar" placeholder="Buscar por DNI">
+    <button type="button" id="btnBuscarDNI" name="btnBuscarDNI">Buscar</button>
 </div>
 
 <div class="contenedor-usuario">
@@ -16,7 +17,7 @@
 
 
         <label for="genero">Género</label>
-        <select name="integrante[genero]" id="">
+        <select name="integrante[genero]" id="genero">
             <option value="" disabled selected>--Seleccione--</option>
             <option value="Masculino">Masculino</option>
             <option value="Femenino">Femenino</option>
@@ -30,7 +31,7 @@
 
     <div class="columna-usuario">
         <label for="email">Email</label>
-        <input type="email" name="integrante[email]" id="email-usuario">
+        <input type="email" name="integrante[email]" id="email">
 
         <label for="telefono">Teléfono</label>
         <input type="number" name="integrante[telefono]" id="telefono" placeholder="Ingrese teléfono">
