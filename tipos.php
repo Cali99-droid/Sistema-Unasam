@@ -15,9 +15,7 @@ $tip = new TipoGrupo();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-  debugear($_GET);
   $tipo = new TipoGrupo($_POST);
-  debugear($tipo);
 }
 
 
@@ -37,7 +35,7 @@ incluirTemplate('barra');
     </div>
 
     <div class="nuevo-grupo">
-      <button type="button" class="boton-grupo" id="boton-agregar-tipo" onclick="modal('modal-tipo', 'boton-agregar-tipo', 'close-tipo')">
+      <button type="button" class="boton-grupo" id="boton-agregar-tipo" onclick="modal( 'modal-tipo', 'boton-agregar-tipo', 'close-tipo', 'nuevo tipo')">
         <i class="fas fa-plus-circle"></i> Agregar Tipos</button>
     </div>
   </div>
@@ -61,11 +59,13 @@ incluirTemplate('barra');
         <td>
           <form method="GET" target="frame">
 
+
+
+            <button value="<?php echo $tipo->idTipoGrupo; ?>" type="button" class="boton-grupo" id="boton-actualizar-tipo" onclick="actualizarTipo(<?php echo $tipo->idTipoGrupo; ?>, 'modal-tipo', 'boton-actualizar-tipo', 'close-tipo')">
+              <i class="fas fa-plus-circle"></i> Editar</button>
+
             <input type="hidden" name="id" value="<?php echo $tipo->idTipoGrupo; ?>">
             <input type="submit" class="boton-rojo-block" value="Eliminar">
-
-            <button value="<?php echo $tipo->idTipoGrupo; ?>" type="button" class="boton-grupo" id="boton-agregar-tipo" onclick="modal('modal-tipo', 'boton-agregar-tipo', 'close-tipo')">
-              <i class="fas fa-plus-circle"></i> Actuaizar</button>
 
 
           </form>
@@ -98,17 +98,15 @@ incluirTemplate('barra');
 
   <div class="contenido-modal-grupo">
     <div class="encabezado-modal">
-      <h2>Nuevo Tipo de Grupo</h2>
+      <h2 id="titulo_tipo">Ingrese nuevo tipo de grupo</h2>
       <span class="close close-tipo">&times;</span>
 
     </div>
 
     <form method="POST" class="formulario-grupo">
 
-      <?php   ?>
-
       <label for="nombre_tipo">Nombre del tipo</label>
-      <input type="text" name="nombre_tipo" id="nombre-tipo" value="<?php $tip->nombre_tipo ?>">
+      <input type="text" name="nombre_tipo" id="nombre_tipo" value="<?php $tip->nombre_tipo ?>">
 
       <button type="submit">Aceptar</button>
 
@@ -117,8 +115,6 @@ incluirTemplate('barra');
   </div>
 
 </div>
-
-<iframe name="frame"></iframe>
 
 <?php
 

@@ -1,7 +1,7 @@
-<div class="buscar">
-    <label for="buscar">Buscar</label>
+<div class="buscar" id="cont_buscar">
+    <label for="buscar" id="lbBuscar">Buscar</label>
     <input type="text" name="buscar" id="buscar" placeholder="Buscar por DNI">
-    <button type="button" id="btnBuscarDNI" name="btnBuscarDNI">Buscar</button>
+    <button type="button" id="btnBuscarDNI" name="btnBuscarDNI" onclick="BuscarIntegrante($('#buscar').val())">Buscar</button>
 </div>
 
 <div class="contenedor-usuario">
@@ -61,7 +61,7 @@
 
 
         <label for="estado">Estado</label>
-        <select name="integrante[estado]" id="">
+        <select name="integrante[estado]" id="estado">
             <option value="" disabled selected>--Seleccione--</option>
             <option value="Activo">Activo</option>
             <option value="Inactivo">Inactivo</option>
@@ -69,7 +69,7 @@
 
 
         <label for="idCondicionEconomica">Condición Socioeconomica</label>
-        <select name="integrante[idCondicionEconomica]" id="escuela">
+        <select name="integrante[idCondicionEconomica]" id="idCondicionEconomica">
             <option value="" selected disabled>--Seleccione--</option>
             <?php while ($row = mysqli_fetch_assoc($condiciones)) : ?>
                 <option <?php echo $estudiante->idCondicionEconomica == $row['idCondicionEconomica'] ? 'selected' : '' ?> value="<?php echo $row['idCondicionEconomica']; ?>"><?php echo $row['nombre_condicion']; ?>
@@ -77,9 +77,10 @@
 
         </select>
         <label for="descripcion">Descripción</label>
-        <textarea name="integrante[descripcion]" id="integrante[descripcion]" cols="30" rows="4"></textarea>
+        <textarea name="integrante[descripcion]" id="descripcion" cols="30" rows="4"></textarea>
 
-        <input type="hidden" name="cod" value="2">
+        <input type="hidden" name="cod" value="2" id="valor">
+        <input type="hidden" name="integrante[idPersona]" value='' id="idPersona">
         <button class="" type="submit">Aceptar</button>
 
     </div>

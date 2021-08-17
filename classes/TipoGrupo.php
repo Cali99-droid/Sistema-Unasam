@@ -142,7 +142,7 @@ class TipoGrupo
     public static function getTipo($id)
     {
         $query = "SELECT * FROM tipo_grupo WHERE idTipoGrupo = ${id}";
-        $resultado = self::consultarSQL($query);
+        $resultado = self::consulta($query)->fetch_assoc();
         return $resultado;
     }
 

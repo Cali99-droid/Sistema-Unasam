@@ -30,9 +30,16 @@ $condiciones = mysqli_query($db, $consultaCondi);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($_POST['cod'] == 1) {
-        debugear('Asginando evento');
+
+        $arg = $_POST['integrante'];
+        $arg['idgrupo_universitario'] = $grupo->idgrupo_universitario;
+
+        $alumno = new Estudiante($arg);
+
+        $alumno->actualizar($id);
     } elseif ($_POST['cod'] == 2) {
         $arg = $_POST['integrante'];
+
         $arg['idgrupo_universitario'] = $grupo->idgrupo_universitario;
 
         $alumno = new Estudiante($arg);
@@ -85,10 +92,6 @@ incluirTemplate('barra');
             <input type="text" placeholder="Buscar">
         </div>
 
-
-
-
-
         <div class=" nuevo-grupo botones-grupo">
 
 
@@ -96,7 +99,7 @@ incluirTemplate('barra');
                 <i class="far fa-calendar-plus"></i> Asignar Evento
             </button>
 
-            <button type="submit" n class="boton-grupo" id="boton-agregar-integrante" onclick="modal('modal-integrante', 'boton-agregar-integrante', 'close-integrante')">
+            <button type="submit" class="boton-grupo" id="boton-agregar-integrante" onclick="modal('modal-integrante', 'boton-agregar-integrante', 'close-integrante')">
                 <i class="fas fa-user-plus"></i> Nuevo Integrante
             </button>
 
@@ -128,14 +131,19 @@ incluirTemplate('barra');
                         <td>
                             <form method="POST" class="w-100">
 
-                                <input type="hidden" name="id" value="<?php echo $integrante->codigo; ?>">
-                                <input type="submit" class="boton-rojo-block" value="Eliminar">
-
-                                <input type="hidden" name="id" value="<?php echo $integrante->codigo; ?>">
+                                <input type="hidden" name="id" value="<?php echo $integrante->codigo_alumno; ?>">
                                 <input type="submit" class="boton-rojo-block" value="Beneficio">
 
-                                <input type="hidden" name="id" value="<?php echo $integrante->codigo; ?>">
+                                <input type="hidden" name="id" value="<?php echo $integrante->codigo_alumno; ?>">
                                 <input type="submit" class="boton-rojo-block" value="Eventos">
+
+
+
+                                <button type="button" class="boton-grupo" onclick="actualizarIntegrante(<?php echo $integrante->dni; ?>,'modal-integrante', 'btn', 'close-integrante')">
+                                    <i class="fas fa-plus-circle"></i> Editar</button>
+
+                                <input type="hidden" name="id" value="<?php echo $integrante->codigo_alumno; ?>">
+                                <input type="button" class="boton-rojo-block" value="Eliminar">
 
 
                             </form>
@@ -193,7 +201,7 @@ incluirTemplate('barra');
 
     <div class="contenido-modal-grupo modal-usuarios">
         <div class="encabezado-modal">
-            <h2>Nuevo Integrante</h2>
+            <h2 id="titulo_integrante">Nuevo Integrante</h2>
             <span class=" close close-integrante">&times;</span>
 
         </div>
@@ -207,39 +215,6 @@ incluirTemplate('barra');
     </div>
 
 </div>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#btnBuscarDNI').click(function() {
-            dni = $("#buscar").val();
-            $.ajax({
-                type: "POST",
-                data: "dni=" + dni,
-                url: "obtenDatos.php",
-                success: function(r) {
-
-                    datos = jQuery.parseJSON(r); // vas a castear el array json uno a uno
-
-                    $('#dni').val(datos['dni']);
-                    $('#nombre').val(datos['nombre']);
-                    $('#apellido').val(datos['apellido']);
-                    $('#direccion').val(datos['direccion']);
-
-                    var recepcionaDatos = datos['genero'];
-                    if (recepcionaDatos === 'Masculino') {
-                        $("#genero option[value='Masculino'").attr("selected", true);
-                    } else {
-                        $("#genero option[value='Femenino'").attr("selected", true);
-                    }
-                    //$('#genero').val(datos['dni']);
-                    // $('#nombre').val(datos['nombre']);
-                    // $('#apellido').val(datos['apellido']);
-                    // $('#direccion').val(datos['direccion']);
-
-                }
-            });
-        });
-    });
-</script>
 
 
 

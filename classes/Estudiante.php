@@ -7,11 +7,12 @@ class Estudiante
 {
     //Base de datos
     protected static $db;
-    protected static $columnaDB = ['idAlumno', 'codigo_alumno', 'dni', 'nombre', 'apellido', 'genero', 'email', 'telefono', 'idEscuela', 'nombre_procedencia', 'idCondicionEconomica', 'descripcion', 'direccion', 'fecha_inscripcion', 'estado', 'idgrupo_universitario'];
+    protected static $columnaDB = ['idPersona', 'idAlumno', 'codigo_alumno', 'dni', 'nombre', 'apellido', 'genero', 'email', 'telefono', 'idEscuela', 'nombre_procedencia', 'idCondicionEconomica', 'descripcion', 'direccion', 'fecha_inscripcion', 'estado', 'idgrupo_universitario'];
 
     //errores
     protected static $errores = [];
 
+    public $idPersona;
     public $idAlumno;
     public $codigo_alumno;
     public $dni;
@@ -48,6 +49,7 @@ class Estudiante
         $this->fecha_inscripcion = $args['fecha_inscripcion'] ?? date('Y-m-d');
         $this->estado = $args['estado'] ?? '';
         $this->idgrupo_universitario = $args['idgrupo_universitario'] ?? '';
+        $this->idPersona = $args['idPersona'] ?? '';
     }
 
     //definir la conexion a la bd
@@ -57,39 +59,22 @@ class Estudiante
     }
 
 
-    public function crear()
+    public function actualizar($id)
     {
-        //sanitizar datos
-        $atributos = $this->sanitizarAtributos();
-        //insertar en la base de da
-        $query = "INSERT INTO grupo_universitario(";
-        $query .= join(', ', array_keys($atributos));
-        $query .= " ) VALUES(' ";
-        $query .= join("', '", array_values($atributos));
-        $query .= " ')";
+        $query = "CALL proce_updateAlumno('" . $this->idPersona . "' ,'" . $this->dni . "' ,'" . $this->nombre . "','" . $this->apellido . "' ,'" . $this->genero . "','" . $this->direccion . " ','" . $this->email . " ','" . $this->telefono . "',
+        '" . $this->codigo_alumno . "' , " . $this->idEscuela . " , '" . $this->nombre_procedencia . "' ," . $this->idCondicionEconomica . ", '" . $this->descripcion . "' ,
+        '" . $this->fecha_inscripcion . "' , '" . $this->estado . "' , " . $id . ")";
 
-        $resultado = self::$db->query($query);
+        $resultado = self::consulta($query)->fetch_object();
 
-
-        return $resultado;
-    }
-
-    public function actualizar()
-    {
-
-        $atributos = $this->sanitizarAtributos();
-        $valores = [];
-        foreach ($atributos as $key => $value) {
-            $valores[] = "{$key}='{$value}'";
+        if ($resultado->valor == '1') {
+            // self::$errores[] = 'El DNI ya existe';
+            header('Location: /grupo.php?id=' . $id . "&mensaje=el codigo se repite");
+        } elseif ($resultado->valor == '2') {
+            header('Location: /grupo.php?id=' . $id . "&mensaje=el dni se repite");
+        } else {
+            header('Location: /grupo.php?id=' . $id);
         }
-
-        $query = " UPDATE grupo_universitario SET ";
-        $query .= join(', ', $valores);
-        $query .= " WHERE idgrupo_universitario = '" . self::$db->escape_string($this->idgrupo_universitario) . "' ";
-        $query .= " LIMIT 1 ";
-
-
-        $resultado = self::$db->query($query);
     }
 
     public function atributos()
@@ -116,10 +101,7 @@ class Estudiante
         return $sanitizado;
     }
 
-
-
-
-    public function asignarGrupo($id)
+    public function crear($id)
     {
 
         $query = "CALL p_insertarAlumno ('" . $this->dni . "' ,'" . $this->nombre . "','" . $this->apellido . "' ,'" . $this->genero . "','" . $this->direccion . " ','" . $this->email . " ','" . $this->telefono . "',
@@ -128,14 +110,17 @@ class Estudiante
 
         $resultado = self::consulta($query)->fetch_object();
 
+        $this->recarga($resultado, $id);
+    }
+
+    function recarga($resultado, $id)
+    {
         if ($resultado->valor == '1') {
             // self::$errores[] = 'El DNI ya existe';
             header('Location: /grupo.php?id=' . $id . "&mensaje=El DNI ya Existe");
         } else {
             header('Location: /grupo.php?id=' . $id);
         }
-
-        return $resultado;
     }
 
     //sincroniza el objeto en memoria con los cambios realizados por el susario
@@ -210,7 +195,7 @@ class Estudiante
 
     public static function find($dni)
     {
-        $query = "SELECT * FROM Vista_Estudiantes WHERE dni = " . $dni;
+        $query = "SELECT * FROM vista_Estudiantes WHERE dni = " . $dni;
         $resultado = self::consulta($query)->fetch_assoc();
         return $resultado;
     }

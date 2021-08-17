@@ -38,7 +38,7 @@ CREATE TABLE `alumno` (
   CONSTRAINT `Escuela1` FOREIGN KEY (`idEscuela`) REFERENCES `escuela` (`idEscuela`),
   CONSTRAINT `Persona` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`),
   CONSTRAINT `Procedencia1` FOREIGN KEY (`idProcedencia`) REFERENCES `procedencia` (`idProcedencia`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,7 @@ CREATE TABLE `alumno` (
 
 LOCK TABLES `alumno` WRITE;
 /*!40000 ALTER TABLE `alumno` DISABLE KEYS */;
-INSERT INTO `alumno` VALUES (1,'171.2506.025',1,3,3,2),(2,'151.2603.104',2,1,2,1),(3,'161.2305.048',3,4,1,3),(4,'132.567.894',6,1,6,1),(5,'132.567.823',7,2,7,1),(6,'132.567.114',8,2,8,3),(7,'122.567.894',9,1,9,2),(8,'142.567.894',10,2,10,1);
+INSERT INTO `alumno` VALUES (1,'171.2506.025',1,3,3,2),(2,'132.567.892',2,1,2,1),(3,'161.2305.048',3,4,1,3),(4,'132.567.894',6,1,6,1),(5,'132.567.850',7,2,7,1),(6,'172.007.894',8,1,8,1),(7,'132.567.8177',9,1,9,3),(8,'132.007.894',10,1,10,1),(9,'122.567.823',11,6,11,2);
 /*!40000 ALTER TABLE `alumno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +69,7 @@ CREATE TABLE `alumnogrupo` (
   KEY `GRUPO_UNIVERSITARIO1_idx` (`idgrupo_universitario`),
   CONSTRAINT `Alumno1` FOREIGN KEY (`idAlumno`) REFERENCES `alumno` (`idAlumno`),
   CONSTRAINT `GRUPO_UNIVERSITARIO1` FOREIGN KEY (`idgrupo_universitario`) REFERENCES `grupo_universitario` (`idgrupo_universitario`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +78,7 @@ CREATE TABLE `alumnogrupo` (
 
 LOCK TABLES `alumnogrupo` WRITE;
 /*!40000 ALTER TABLE `alumnogrupo` DISABLE KEYS */;
-INSERT INTO `alumnogrupo` VALUES (1,'2017-05-12','Activo',2,5),(2,'2017-05-19','Activo',1,5),(3,'2017-06-16','Activo',3,8),(4,'2021-08-15','Activo',4,9),(5,'2021-08-15','Activo',5,9),(6,'2021-08-15','Activo',6,9),(7,'2021-08-15','Activo',7,5),(8,'2021-08-15','Activo',8,9);
+INSERT INTO `alumnogrupo` VALUES (1,'2021-08-17','Activo',2,5),(2,'2021-08-17','Activo',1,5),(3,'2017-06-16','Activo',3,8),(4,'2021-08-17','Activo',4,9),(5,'2021-08-17','Activo',5,9),(6,'2021-08-17','Activo',6,9),(7,'2021-08-17','Activo',7,5),(8,'2021-08-17','Activo',8,9),(9,'2021-08-16','Activo',8,5),(10,'2021-08-17','Activo',7,9),(11,'2021-08-17','Activo',9,5);
 /*!40000 ALTER TABLE `alumnogrupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -314,7 +314,7 @@ CREATE TABLE `formacion_socioeconomica` (
   PRIMARY KEY (`idformacion_socioeconomica`),
   KEY `Alumno2_idx` (`codalum`),
   CONSTRAINT `Alumno2` FOREIGN KEY (`codalum`) REFERENCES `alumno` (`idAlumno`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -323,7 +323,7 @@ CREATE TABLE `formacion_socioeconomica` (
 
 LOCK TABLES `formacion_socioeconomica` WRITE;
 /*!40000 ALTER TABLE `formacion_socioeconomica` DISABLE KEYS */;
-INSERT INTO `formacion_socioeconomica` VALUES (1,'Esto es una descripcion',4),(2,'Su descripcion',5),(3,'No es pobre',6),(4,'Esta es una descripcion mas',7),(5,'nada',8);
+INSERT INTO `formacion_socioeconomica` VALUES (1,'Esto es una descripcion',4),(2,'Su descripcion',5),(3,'No es pobre',6),(4,'Esta es una descripcion mas',7),(5,'nada',8),(6,'descrip',9);
 /*!40000 ALTER TABLE `formacion_socioeconomica` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -410,7 +410,7 @@ CREATE TABLE `persona` (
   `email` text NOT NULL,
   `telefono` char(10) NOT NULL,
   PRIMARY KEY (`idPersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -419,7 +419,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'71856595','Ximena Azucena','Coral Crispin','Femenino','Av. Anta 345','coral@correo.com','965841236'),(2,'96385274','Claudia Alejandra','Briceño Pulache','Feminino','Jr. Las piedras 342','Claudia@correo.com','965874125'),(3,'96587451','Jamil Sean Paul','Morales Bermudes','Masculino','Av. Tupac Amaru','reforma@agraria.com','745865232'),(4,'85456958','Pedro ','Castillo Terrones','Masculino','Av. Chota','lapiz@peruLibre.com','974854568'),(5,'74854585','Julio ','Poterico Huamayali','Masculino','Jr. las manzanas','rector@unasam.com','965874123'),(6,'12345678','Julio','Agosto','Masculino','Los Planos ','Correo@correo.com ','34567688'),(7,'1234563','Maria','Bellido','Femenino','Las Flores ','Correo2@correo.com ','34567872'),(8,'34554433','Maricarmen','Medina','Femenino','Av. Los Angeles ','correF@correo.com ','234545676'),(9,'54678799','Jesenia Judith','Melgarejo Principe','Femenino','Shancayan ','jes@gmail.com ','998876543'),(10,'23623644','Martin','Melgarejo Principe','Masculino','Av. Los Angeles ','correo@defg.nom ','21513673');
+INSERT INTO `persona` VALUES (1,'15534588','Julio','Rosas Nombre','Masculino','Jr. Las piedras 342 ','Correo@correo.com ','34567688'),(2,'95485652','Claudia Alejandra','Briceño Pulache','Masculino','Los Planos      ','Correo@correo.com ','34567688'),(3,'12485678','Otro','enero e','Masculino','Los Planos     ','Correo@correo.com ','34567688'),(4,'96548715','Otro','enero e','Masculino','Los Planos     ','Correo@correo.com ','34567688'),(5,'12365487','Otro','enero e','Masculino','Los Planos     ','Correo@correo.com ','34567688'),(6,'36541259','Jamil','Urbano Macedo','Masculino','av. locos   ','Correo@correo.com ','34567688'),(7,'12346543','Claudia Alejandra','Briceño Pulache','Femenino','Los Planos      ','Correo@correo.com ','34567688'),(8,'23545663','Carlos','Alvarado Rosales','Masculino','Av. Los Angeles ','Correo@correo.com ','34567688'),(9,'56543322','Ximena Azucena','Coral Crispin','Femenino','Las avenidas   ','Xime@correo.com ','933445565'),(10,'112232','Carlos editg','dest','Masculino','Los Planos         ','Correo@correo.com ','34567688'),(11,'43556677','Maria','Melgarejo Principe','Femenino','Las Flores   ','jes@gmail.com ','908765643');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -434,7 +434,7 @@ CREATE TABLE `procedencia` (
   `idProcedencia` int NOT NULL AUTO_INCREMENT,
   `nombre_procedencia` varchar(45) NOT NULL,
   PRIMARY KEY (`idProcedencia`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -443,7 +443,7 @@ CREATE TABLE `procedencia` (
 
 LOCK TABLES `procedencia` WRITE;
 /*!40000 ALTER TABLE `procedencia` DISABLE KEYS */;
-INSERT INTO `procedencia` VALUES (1,'Ayacucho'),(2,'Chimbote'),(3,'Huaraz'),(4,'Carhuaz'),(5,'Yungay'),(6,'Huaraz'),(7,'Huaraz'),(8,'Huaraz'),(9,'Huaraz'),(10,'Huaraz');
+INSERT INTO `procedencia` VALUES (1,'Ayacucho'),(2,'Huaraz'),(3,'Huaraz'),(4,'Carhuaz'),(5,'Yungay'),(6,'Huaraz'),(7,'Huaraz'),(8,'Huaraz'),(9,'Huaraz'),(10,'Huaraz'),(11,'Chimbote');
 /*!40000 ALTER TABLE `procedencia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -759,4 +759,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-15  2:52:12
+-- Dump completed on 2021-08-17  2:04:36

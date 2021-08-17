@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 
+
 function navegacion(){
     const contenedor = document.querySelector('.contenedor-barra');
     const logo = document.querySelector('.contenido-cabecera');
@@ -81,23 +82,105 @@ function items(){
 function modal(modal, boton, close){
    
 var modal = document.getElementById(modal);
-
-var btn = document.getElementById(boton);
-
 var span = document.getElementsByClassName(close)[0];
 
   modal.style.display = "block";
-  console.log('dieste click ' + modal);
 
 
 span.onclick = function() {
   modal.style.display = "none";
+  window.location.reload();
 }
 
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
-    console.log('click ventana')
+    window.location.reload();
+
   }
 }
+}
+
+
+/**AJAX */
+
+function BuscarIntegrante(dni){
+
+    var param = {"dni": dni, "cod": 1}
+
+    $.ajax({
+        type: "POST",
+        data: param,
+        url: "obtenDatos.php",
+        success: function(r) {
+
+            datos = jQuery.parseJSON(r); // vas a castear el array json uno a uno
+
+            $('#dni').val(datos['dni']);
+            $('#nombre').val(datos['nombre']);
+            $('#apellido').val(datos['apellido']);
+            $('#direccion').val(datos['direccion']);
+            $('#email').val(datos['email']);
+            $('#telefono').val(datos['telefono']);
+            $('#codigo_alumno').val(datos['codigo_alumno']);
+            $('#idEscuela').val(datos['idEscuela']);
+            $('#nombre_procedencia').val(datos['nombre_procedencia']);
+            $('#estado').val(datos['estado']);
+            $('#idCondicionEconomica').val(datos['idCondicionEconomica']);
+            $('#descripcion').val(datos['descripcion']);
+            $('#idPersona').val(datos['idPersona']);
+
+            var recepcionaDatos = datos['genero'];
+            if (recepcionaDatos === 'Masculino') {
+                $("#genero option[value='Masculino'").attr("selected", true);
+            } else {
+                $("#genero option[value='Femenino'").attr("selected", true);
+            }
+        }
+    });
+
+}
+
+function actualizarIntegrante(dni, modal_integrante, boton, close){
+
+  
+    modal(modal_integrante, boton, close);
+
+     BuscarIntegrante(dni);
+
+     $(document).ready(function(){
+
+        $("#cont_buscar").hide();
+
+        $("#titulo_integrante").text('Editar Integrante');
+        $("#valor").val('1');
+      
+      });
+
+
+    
+}
+
+function actualizarTipo(id, modal_tipo, boton_agregar_tipo, close_tipo){
+
+    modal(modal_tipo, boton_agregar_tipo, close_tipo);
+
+    
+    var param = {"id": id, "cod": 2}
+
+    $.ajax({
+        type: "POST",
+        data: param,
+        url: "obtenDatos.php",
+        success: function(r) {
+
+            datos = jQuery.parseJSON(r); // vas a castear el array json uno a uno
+
+            $('#nombre_tipo').val(datos['nombre_tipo']);
+
+            $('#titulo_tipo').text('Actualizar Tipo');
+           
+        }
+    });
+
 }

@@ -135,7 +135,7 @@ class Grupo
     public function setIntegrante($alumno)
     {
 
-        $resultado = $alumno->asignarGrupo($this->idgrupo_universitario);
+        $resultado = $alumno->crear($this->idgrupo_universitario);
 
 
         return $resultado;
