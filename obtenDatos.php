@@ -3,6 +3,7 @@ require 'includes/app.php';
 
 use App\Estudiante;
 use App\TipoGrupo;
+use App\Beneficio;
 
 //$estudiante=new Estudiante();
 
@@ -13,12 +14,15 @@ $cod = $_POST['cod'];
 //los datos que se encuentran en la otra capa y asi la está ejecutando en ésta
 switch ($cod) {
     case 1:
+        //buscar estudiantes
         echo json_encode(Estudiante::find($_POST['dni']));
         break;
     case 2:
+        //buacar tipo
         echo json_encode(TipoGrupo::getTipo($_POST['id']));
         break;
-    case "pastel":
-        echo "i es un pastel";
+        //traer beneficio
+    case 3:
+        echo json_encode(Beneficio::find($_POST['id']));;
         break;
 }

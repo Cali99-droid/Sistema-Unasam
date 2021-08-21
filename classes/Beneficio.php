@@ -6,24 +6,39 @@ class Beneficio
 {
     //Base de datos
     protected static $db;
-    protected static $columnaDB = ['idResolucionxbeneficio', 'numero', 'fecha_emision', 'estado', 'idBeneficio'];
+    protected static $columnaDB = ['idResolucionxbeneficio', 'numero', 'fecha_emision', 'estadoresolucion', 'idBeneficio', 'nombre', 'idBeneficioxtipGrupo', 'estado', 'nombre_tipo', 'idTipoGrupo'];
 
     //errores
     protected static $errores = [];
 
+
+
     public $idResolucionxbeneficio;
     public $numero;
     public $fecha_emision;
-    public $estado;
+    public $estadoresolucion;
     public $idBeneficio;
+    public $nombre;
+    public $idBeneficioxtipGrupo;
+    public $estado;
+    public $nombre_tipo;
+    public $idTipoGrupo;
+
+
+
 
     public function __construct($args = [])
     {
         $this->idResolucionxbeneficio = $args['idResolucionxbeneficio'] ?? '';
         $this->numero = $args['numero'] ?? '';
         $this->fecha_emision = $args['fecha_emision'] ?? '';
-        $this->estado = $args['estado'] ?? '';
+        $this->estadoresolucion = $args['estadoresolucion'] ?? '';
         $this->idBeneficio = $args['idBeneficio'] ?? '';
+        $this->nombre = $args['nombre'] ?? '';
+        $this->idBeneficioxtipGrupo = $args['idBeneficioxtipGrupo'] ?? '';
+        $this->estado = $args['estado'] ?? '';
+        $this->nombre_tipo = $args['nombre_tipo'] ?? '';
+        $this->idTipoGrupo = $args['idTipoGrupo'] ?? '';
     }
 
     //definir la conexion a la bd
@@ -38,16 +53,13 @@ class Beneficio
         //sanitizar datos
         $atributos = $this->sanitizarAtributos();
         //insertar en la base de da
-        $query = "INSERT INTO grupo_universitario(";
-        $query .= join(', ', array_keys($atributos));
-        $query .= " ) VALUES(' ";
-        $query .= join("', '", array_values($atributos));
-        $query .= " ')";
+        $query = "CALL p_insertarbeneficio( '" . $this->nombre . "','" . $this->numero . "', '" . $this->fecha_emision . "', '" . $this->estadoresolucion . "','" . $this->estado . "'," . $this->idTipoGrupo . ")";
 
         $resultado = self::$db->query($query);
 
-
-        return $resultado;
+        if ($resultado) {
+            header('Location: /beneficios.php');
+        }
     }
 
     public function actualizar()
@@ -59,13 +71,13 @@ class Beneficio
             $valores[] = "{$key}='{$value}'";
         }
 
-        $query = " UPDATE grupo_universitario SET ";
-        $query .= join(', ', $valores);
-        $query .= " WHERE idgrupo_universitario = '" . self::$db->escape_string($this->idgrupo_universitario) . "' ";
-        $query .= " LIMIT 1 ";
+        $query = "CALL p_updatebeneficio('" . $this->idBeneficio . "', '" . $this->nombre . "','" . $this->numero . "', '" . $this->fecha_emision . "', '" . $this->estadoresolucion . "','" . $this->estado . "'," . $this->idTipoGrupo . ")";
 
 
         $resultado = self::$db->query($query);
+        if ($resultado) {
+            header('Location: /beneficios.php');
+        }
     }
 
     public function atributos()
@@ -92,14 +104,6 @@ class Beneficio
         return $sanitizado;
     }
 
-    public function setImagen($imagen)
-    {
-
-        //asignar al atributo de imagen el nombre de la imagen
-        if ($imagen) {
-            $this->imagen = $imagen;
-        }
-    }
 
     public function getTipoGrupo(): string
     {
@@ -189,17 +193,17 @@ class Beneficio
     // lista todas los grupos
     public static function all()
     {
-        $query = "SELECT * FROM Vista_Res_Beneficio";
+        $query = "SELECT * FROM vista_beneficios_tipo";
         $resultado = self::consultarSQL($query);
         return $resultado;
     }
-    // trae un grupo
-    public static function getBeneficioGrupo($id): Grupo
+    public static function find($id)
     {
-        $query = "SELECT * FROM vista_grupo_universitario WHERE idgrupo_universitario = ${id}";
-        $resultado = self::consultarSQL($query);
-        return $resultado[0];
+        $query = "SELECT * FROM vista_beneficios_tipo WHERE idBeneficio = " . $id;
+        $resultado = self::consulta($query)->fetch_assoc();
+        return $resultado;
     }
+
 
     public static function consulta($query)
     {

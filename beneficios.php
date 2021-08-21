@@ -3,14 +3,34 @@
 require 'includes/app.php';
 
 use App\Beneficio;
+use App\TipoGrupo;
 
 $beneficios = Beneficio::all();
 
-//cargar tipos
-$consulta = "SELECT * FROM tipo_grupo";
-$tipos = mysqli_query($db, $consulta);
 
-$bene = new Beneficio();
+//cargar tipos
+$tipos = TipoGrupo::all();
+
+
+$beneficio = new Beneficio();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+
+    if ($_POST['cod'] == 1) {
+        $beneficio = new Beneficio($_POST['beneficio']);
+
+        $beneficio->crear();
+    } elseif ($_POST['cod'] == 2) {
+
+        $beneficio = new Beneficio($_POST['beneficio']);
+
+        $beneficio->actualizar();
+    }
+}
+
+
+
 
 incluirTemplate('barra');
 ?>
@@ -27,7 +47,7 @@ incluirTemplate('barra');
         </div>
 
         <div class="nuevo-grupo">
-            <button type="button" class="boton-grupo" id="boton-agregar-beneficio" onclick="modal('modal-agregar', 'boton-agregar-beneficio', 'close')">
+            <button type="button" class="boton-grupo" id="boton-agregar-beneficio" onclick="modal('modal-agregar-bene', 'boton-agregar-beneficio', 'close')">
                 <i class="fas fa-plus-circle"></i> Agregar Beneficio
             </button>
         </div>
@@ -52,12 +72,16 @@ incluirTemplate('barra');
                         <td><?php echo $beneficio->getBeneficio(); ?></td>
                         <td><?php echo $beneficio->numero; ?></td>
                         <td><?php echo  $beneficio->fecha_emision; ?></td>
-                        <td><?php echo $beneficio->estado; ?></td>
+                        <td><?php echo $beneficio->estadoresolucion; ?></td>
                         <td>
-                            <form method="POST" class="w-100">
-                                <input type="hidden" name="id" value="<?php echo $beneficio->idBeneficio; ?>">
-                                <input type="submit" class="boton-rojo-block" value="Eliminar">
-                            </form>
+
+                            <input type="hidden" name="id" value="<?php echo $beneficio->idBeneficio; ?>">
+                            <input type="button" class="boton-rojo-block" value="editar" onclick="actualizarBeneficio(   <?php echo $beneficio->idBeneficio; ?>, 'modal-agregar-bene', 'boton-agregar-beneficio', 'close')">
+
+
+                            <input type="hidden" name="id" value="<?php echo $beneficio->idBeneficio; ?>">
+                            <input type="submit" class="boton-rojo-block" value="Eliminar">
+
 
                         </td>
                     </tr>
@@ -78,7 +102,7 @@ incluirTemplate('barra');
 
 </div>
 </div>
-<div class="modal-agregar" id="modal-agregar">
+<div class="modal-agregar" id="modal-agregar-bene">
 
 
     <div class="modal-beneficio contenido-modal-grupo ">
@@ -87,11 +111,9 @@ incluirTemplate('barra');
             <span class="close">&times;</span>
 
         </div>
-        <form action="" class="formulario-beneficio">
+        <form method="POST" class="formulario-beneficio">
 
-            <?php include 'includes/templates/modales/modBeneficio.php';
-
-            ?>
+            <?php include 'includes/templates/modales/modBeneficio.php'; ?>
 
 
         </form>

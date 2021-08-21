@@ -47,7 +47,7 @@ CREATE TABLE `alumno` (
 
 LOCK TABLES `alumno` WRITE;
 /*!40000 ALTER TABLE `alumno` DISABLE KEYS */;
-INSERT INTO `alumno` VALUES (1,'171.2506.025',1,3,3,2),(2,'132.567.892',2,1,2,1),(3,'161.2305.048',3,4,1,3),(4,'132.567.894',6,1,6,1),(5,'132.567.850',7,2,7,1),(6,'172.007.894',8,1,8,1),(7,'132.567.8177',9,1,9,3),(8,'132.007.894',10,1,10,1),(9,'122.567.823',11,6,11,2);
+INSERT INTO `alumno` VALUES (1,'171.2506.025',1,3,3,2),(2,'132.567.892',2,1,2,1),(3,'161.2305.048',3,4,1,3),(4,'132.567.894',6,1,6,1),(5,'132.567.850',7,2,7,1),(6,'172.007.894',8,1,8,1),(7,'132.567.8177',9,6,9,3),(8,'132.007.894',10,1,10,1),(9,'122.567.823',11,6,11,2);
 /*!40000 ALTER TABLE `alumno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,7 +78,7 @@ CREATE TABLE `alumnogrupo` (
 
 LOCK TABLES `alumnogrupo` WRITE;
 /*!40000 ALTER TABLE `alumnogrupo` DISABLE KEYS */;
-INSERT INTO `alumnogrupo` VALUES (1,'2021-08-17','Activo',2,5),(2,'2021-08-17','Activo',1,5),(3,'2017-06-16','Activo',3,8),(4,'2021-08-17','Activo',4,9),(5,'2021-08-17','Activo',5,9),(6,'2021-08-17','Activo',6,9),(7,'2021-08-17','Activo',7,5),(8,'2021-08-17','Activo',8,9),(9,'2021-08-16','Activo',8,5),(10,'2021-08-17','Activo',7,9),(11,'2021-08-17','Activo',9,5);
+INSERT INTO `alumnogrupo` VALUES (1,'2021-08-17','Activo',2,5),(2,'2021-08-20','Activo',1,5),(3,'2017-06-16','Activo',3,8),(4,'2021-08-17','Activo',4,9),(5,'2021-08-17','Activo',5,9),(6,'2021-08-17','Activo',6,9),(7,'2021-08-21','Activo',7,5),(8,'2021-08-20','Activo',8,9),(9,'2021-08-16','Activo',8,5),(10,'2021-08-17','Activo',7,9),(11,'2021-08-17','Activo',9,5);
 /*!40000 ALTER TABLE `alumnogrupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +93,7 @@ CREATE TABLE `beneficio` (
   `idBeneficio` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   PRIMARY KEY (`idBeneficio`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `beneficio` (
 
 LOCK TABLES `beneficio` WRITE;
 /*!40000 ALTER TABLE `beneficio` DISABLE KEYS */;
-INSERT INTO `beneficio` VALUES (1,'Descuento de Matricula'),(2,'Descuento en CID'),(3,'Comedor Gratis');
+INSERT INTO `beneficio` VALUES (1,'Descuento de Matricula edt'),(2,'Descuento en CID'),(3,'Comedor Gratis'),(4,'Beneficio nuevo'),(5,'Beneficio nuevo'),(6,'Beneficio nuevo'),(7,'Beneficio edt'),(8,'bb'),(9,'bb'),(10,'bb'),(11,'benee'),(12,'Nuevo beneficio'),(13,'Aprobar en progra '),(14,'beeee'),(15,'depor'),(16,'depor');
 /*!40000 ALTER TABLE `beneficio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +159,7 @@ CREATE TABLE `beneficioxtipgrupo` (
   KEY `TipoGrupo2_idx` (`idTipoGrupo`),
   CONSTRAINT `Beneficio3` FOREIGN KEY (`idBeneficio`) REFERENCES `beneficio` (`idBeneficio`),
   CONSTRAINT `TipoGrupo2` FOREIGN KEY (`idTipoGrupo`) REFERENCES `tipo_grupo` (`idTipoGrupo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,6 +168,7 @@ CREATE TABLE `beneficioxtipgrupo` (
 
 LOCK TABLES `beneficioxtipgrupo` WRITE;
 /*!40000 ALTER TABLE `beneficioxtipgrupo` DISABLE KEYS */;
+INSERT INTO `beneficioxtipgrupo` VALUES (1,'ACTIVO',1,2),(2,'INACTIVO',2,3),(3,'ACTIVO',4,1),(4,'ACTIVO',5,1),(5,'ACTIVO',6,1),(6,'ACTIVO',7,3),(7,'ACTIVO',8,2),(8,'ACTIVO',9,2),(9,'ACTIVO',10,2),(10,'ACTIVO',11,1),(11,'ACTIVO',12,1),(12,'ACTIVO',13,3),(13,'ACTIVO',14,4),(14,'ACTIVO',15,2),(15,'ACTIVO',16,2);
 /*!40000 ALTER TABLE `beneficioxtipgrupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -353,7 +354,7 @@ CREATE TABLE `grupo_universitario` (
 
 LOCK TABLES `grupo_universitario` WRITE;
 /*!40000 ALTER TABLE `grupo_universitario` DISABLE KEYS */;
-INSERT INTO `grupo_universitario` VALUES (5,' Deportivo ','2021-08-10','RES_45','70ed58b53fbccec929dfc680034d67d9.jpg',2),(8,'Grupo estudios','2021-08-06','RES_123','4466df1374c590a8d1b7f9462121e996grupo2.jpg',4),(9,'Tuna Femenina ','2021-07-30','RES_234','ed4748a6078f65686a09c33d7766315d.jpg',1),(10,'Deporte SIstemas','2021-08-14','RES_89','03f958d0fdfbc28c225a529eccde7d40adusan.png',2),(11,'Tuna UNASAM','2021-08-06','RES_12','073b381628487f23b4276f57339fee0a.jpg',1),(12,'Desarrollo Inf.','2021-08-01','RES_003','75a1da4887220c39f7e8cf86682cd408grupo4.jpg',4),(13,'TUSAM','2021-08-15','RES_0009','0d56108668a6741d4b3f669f4201e8a5grupo3.jpg',3),(15,'Grupo','2021-08-07','RES_198','88cda3956cfe0b8519a28778d01d46b4grupo3.jpg',1),(18,' Grupo App','2021-08-08','RES_19811','b9a849d3de323af557c6a7d3c62b8065.jpg',1),(19,'gruposs','2021-08-14','234','3477a7fc5cc3fc7b7a80262ed0b31ce6.jpg',1),(21,' Nuevo Grupete','2021-08-10','res555','d7a2d1ee29132361d9723829bdb04ce6.jpg',2),(22,' Nuevo Grupete','2021-08-14','RES_2001','460d981514377cdb275faf772578606a.jpg',3),(23,' Nuevo Grupete','2021-08-14','RES_2001','0f3251c02297191140b8c08e6a211ba6.jpg',3),(24,'Los Rosados','2021-08-13','res555we','7db919bd66d08b248e70a74386fa6255.jpg',2),(25,'Equipo','2021-08-14','ALV_45','f106eb2487d11298dcd93cc97af1ac19.jpg',4),(26,' Equipo los grandes','2021-08-13','res555we','17c11b68286534ba59394db97ba7c0e8.jpg',2),(27,' Gripo nuee','2021-08-08','RES_19811','10180405841b76d7c028d7c0b1138ac6.jpg',1),(28,'  Gripo nuee','2021-08-08','RES_19811','e336b18bf689738246f3129a7815a7f4.jpg',1),(29,'  Equiposs','2021-08-14','ALV_45','b09d4be1678ec945fe06e15d7c26952b.jpg',3),(30,' Tuna FEm','2021-07-30','RES_234','ba18850777055f093a2b00d9ec728db4.jpg',1),(31,' Prueba','2021-08-15','res55511','af21933ecb961bab26a2794d845675ad.jpg',2);
+INSERT INTO `grupo_universitario` VALUES (5,' Deportivo ','2021-08-10','RES_45','70ed58b53fbccec929dfc680034d67d9.jpg',2),(8,'Grupo estudios','2021-08-06','RES_123','4466df1374c590a8d1b7f9462121e996grupo2.jpg',4),(9,'Tuna Femenina 2.0','2021-07-30','RES_234','011cd945e78e52367cc14b2fd7b0f50c.jpg',1),(10,'Deporte SIstemas','2021-08-14','RES_89','03f958d0fdfbc28c225a529eccde7d40adusan.png',2),(11,'Tuna UNASAM','2021-08-06','RES_12','073b381628487f23b4276f57339fee0a.jpg',1),(12,'Desarrollo Inf.','2021-08-01','RES_003','75a1da4887220c39f7e8cf86682cd408grupo4.jpg',4),(13,'TUSAM','2021-08-15','RES_0009','0d56108668a6741d4b3f669f4201e8a5grupo3.jpg',3),(15,'Grupo','2021-08-07','RES_198','88cda3956cfe0b8519a28778d01d46b4grupo3.jpg',1),(18,' Grupo App','2021-08-08','RES_19811','b9a849d3de323af557c6a7d3c62b8065.jpg',1),(19,'gruposs','2021-08-14','234','3477a7fc5cc3fc7b7a80262ed0b31ce6.jpg',1),(21,' Nuevo Grupete','2021-08-10','res555','d7a2d1ee29132361d9723829bdb04ce6.jpg',2),(22,' Nuevo Grupete','2021-08-14','RES_2001','460d981514377cdb275faf772578606a.jpg',3),(23,' Nuevo Grupete','2021-08-14','RES_2001','0f3251c02297191140b8c08e6a211ba6.jpg',3),(24,'Los Rosados','2021-08-13','res555we','7db919bd66d08b248e70a74386fa6255.jpg',2),(25,'Equipo','2021-08-14','ALV_45','f106eb2487d11298dcd93cc97af1ac19.jpg',4),(26,' Equipo los grandes','2021-08-13','res555we','17c11b68286534ba59394db97ba7c0e8.jpg',2),(27,' Gripo nuee','2021-08-08','RES_19811','10180405841b76d7c028d7c0b1138ac6.jpg',1),(28,'  Gripo nuee','2021-08-08','RES_19811','e336b18bf689738246f3129a7815a7f4.jpg',1),(29,'  Equiposs','2021-08-14','ALV_45','b09d4be1678ec945fe06e15d7c26952b.jpg',3),(30,' Tuna FEm','2021-07-30','RES_234','ba18850777055f093a2b00d9ec728db4.jpg',1),(31,' Prueba','2021-08-15','res55511','af21933ecb961bab26a2794d845675ad.jpg',2);
 /*!40000 ALTER TABLE `grupo_universitario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -419,7 +420,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'15534588','Julio','Rosas Nombre','Masculino','Jr. Las piedras 342 ','Correo@correo.com ','34567688'),(2,'95485652','Claudia Alejandra','Briceño Pulache','Masculino','Los Planos      ','Correo@correo.com ','34567688'),(3,'12485678','Otro','enero e','Masculino','Los Planos     ','Correo@correo.com ','34567688'),(4,'96548715','Otro','enero e','Masculino','Los Planos     ','Correo@correo.com ','34567688'),(5,'12365487','Otro','enero e','Masculino','Los Planos     ','Correo@correo.com ','34567688'),(6,'36541259','Jamil','Urbano Macedo','Masculino','av. locos   ','Correo@correo.com ','34567688'),(7,'12346543','Claudia Alejandra','Briceño Pulache','Femenino','Los Planos      ','Correo@correo.com ','34567688'),(8,'23545663','Carlos','Alvarado Rosales','Masculino','Av. Los Angeles ','Correo@correo.com ','34567688'),(9,'56543322','Ximena Azucena','Coral Crispin','Femenino','Las avenidas   ','Xime@correo.com ','933445565'),(10,'112232','Carlos editg','dest','Masculino','Los Planos         ','Correo@correo.com ','34567688'),(11,'43556677','Maria','Melgarejo Principe','Femenino','Las Flores   ','jes@gmail.com ','908765643');
+INSERT INTO `persona` VALUES (1,'15534588','Julio jose','Rosas Nombre','Masculino','Jr. Las piedras 342  ','Correo@correo.com ','34567688'),(2,'95485652','Claudia Alejandra','Briceño Pulache','Masculino','Los Planos      ','Correo@correo.com ','34567688'),(3,'12485678','Otro','enero e','Masculino','Los Planos     ','Correo@correo.com ','34567688'),(4,'96548715','Otro','enero e','Masculino','Los Planos     ','Correo@correo.com ','34567688'),(5,'12365487','Otro','enero e','Masculino','Los Planos     ','Correo@correo.com ','34567688'),(6,'36541259','Jamil','Urbano Macedo','Masculino','av. locos   ','Correo@correo.com ','34567688'),(7,'12346543','Claudia Alejandra','Briceño Pulache','Femenino','Los Planos      ','Correo@correo.com ','34567688'),(8,'23545663','Carlos','Alvarado Rosales','Masculino','Av. Los Angeles ','Correo@correo.com ','34567688'),(9,'56543322','Ximena Azucena','Coral Crispin de Alvarado','Femenino','Las avenidas     ','Xime@correo.com ','933445565'),(10,'112232','Carlos Jose','Rosales','Masculino','Los Planos           ','Correo@correo.com ','34567688'),(11,'43556677','Maria','Melgarejo Principe','Femenino','Las Flores   ','jes@gmail.com ','908765643');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -463,7 +464,7 @@ CREATE TABLE `resolucionxbeneficio` (
   PRIMARY KEY (`idResolucionxbeneficio`),
   KEY `Beneficio2_idx` (`idBeneficio`),
   CONSTRAINT `Beneficio2` FOREIGN KEY (`idBeneficio`) REFERENCES `beneficio` (`idBeneficio`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -472,7 +473,7 @@ CREATE TABLE `resolucionxbeneficio` (
 
 LOCK TABLES `resolucionxbeneficio` WRITE;
 /*!40000 ALTER TABLE `resolucionxbeneficio` DISABLE KEYS */;
-INSERT INTO `resolucionxbeneficio` VALUES (1,'123','2021-05-12','completado',1),(2,'456','2021-05-19','pendiente',2),(3,'543','2021-05-14','completado',3);
+INSERT INTO `resolucionxbeneficio` VALUES (1,'123','2021-05-12','PENDIENTE',1),(2,'456','2021-05-19','PENDIENTE',2),(3,'543','2021-05-14','completado',3),(4,'03','2021-08-20','PENDIENTE',4),(5,'03','2021-08-20','PENDIENTE',5),(6,'03','2021-08-20','PENDIENTE',6),(7,'00203','2021-08-21','COMPLETADO',7),(8,'555','2021-08-15','COMPLETADO',8),(9,'555','2021-08-15','COMPLETADO',9),(10,'555','2021-08-15','COMPLETADO',10),(11,'111','2021-08-06','COMPLETADO',11),(12,'888','2021-08-13','COMPLETADO',12),(13,'12345','2021-08-15','COMPLETADO',13),(14,'0020322','2021-08-01','COMPLETADO',14),(15,'111112','2021-08-14','COMPLETADO',15),(16,'111344','2021-08-13','COMPLETADO',16);
 /*!40000 ALTER TABLE `resolucionxbeneficio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -593,6 +594,27 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary view structure for view `vista_beneficios_tipo`
+--
+
+DROP TABLE IF EXISTS `vista_beneficios_tipo`;
+/*!50001 DROP VIEW IF EXISTS `vista_beneficios_tipo`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vista_beneficios_tipo` AS SELECT 
+ 1 AS `idResolucionxbeneficio`,
+ 1 AS `numero`,
+ 1 AS `fecha_emision`,
+ 1 AS `estadoresolucion`,
+ 1 AS `idBeneficio`,
+ 1 AS `nombre`,
+ 1 AS `idBeneficioxtipGrupo`,
+ 1 AS `estado`,
+ 1 AS `idTipoGrupo`,
+ 1 AS `nombre_tipo`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Temporary view structure for view `vista_estudiantes`
 --
 
@@ -697,6 +719,24 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
+-- Final view structure for view `vista_beneficios_tipo`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vista_beneficios_tipo`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vista_beneficios_tipo` AS select `rb`.`idResolucionxbeneficio` AS `idResolucionxbeneficio`,`rb`.`numero` AS `numero`,`rb`.`fecha_emision` AS `fecha_emision`,`rb`.`estado` AS `estadoresolucion`,`b`.`idBeneficio` AS `idBeneficio`,`b`.`nombre` AS `nombre`,`btp`.`idBeneficioxtipGrupo` AS `idBeneficioxtipGrupo`,`btp`.`estado` AS `estado`,`tp`.`idTipoGrupo` AS `idTipoGrupo`,`tp`.`nombre_tipo` AS `nombre_tipo` from (((`beneficio` `b` join `resolucionxbeneficio` `rb` on((`rb`.`idBeneficio` = `b`.`idBeneficio`))) join `beneficioxtipgrupo` `btp` on((`btp`.`idBeneficio` = `b`.`idBeneficio`))) join `tipo_grupo` `tp` on((`tp`.`idTipoGrupo` = `btp`.`idTipoGrupo`))) order by `b`.`idBeneficio` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `vista_estudiantes`
 --
 
@@ -759,4 +799,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-17  2:04:36
+-- Dump completed on 2021-08-21 11:45:08

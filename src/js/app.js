@@ -184,3 +184,49 @@ function actualizarTipo(id, modal_tipo, boton_agregar_tipo, close_tipo){
     });
 
 }
+
+function actualizarBeneficio(id, modalben, boton_agregar_ben, close_ben){
+
+    modal(modalben, boton_agregar_ben, close_ben);
+
+    
+    var param = {"id": id, "cod": 3}
+
+    $.ajax({
+        type: "POST",
+        data: param,
+        url: "obtenDatos.php",
+        success: function(r) {
+
+            datos = jQuery.parseJSON(r); // vas a castear el array json uno a uno
+
+            $('#numero').val(datos['numero']);
+            $("#fecha_emision").val(datos['fecha_emision']);
+            $('#estadoresolucion').val(datos['estadoresolucion']);
+            $('#nombre').val(datos['nombre']);
+            $('#estado').val(datos['estado']);
+            $('#idTipoGrupo').val(datos['idTipoGrupo']);
+            $("#valor").val('2');
+            $("#idBeneficio").val(datos['idBeneficio']);
+
+            
+            if (datos['estadoresolucion'] === 'COMPLETADO') {
+                $("#estadoresolucion option[value='COMPLETADO'").attr("selected", true);
+            } else {
+                $("#estadoresolucion option[value='PENDIENTE'").attr("selected", true);
+            }
+
+            if (datos['estado'] === 'ACTIVO') {
+                $("#estado option[value='ACTIVO'").attr("selected", true);
+            } else {
+                $("#estado option[value='INACTIVO'").attr("selected", true);
+            }
+            
+         
+     
+     
+           
+        }
+    });
+
+}
