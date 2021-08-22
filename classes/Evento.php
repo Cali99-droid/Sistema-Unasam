@@ -3,23 +3,28 @@
 namespace App;
 
 
-class TipoGrupo
+class Evento
 {
     //Base de datos
     protected static $db;
-    protected static $columnaDB = ['idTipoGrupo', 'nombre_tipo'];
+    protected static $columnaDB = ['idEventosrealizados', 'nombre_evento', 'fecha_inicio', 'fecha_final'];
 
     //errores
     protected static $errores = [];
 
-    public $idTipoGrupo;
-    public $nombre_tipo;
+    public $idEventosrealizados;
+    public $nombre_evento;
+    public $fecha_inicio;
+    public $fecha_final;
+
 
 
     public function __construct($args = [])
     {
-        $this->idTipoGrupo = $args['idTipoGrupo'] ?? '';
-        $this->nombre_tipo = $args['nombre_tipo'] ?? '';
+        $this->idEventosrealizados = $args['idEventosrealizados'] ?? '';
+        $this->nombre_evento = $args['nombre_evento'] ?? '';
+        $this->fecha_inicio = $args['fecha_inicio'] ?? '';
+        $this->fecha_final = $args['fecha_final'] ?? '';
     }
 
     //definir la conexion a la bd
@@ -34,14 +39,15 @@ class TipoGrupo
         //sanitizar datos
         $atributos = $this->sanitizarAtributos();
         //insertar en la base de da
-        $query = "INSERT INTO tipo_grupo(";
+        $query = "INSERT INTO Eventos_realizados(";
         $query .= join(', ', array_keys($atributos));
         $query .= " ) VALUES(' ";
         $query .= join("', '", array_values($atributos));
         $query .= " ')";
 
-
         $resultado = self::$db->query($query);
+
+
         return $resultado;
     }
 
@@ -52,12 +58,10 @@ class TipoGrupo
         foreach ($atributos as $key => $value) {
             $valores[] = "{$key}='{$value}'";
         }
-        $query = " UPDATE tipo_grupo SET ";
+        $query = " UPDATE Eventos_realizados SET ";
         $query .= join(', ', $valores);
-        $query .= " WHERE idTipoGrupo = '" . self::$db->escape_string($this->idTipoGrupo) . "' ";
+        $query .= " WHERE idEventosrealizados = '" . self::$db->escape_string($this->idEventosrealizados) . "' ";
         $query .= " LIMIT 1 ";
-
-
 
         $resultado = self::$db->query($query);
         return $resultado;
@@ -67,7 +71,7 @@ class TipoGrupo
     {
         $atributos = [];
         foreach (self::$columnaDB as $columna) {
-            if ($columna == 'idTipoGrupo') continue;
+            if ($columna == 'idEventosrealizados') continue;
             $atributos[$columna] = $this->$columna;
         }
 
@@ -86,8 +90,6 @@ class TipoGrupo
 
         return $sanitizado;
     }
-
-
 
 
 
@@ -111,31 +113,60 @@ class TipoGrupo
         return self::$errores;
     }
 
+    public function validar()
+    {
+
+        if (!$this->titulo) {
+            self::$errores[] = "Debes Añadir un titulo";
+        }
+
+        if (!$this->precio) {
+            self::$errores[] = "El precio es obligatorio";
+        }
+
+        if (strlen($this->descripcion) < 50) {
+            self::$errores[] = "La descripcion es obligatoria y debe tener mas de 50 caracteres";
+        }
+
+        if (!$this->habitaciones) {
+            self::$errores[] = "El numero de habitaciones es obligatorio";
+        }
+
+        if (!$this->wc) {
+            self::$errores[] = "El numero de baños es obligatorio";
+        }
+
+        if (!$this->estacionamiento) {
+            self::$errores[] = "El numero de estacionamientos es obligatorio";
+        }
+
+        if (!$this->vendedorId) {
+            self::$errores[] = "Elige un vendedor";
+        }
+
+        if (!$this->imagen) {
+            self::$errores[] = "la imagen es obligatoria";
+        }
+
+
+        return self::$errores;
+    }
 
 
     // lista todas los grupos
     public static function all()
     {
-        $query = "SELECT * FROM tipo_grupo";
+        $query = "SELECT * FROM Eventos_realizados";
         $resultado = self::consultarSQL($query);
         return $resultado;
     }
-    // trae un grupo
-    public static function getTipo($id)
-    {
-        $query = "SELECT * FROM tipo_grupo WHERE idTipoGrupo = ${id}";
-        $resultado = self::consulta($query)->fetch_assoc();
-        return $resultado;
-    }
-
-    // trae un grupo
+    // trae un evento
     public static function find($id)
     {
-        $query = "SELECT * FROM tipo_grupo WHERE idTipoGrupo = ${id}";
+        $query = "SELECT * FROM Eventos_realizados WHERE idEventosrealizados = ${id}";
         $resultado = self::consulta($query)->fetch_assoc();;
         return $resultado;
     }
-
 
     public static function consulta($query)
     {

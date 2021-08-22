@@ -1,5 +1,5 @@
 <!--ventana modal-->
-<div class="modal-agregar" id="modal-agregar">
+<div class="modal-agregar" id="modal-agregar-ev">
 
 
     <div class="contenido-modal-grupo">
@@ -10,16 +10,17 @@
         </div>
         <form class="formulario-grupo" method="POST">
 
-            <label for="nombre-evento">Nombre del Evento</label>
-            <input type="text" name="nombre-evento" id="nombre-evento">
+            <label for="nombre_evento">Nombre del Evento</label>
+            <input type="text" name="nombre_evento" id="nombre_evento">
 
-            <label for="fecha-inicio">Fecha inicio</label>
-            <input type="date" name="fecha-inicio" id="fecha-inicio">
+            <label for="fecha_inicio">Fecha inicio</label>
+            <input type="date" name="fecha_inicio" id="fecha_inicio">
 
-            <label for="fecha-fin">Fecha fin</label>
-            <input type="date" name="fecha-fin" id="fecha-fin">
+            <label for="fecha_final">Fecha fin</label>
+            <input type="date" name="fecha_final" id="fecha_final">
 
-            <input type="hidden" name="cod" value="1">
+            <input type="hidden" name="cod" value="1" id="valor">
+            <input type="hidden" name="idEventosrealizados" value='' id="idEventosrealizados">
             <button class="" type="submit">Aceptar</button>
 
 

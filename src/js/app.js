@@ -177,8 +177,9 @@ function actualizarTipo(id, modal_tipo, boton_agregar_tipo, close_tipo){
             datos = jQuery.parseJSON(r); // vas a castear el array json uno a uno
 
             $('#nombre_tipo').val(datos['nombre_tipo']);
-
             $('#titulo_tipo').text('Actualizar Tipo');
+            $('#idTipoGrupo').val(datos['idTipoGrupo']);
+            $('#valor').val('2');
            
         }
     });
@@ -226,6 +227,31 @@ function actualizarBeneficio(id, modalben, boton_agregar_ben, close_ben){
      
      
            
+        }
+    });
+
+}
+
+function actualizarEvento(id, modal_ev, boton_agregar_ev, close_ev){
+
+    modal(modal_ev, boton_agregar_ev, close_ev);
+
+    var param = {"id": id, "cod": 4}
+
+    $.ajax({
+        type: "POST",
+        data: param,
+        url: "obtenDatos.php",
+        success: function(r) {
+
+
+            datos = jQuery.parseJSON(r); // vas a castear el array json uno a uno
+
+            $('#nombre_evento').val(datos['nombre_evento']);
+            $('#fecha_inicio').val(datos['fecha_inicio']);
+            $('#fecha_final').val(datos['fecha_final']);
+            $("#valor").val('2');
+            $('#idEventosrealizados').val(datos['idEventosrealizados']);
         }
     });
 

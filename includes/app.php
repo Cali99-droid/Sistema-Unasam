@@ -11,8 +11,10 @@ use App\Grupo;
 use App\Beneficio;
 use App\Estudiante;
 use App\TipoGrupo;
+use App\Evento;
 
 Grupo::setDB($db);
 Beneficio::setDB($db);
 Estudiante::setDB($db);
 TipoGrupo::setDB($db);
+Evento::setDB($db);

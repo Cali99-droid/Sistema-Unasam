@@ -14,8 +14,19 @@ $tipos = TipoGrupo::all();
 $tip = new TipoGrupo();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-  $tipo = new TipoGrupo($_POST);
+  if ($_POST['cod'] == 1) {
+    $tipo = new TipoGrupo($_POST);
+    $resultado = $tipo->crear();
+    if ($resultado) {
+      header('Location: /tipos.php');
+    }
+  } elseif ($_POST['cod'] == 2) {
+    $tipo = new TipoGrupo($_POST);
+    $resultado = $tipo->actualizar();
+    if ($resultado) {
+      header('Location: /tipos.php');
+    }
+  }
 }
 
 
@@ -93,7 +104,7 @@ incluirTemplate('barra');
 </div>
 
 <!--ventana modal-->
-<div class="modal-agregar " id="modal-tipo">
+<div class="modal-agregar" id="modal-tipo">
 
 
   <div class="contenido-modal-grupo">
@@ -108,6 +119,8 @@ incluirTemplate('barra');
       <label for="nombre_tipo">Nombre del tipo</label>
       <input type="text" name="nombre_tipo" id="nombre_tipo" value="<?php $tip->nombre_tipo ?>">
 
+      <input type="hidden" name="cod" value="1" id="valor">
+      <input type="hidden" name="idTipoGrupo" value='' id="idTipoGrupo">
       <button type="submit">Aceptar</button>
 
     </form>

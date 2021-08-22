@@ -4,6 +4,7 @@ require 'includes/app.php';
 use App\Estudiante;
 use App\TipoGrupo;
 use App\Beneficio;
+use App\Evento;
 
 //$estudiante=new Estudiante();
 
@@ -24,5 +25,8 @@ switch ($cod) {
         //traer beneficio
     case 3:
         echo json_encode(Beneficio::find($_POST['id']));;
+        break;
+    case 4:
+        echo json_encode(Evento::find($_POST['id']));;
         break;
 }
