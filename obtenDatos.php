@@ -5,6 +5,7 @@ use App\Estudiante;
 use App\TipoGrupo;
 use App\Beneficio;
 use App\Evento;
+use App\User;
 
 //$estudiante=new Estudiante();
 
@@ -28,5 +29,8 @@ switch ($cod) {
         break;
     case 4:
         echo json_encode(Evento::find($_POST['id']));;
+        break;
+    case 5:
+        echo json_encode(User::find($_POST['dni']));
         break;
 }

@@ -256,3 +256,67 @@ function actualizarEvento(id, modal_ev, boton_agregar_ev, close_ev){
     });
 
 }
+
+
+function buscarUsuario(dni){
+
+    var param = {"dni": dni, "cod": 5}
+
+    $.ajax({
+        type: "POST",
+        data: param,
+        url: "obtenDatos.php",
+
+        success: function(r) {
+
+            datos = jQuery.parseJSON(r); // vas a castear el array json uno a uno
+
+        
+            $('#dni').val(datos['dni']);
+            $('#nombre').val(datos['nombre']);
+            $('#apellido').val(datos['apellido']);
+            $('#direccion').val(datos['direccion']);
+            $('#email').val(datos['email']);
+            $('#telefono').val(datos['telefono']);
+            $('#usuario').val(datos['usuario']);
+            $('#password').val(datos['password']);
+           // $('#estado').val(datos['estado']);
+            $('#idPersona').val(datos['idPersona']);
+            var val = datos['estado'];
+          
+            var recepcionaDatos = datos['genero'];
+            if (recepcionaDatos === 'Masculino') {
+                $("#genero option[value='Masculino'").attr("selected", true);
+            } else {
+                $("#genero option[value='Femenino'").attr("selected", true);
+            }
+
+            if(val === 'activo'){
+                $("#estado").attr('checked', true);
+
+            }else{
+                $("#estado").attr('checked', false);
+            }
+        }
+    });
+
+}
+
+
+function actualizarUsuario(dni, modal_usu, boton_agregar_usu, close_usu){
+
+    modal(modal_usu, boton_agregar_usu, close_usu);
+    buscarUsuario(dni);
+
+    $(document).ready(function(){
+
+        
+
+        $("#bus_user").hide();
+   
+        $("#titulo_user").text('Editar Usuario');
+        $("#valor").val('2');
+        $("")
+      });
+
+}

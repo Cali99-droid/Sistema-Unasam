@@ -1,146 +1,175 @@
 <?php
+require 'includes/app.php';
 
-require 'includes/funciones.php';
+use App\User;
+
+$users = User::all();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    if ($_POST['cod'] == 1) {
+
+        $arg =  $_POST['user'];
+        $user = new User($arg);
+        $user->crear($arg['password']);
+    } else if ($_POST['cod'] == 2) {
+        $arg =  $_POST['user'];
+
+        $user = new User($arg);
+
+        $user->actualizar($arg['password']);
+    }
+}
+
+
 incluirTemplate('barra');
 ?>
 
-        <div class="contenedor-grupos">
-            <div class="titulo-grupos">
-                <h2 class="no-margin">Gestión de Usuarios</h2>
-            </div>
+<div class="contenedor-grupos">
+    <div class="titulo-grupos">
+        <h2 class="no-margin">Gestión de Usuarios</h2>
+    </div>
 
-            <div class="acciones-grupo">
-                <div class="buscar">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Buscar" >
-                </div>
-
-                <div class="nuevo-grupo">
-                    <button type="button" class="boton-grupo" id="boton-agregar-usuario" 
-                    onclick="modal('modal-agregar', 'boton-agregar-usuario', 'close')">
-                        <i class="fas fa-plus-circle"></i>  Agregar Usuario</button>
-                </div>
-            </div>
-
-            <div class="contenedor-tabla tab-beneficio">
-
-                    <table>
-                        <tr>
-                          <th>Nombre</th>
-                          <th>Usuario</th>
-                          <th>Cargo</th>
-                          <th>Estado</th>
-                          <th>Acciones</th>
-                          
-                        </tr>
-                        <tr>
-                          <td>Jill</td>
-                          <td>Smith</td>
-                          <td>50</td>
-                          <td><input type="checkbox"></td>
-                          <td class="acciones"><i class="far fa-edit"></i><i class="far fa-trash-alt"></i></td>
-                          
-                        </tr>
-                        <tr>
-                          <td>Eve</td>
-                          <td>Jackson</td>
-                          <td>94</td>
-                          <td><input type="checkbox"</td>
-                          <td class="acciones"><i class="far fa-edit"></i><i class="far fa-trash-alt"></i></td>
-                          
-                        </tr>
-                        <tr>
-                          <td>Adam</td>
-                          <td>Johnson</td>
-                          <td>67</td>
-                          <td><input type="checkbox"</td>
-                          <td class="acciones"><i class="far fa-edit"></i><i class="far fa-trash-alt"></i></td>
-                          
-                        </tr>
-                      </table>
-          
-            </div>
-
-
+    <div class="acciones-grupo">
+        <div class="buscar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Buscar">
         </div>
 
+        <div class="nuevo-grupo">
+            <button type="button" class="boton-grupo" id="boton-agregar-usuario" onclick="modal('modal-agregar', 'boton-agregar-usuario', 'close')">
+                <i class="fas fa-plus-circle"></i> Agregar Usuario</button>
         </div>
-       
+    </div>
 
+    <div class="contenedor-tabla tab-beneficio">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Usuario</th>
+                    <th>DNI</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+            <?php foreach ($users as $user) :  ?>
+                <tr>
+                    <td><?php echo $user->nombre . ' ' . $user->apellido ?></td>
+                    <td><?php echo $user->usuario ?></td>
+                    <td><?php echo $user->dni ?></td>
+                    <td><label for="estado<?php echo $user->dni ?>">Activo </label><input id="estado<?php echo $user->dni ?>" name="estado<?php echo $user->dni ?>" type="checkbox" <?php echo $user->estado == 'activo' ? 'checked' : '' ?> value="activo"> </td>
+
+                    <td>
+                        <form method="GET" target="frame">
+                            <button value="<?php echo $user->idUsuario; ?>" type="button" class="boton-grupo" onclick="actualizarUsuario(<?php echo $user->dni; ?>, 'modal-agregar', 'boton-actualizar-tipo', 'close')">
+                                <i class="fas fa-plus-circle"></i> Editar</button>
+
+                            <input type="hidden" name="id" value="<?php echo $user->idUsuario; ?>">
+                            <input type="submit" class="boton-rojo-block" value="Eliminar">
+                        </form>
+
+                    </td>
+                </tr>
+
+            <?php endforeach; ?>
+
+        </table>
 
     </div>
-   </div>
 
-   <!--ventana modal-->
-   <div class="modal-agregar" id="modal-agregar">
-       
-   
+
+</div>
+
+</div>
+
+
+
+</div>
+</div>
+
+<!--ventana modal-->
+<div class="modal-agregar " id="modal-agregar">
+
+
     <div class="contenido-modal-grupo modal-usuarios">
-     <div class="encabezado-modal">
-         <h2>Nuevo Usuario</h2>
-         <span class="close">&times;</span>
+        <div class="encabezado-modal">
+            <h2 id="titulo_user">Nuevo Usuario</h2>
+            <span class="close">&times;</span>
 
-     </div>
-         <form action="" class="formulario-grupo">
+        </div>
+        <form method="POST" class="formulario-grupo">
 
-            <div class="buscar">
-                <label for="nombre-evento">Buscar</label>
-                <input type="text" name="nombre-evento" id="nombre-evento">
+            <div class="buscar" id="bus_user">
+                <label for="buscar_user">Buscar</label>
+                <input type="text" name="buscar_user" id="buscar_user" placeholder="Buscar por DNI">
+                <button type="button" id="btnBuscauser" name="btnBuscauser" onclick="buscarUsuario($('#buscar_user').val())">Buscar</button>
             </div>
 
             <div class="contenedor-usuario">
                 <div class="columna-usuario">
-                    <label for="nombre-usuario">Nombre</label>
-                    <input type="text" name="nombre-usuario" id="nombre-usuario">
-            
-                    <label for="apellido-usuario">Apellido</label>
-                    <input type="text" name="apellido-usuario" id="apellido-usuario">
+                    <label for="dni">DNI</label>
+                    <input type="text" name="user[dni]" id="dni">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="user[nombre]" id="nombre">
 
+                    <label for="apellido">Apellido</label>
+                    <input type="text" name="user[apellido]" id="apellido">
 
-                    <label for="genero">Genero</label>
-                    <select name="genero" id="">
-                        <option value="">Masculino</option>
-                        <option value="">Femenino</option>
+                    <label for="genero">Género</label>
+                    <select name="user[genero]" id="genero">
+                        <option value="" disabled selected>--Seleccione--</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
                     </select>
-
-                    <label for="direccion">Direccion</label>
-                    <input type="text" name="direccion" id="direccion">
-
-                    <label for="email-usuario">Email</label>
-                    <input type="email" name="email-usuario" id="email-usuario">
-
-                    
                 </div>
 
                 <div class="columna-usuario">
-                
+                    <label for="direccion">Dirección</label>
+                    <input type="text" name="user[direccion]" id="direccion">
+
+                    <label for="email">Email</label>
+                    <input type="email" name="user[email]" id="email">
 
                     <label for="telefono">Teléfono</label>
-                    <input type="number" name="telefono" id="telefono" placeholder="Ingrese teléfono">
+                    <input type="number" name="user[telefono]" id="telefono" placeholder="Ingrese teléfono">
 
-                    <label for="nombre-usu"nombre-usu>Nombre de Usuario</label>
-                    <input type="text" name="nombre-usu" placeholder="Ingrese nombre de Usuario">
+                </div>
 
-                    <label for="pass-usuario">Clave de Usuario</label>
-                    <input type="password"  name="pass-usuario" placeholder="Ingrese Password de Usuario">
+                <div class="columna-usuario">
+
+
+
+
+                    <label for="usuario" nombre-usu>Nombre de Usuario</label>
+                    <input type="text" name="user[usuario]" id="usuario" placeholder="Ingrese nombre de Usuario">
+
+                    <label for="password">Clave de Usuario</label>
+                    <input type="password" name="user[password]" id="password" placeholder="Ingrese Password de Usuario">
                     <div class="estado">
                         <label for="estado">Estado</label>
-                        <input type="checkbox" name="estado">
+                        <input type="checkbox" name="user[estado]" id="estado" value="activo" <?php echo $user->estado == 'activo' ? 'checked' : '' ?>>
 
                     </div>
-                   
+
+                    <input type="hidden" name="cod" value="1" id="valor">
+                    <input type="hidden" name="user[idPersona]" value='' id="idPersona">
                     <button class="" type="submit">Aceptar</button>
 
                 </div>
 
             </div>
-             
-             
 
-             
-   
-         </form> 
 
-         <?php
 
-incluirTemplate('cierre');
+
+
+        </form>
+
+        <?php
+
+        incluirTemplate('cierre');

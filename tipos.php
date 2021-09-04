@@ -4,11 +4,6 @@ require 'includes/app.php';
 use App\TipoGrupo;
 
 
-
-
-
-
-
 $tipos = TipoGrupo::all();
 
 $tip = new TipoGrupo();
@@ -72,7 +67,7 @@ incluirTemplate('barra');
 
 
 
-            <button value="<?php echo $tipo->idTipoGrupo; ?>" type="button" class="boton-grupo" id="boton-actualizar-tipo" onclick="actualizarTipo(<?php echo $tipo->idTipoGrupo; ?>, 'modal-tipo', 'boton-actualizar-tipo', 'close-tipo')">
+            <button value="<?php echo $tipo->idTipoGrupo; ?>" type="button" class="boton-grupo" onclick="actualizarTipo(<?php echo $tipo->idTipoGrupo; ?>, 'modal-tipo', 'boton-actualizar-tipo', 'close-tipo')">
               <i class="fas fa-plus-circle"></i> Editar</button>
 
             <input type="hidden" name="id" value="<?php echo $tipo->idTipoGrupo; ?>">
