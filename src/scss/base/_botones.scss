@@ -1,0 +1,22 @@
+.mas {
+  color: $azul;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration-line: underline;
+  background-color: transparent;
+}
+
+.boton-acciones {
+  border: none;
+  padding: 0.8rem;
+  border-radius: 25px;
+  cursor: pointer;
+  background-color: transparent;
+  i {
+    color: $azul;
+  }
+}
+
+.borrar {
+}

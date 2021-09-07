@@ -66,11 +66,15 @@ incluirTemplate('barra');
 
                     <td>
                         <form method="GET" target="frame">
-                            <button value="<?php echo $user->idUsuario; ?>" type="button" class="boton-grupo" onclick="actualizarUsuario(<?php echo $user->dni; ?>, 'modal-agregar', 'boton-actualizar-tipo', 'close')">
-                                <i class="fas fa-plus-circle"></i> Editar</button>
 
-                            <input type="hidden" name="id" value="<?php echo $user->idUsuario; ?>">
-                            <input type="submit" class="boton-rojo-block" value="Eliminar">
+
+                            <button type="button" class="boton-acciones" onclick="actualizarUsuario(<?php echo $user->dni; ?>, 'modal-agregar', 'boton-actualizar-tipo', 'close')">
+                                <i class=" fas fa-pencil-alt"></i> </button>
+
+
+                            <input type="hidden" name="id" value="<?php echo $user->dni; ?>">
+                            <button type="button" class="boton-acciones borrar">
+                                <i class="fas fa-trash"></i> </button>
                         </form>
 
                     </td>

@@ -89,7 +89,7 @@ incluirTemplate('barra');
     <div class="acciones-grupo">
         <div class="buscar">
             <i class="fas fa-search"></i>
-            <input type="text" placeholder="Buscar">
+            <input type="text" placeholder="Buscar" class="buscar-inte" id="buscarRegistro">
         </div>
 
         <div class=" nuevo-grupo botones-grupo">
@@ -112,7 +112,7 @@ incluirTemplate('barra');
 
     <div class=" contenedor-tabla tab-integrantes">
 
-        <table>
+        <table id="mytable">
             <thead>
                 <tr>
                     <th>DNI</th>
@@ -131,19 +131,15 @@ incluirTemplate('barra');
                         <td>
                             <form method="POST" class="w-100">
 
-                                <input type="hidden" name="id" value="<?php echo $integrante->codigo_alumno; ?>">
-                                <input type="submit" class="boton-rojo-block" value="Beneficio">
+
+                                <button type="button" class="boton-acciones" onclick="actualizarIntegrante(<?php echo $integrante->dni; ?>,'modal-integrante', 'btn', 'close-integrante')">
+                                    <i class=" fas fa-pencil-alt"></i> </button>
+
+                                <button type="button" class="boton-acciones borrar">
+                                    <i class="fas fa-trash"></i> </button>
 
                                 <input type="hidden" name="id" value="<?php echo $integrante->codigo_alumno; ?>">
-                                <input type="submit" class="boton-rojo-block" value="Eventos">
-
-
-
-                                <button type="button" class="boton-grupo" onclick="actualizarIntegrante(<?php echo $integrante->dni; ?>,'modal-integrante', 'btn', 'close-integrante')">
-                                    <i class="fas fa-plus-circle"></i> Editar</button>
-
-                                <input type="hidden" name="id" value="<?php echo $integrante->codigo_alumno; ?>">
-                                <input type="button" class="boton-rojo-block" value="Eliminar">
+                                <input type="submit" class="mas" value="Ver mas...">
 
 
                             </form>

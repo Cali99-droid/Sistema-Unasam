@@ -1,16 +1,16 @@
-@import 'base/normalize';
-@import 'base/variables';
-@import 'base/mixins';
-@import 'base/globales';
-@import 'base/utilidades';
-@import 'layout/barra';
-@import 'layout/principal';
-@import 'layout/cuerpo';
-@import 'layout/login';
-@import 'base/tablas';
-
+@import "base/normalize";
+@import "base/variables";
+@import "base/mixins";
+@import "base/globales";
+@import "base/utilidades";
+@import "layout/barra";
+@import "layout/principal";
+@import "layout/cuerpo";
+@import "layout/login";
+@import "base/tablas";
+@import "base/botones";
 /*Internas*/
-@import 'internas/grupos';
-@import 'internas/beneficios';
-@import 'internas/usuarios';
-@import 'internas/grupo';
+@import "internas/grupos";
+@import "internas/beneficios";
+@import "internas/usuarios";
+@import "internas/grupo";

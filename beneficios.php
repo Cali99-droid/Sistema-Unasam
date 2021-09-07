@@ -43,7 +43,7 @@ incluirTemplate('barra');
     <div class="acciones-grupo">
         <div class="buscar">
             <i class="fas fa-search"></i>
-            <input type="text" placeholder="Buscar">
+            <input type="text" placeholder="Buscar" id="buscarRegistro" class="buscar-ben">
         </div>
 
         <div class="nuevo-grupo">
@@ -55,7 +55,7 @@ incluirTemplate('barra');
 
     <div class="contenedor-tabla tab-beneficio">
 
-        <table>
+        <table id="mytable">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -75,12 +75,15 @@ incluirTemplate('barra');
                         <td><?php echo $beneficio->estadoresolucion; ?></td>
                         <td>
 
-                            <input type="hidden" name="id" value="<?php echo $beneficio->idBeneficio; ?>">
-                            <input type="button" class="boton-rojo-block" value="editar" onclick="actualizarBeneficio(   <?php echo $beneficio->idBeneficio; ?>, 'modal-agregar-bene', 'boton-agregar-beneficio', 'close')">
+
+
+                            <button type="button" class="boton-acciones" onclick="actualizarBeneficio(   <?php echo $beneficio->idBeneficio; ?>, 'modal-agregar-bene', 'boton-agregar-beneficio', 'close')">
+                                <i class=" fas fa-pencil-alt"></i> </button>
 
 
                             <input type="hidden" name="id" value="<?php echo $beneficio->idBeneficio; ?>">
-                            <input type="submit" class="boton-rojo-block" value="Eliminar">
+                            <button type="button" class="boton-acciones borrar">
+                                <i class="fas fa-trash"></i> </button>
 
 
                         </td>

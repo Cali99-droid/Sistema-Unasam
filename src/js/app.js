@@ -48,6 +48,11 @@ function mostrarAdmin(){
 function eventListeners(){
     const mobileMenu = document.querySelector('.openbtn');
     mobileMenu.addEventListener('click', navegacion);
+
+    const busc = document.querySelector('.buscar-inte');
+    busc.addEventListener('keyup',buscarRegistro());
+
+
 /*
     const ad = document.querySelector('.administrador');
     ad.addEventListener('click', navegacion);*/
@@ -320,3 +325,43 @@ function actualizarUsuario(dni, modal_usu, boton_agregar_usu, close_usu){
       });
 
 }
+
+function actualizarSemestre(id, modal_se, boton_se, close_se){
+    modal(modal_se, boton_se, close_se);
+
+
+}
+
+
+function buscarRegistro(){
+
+    $(document).ready(function(){
+        $("#buscarRegistro").keyup(function(){
+        _this = this;
+        // Show only matching TR, hide rest of them
+        $.each($("#mytable tbody tr"), function() {
+            if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+                $(this).hide();
+            else
+                $(this).show();
+        });
+        });
+    });
+}
+
+
+
+    $(document).ready(function(){
+        $("#buscarRegistro").keyup(function(){
+        _this = this;
+        // Show only matching TR, hide rest of them
+        $.each($("#mytable tbody tr"), function() {
+            if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+                $(this).hide();
+            else
+                $(this).show();
+        });
+        });
+    });
+
+

@@ -13,6 +13,7 @@ use App\Estudiante;
 use App\TipoGrupo;
 use App\Evento;
 use App\User;
+use App\Semestre;
 
 Grupo::setDB($db);
 Beneficio::setDB($db);
@@ -20,3 +21,4 @@ Estudiante::setDB($db);
 TipoGrupo::setDB($db);
 Evento::setDB($db);
 User::setDB($db);
+Semestre::setDB($db);

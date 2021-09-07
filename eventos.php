@@ -69,11 +69,14 @@ incluirTemplate('barra');
                         <td><?php echo $evento->fecha_inicio; ?></td>
                         <td><?php echo  $evento->fecha_final; ?></td>
                         <td>
-                            <input type="hidden" name="id" value="<?php echo $evento->idEventosrealizados; ?>">
-                            <input type="button" class="boton-rojo-block" onclick="actualizarEvento(<?php echo $evento->idEventosrealizados; ?>,'modal-agregar-ev', 'boton-agregar-evento', 'close-evento')" value="Editar">
+
+                            <button type="button" class="boton-acciones" onclick="actualizarEvento(<?php echo $evento->idEventosrealizados; ?>,'modal-agregar-ev', 'boton-agregar-evento', 'close-evento')">
+                                <i class=" fas fa-pencil-alt"></i> </button>
+
 
                             <input type="hidden" name="id" value="<?php echo $evento->idEventosrealizados; ?>">
-                            <input type="submit" class="boton-rojo-block" value="Eliminar">
+                            <button type="button" class="boton-acciones borrar">
+                                <i class="fas fa-trash"></i> </button>
 
 
                         </td>
