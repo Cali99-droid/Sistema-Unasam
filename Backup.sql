@@ -102,7 +102,7 @@ CREATE TABLE `beneficio` (
 
 LOCK TABLES `beneficio` WRITE;
 /*!40000 ALTER TABLE `beneficio` DISABLE KEYS */;
-INSERT INTO `beneficio` VALUES (1,'Descuento de Matricula edt'),(2,'Descuento en CID'),(3,'Comedor Gratis'),(4,'Beneficio nuevo'),(5,'Beneficio nuevo'),(6,'Beneficio nuevo'),(7,'Beneficio edt'),(8,'bb'),(9,'bb'),(10,'bb'),(11,'benee'),(12,'Nuevo beneficio'),(13,'Aprobar en progra '),(14,'beeee'),(15,'depor'),(16,'depor');
+INSERT INTO `beneficio` VALUES (1,'Descuento de Matricula '),(2,'Descuento en CID'),(3,'Comedor Gratis'),(4,'Beneficio nuevo'),(5,'Beneficio nuevo'),(6,'Beneficio nuevo'),(7,'Beneficio edt'),(8,'bb'),(9,'bb'),(10,'bb'),(11,'benee'),(12,'Nuevo beneficio'),(13,'Aprobar en progra '),(14,'beeee'),(15,'depor'),(16,'depor');
 /*!40000 ALTER TABLE `beneficio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +212,7 @@ CREATE TABLE `datos_usuario` (
   KEY `Persona1_idx` (`idPersona`),
   CONSTRAINT `Persona1` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`),
   CONSTRAINT `Usuario2` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,6 +221,7 @@ CREATE TABLE `datos_usuario` (
 
 LOCK TABLES `datos_usuario` WRITE;
 /*!40000 ALTER TABLE `datos_usuario` DISABLE KEYS */;
+INSERT INTO `datos_usuario` VALUES (1,1,1),(2,2,2),(3,3,12),(4,4,2),(5,5,2);
 /*!40000 ALTER TABLE `datos_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,7 +265,7 @@ CREATE TABLE `eventos_realizados` (
   `fecha_inicio` date NOT NULL,
   `fecha_final` date NOT NULL,
   PRIMARY KEY (`idEventosrealizados`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -273,7 +274,7 @@ CREATE TABLE `eventos_realizados` (
 
 LOCK TABLES `eventos_realizados` WRITE;
 /*!40000 ALTER TABLE `eventos_realizados` DISABLE KEYS */;
-INSERT INTO `eventos_realizados` VALUES (1,'Cumbre de las Tunas universitaria del peru','2020-05-05','2020-05-06'),(2,'Hackatom','2021-08-09','2021-10-03'),(3,'Danzando con Dios','2021-07-18','2021-07-25');
+INSERT INTO `eventos_realizados` VALUES (1,'Cumbre de las Tunas universitarias','2020-05-05','2020-05-06'),(2,'Hackatom','2021-08-09','2021-10-31'),(3,'Danzando con Dios','2021-07-18','2021-07-25'),(4,' Nuevo Evento','2021-08-21','2021-08-25'),(5,'evento prueba','2020-05-05','2020-05-06');
 /*!40000 ALTER TABLE `eventos_realizados` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -411,7 +412,7 @@ CREATE TABLE `persona` (
   `email` text NOT NULL,
   `telefono` char(10) NOT NULL,
   PRIMARY KEY (`idPersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -420,7 +421,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'15534588','Julio jose','Rosas Nombre','Masculino','Jr. Las piedras 342  ','Correo@correo.com ','34567688'),(2,'95485652','Claudia Alejandra','Briceño Pulache','Masculino','Los Planos      ','Correo@correo.com ','34567688'),(3,'12485678','Otro','enero e','Masculino','Los Planos     ','Correo@correo.com ','34567688'),(4,'96548715','Otro','enero e','Masculino','Los Planos     ','Correo@correo.com ','34567688'),(5,'12365487','Otro','enero e','Masculino','Los Planos     ','Correo@correo.com ','34567688'),(6,'36541259','Jamil','Urbano Macedo','Masculino','av. locos   ','Correo@correo.com ','34567688'),(7,'12346543','Claudia Alejandra','Briceño Pulache','Femenino','Los Planos      ','Correo@correo.com ','34567688'),(8,'23545663','Carlos','Alvarado Rosales','Masculino','Av. Los Angeles ','Correo@correo.com ','34567688'),(9,'56543322','Ximena Azucena','Coral Crispin de Alvarado','Femenino','Las avenidas     ','Xime@correo.com ','933445565'),(10,'112232','Carlos Jose','Rosales','Masculino','Los Planos           ','Correo@correo.com ','34567688'),(11,'43556677','Maria','Melgarejo Principe','Femenino','Las Flores   ','jes@gmail.com ','908765643');
+INSERT INTO `persona` VALUES (1,'15534588','Julio jose','Rosas Nombre','Masculino','Jr. Las piedras 342  ','Correo@correo.com ','34567688'),(2,'95485652','Claudia Alejandra','Briceño Pulache','Femenino','Los Planos        ','Correo@correo.com ','34567688'),(3,'12485678','Otro','enero e','Masculino','Los Planos     ','Correo@correo.com ','34567688'),(4,'96548715','Otro','enero e','Masculino','Los Planos     ','Correo@correo.com ','34567688'),(5,'12365487','Otro','enero e','Masculino','Los Planos     ','Correo@correo.com ','34567688'),(6,'36541259','Jamil','Urbano Macedo','Masculino','av. locos   ','Correo@correo.com ','34567688'),(7,'12346543','Claudia Alejandra','Briceño Pulache','Femenino','Los Planos      ','Correo@correo.com ','34567688'),(8,'23545663','Carlos','Alvarado Rosales','Masculino','Av. Los Angeles ','Correo@correo.com ','34567688'),(9,'56543322','Ximena Azucena','Coral Crispin de Alvarado','Femenino','Las avenidas     ','Xime@correo.com ','933445565'),(10,'112232','Carlos Jose','Rosales','Masculino','Los Planos           ','Correo@correo.com ','34567688'),(11,'43556677','Maria','Melgarejo Principe','Femenino','Las Flores   ','jes@gmail.com ','908765643'),(12,'74859588','Martin ','Savedra Rosas','Masculino','Av. los pinos    ','Correo@cerreo.com ','976546875');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -491,7 +492,7 @@ CREATE TABLE `semestre` (
   `fecha_final` date NOT NULL,
   `estado` varchar(45) NOT NULL,
   PRIMARY KEY (`idSemestre`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -500,7 +501,7 @@ CREATE TABLE `semestre` (
 
 LOCK TABLES `semestre` WRITE;
 /*!40000 ALTER TABLE `semestre` DISABLE KEYS */;
-INSERT INTO `semestre` VALUES (1,'2021-I','2021-04-15','2021-08-15','Activo'),(2,'2020-II','2020-08-08','2020-12-12','Inactivo');
+INSERT INTO `semestre` VALUES (1,'2021-I','2021-04-15','2021-08-15','Activo'),(2,'2020-II','2020-08-08','2020-12-12','Inactivo'),(3,'2021-II','2021-09-17','2021-09-24','activo ');
 /*!40000 ALTER TABLE `semestre` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -515,7 +516,7 @@ CREATE TABLE `tipo_grupo` (
   `idTipoGrupo` int NOT NULL AUTO_INCREMENT,
   `nombre_tipo` varchar(45) NOT NULL,
   PRIMARY KEY (`idTipoGrupo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -524,7 +525,7 @@ CREATE TABLE `tipo_grupo` (
 
 LOCK TABLES `tipo_grupo` WRITE;
 /*!40000 ALTER TABLE `tipo_grupo` DISABLE KEYS */;
-INSERT INTO `tipo_grupo` VALUES (1,'Musica'),(2,'Deporte'),(3,'Danza'),(4,'Academico');
+INSERT INTO `tipo_grupo` VALUES (1,'Musica'),(2,'Deporte'),(3,'Danza'),(4,'Academico'),(5,' Teatro '),(6,' Programacion  en java  '),(7,' Investigacion ');
 /*!40000 ALTER TABLE `tipo_grupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -541,7 +542,7 @@ CREATE TABLE `usuario` (
   `password` text NOT NULL,
   `estado` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -550,8 +551,32 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,'Admin','admin','activo'),(2,'user','user','inactivo'),(3,'Martin','rosas','inactivo'),(4,'user','afs','activo'),(5,'nnueva','asvsvdd','inactivo');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `v_users`
+--
+
+DROP TABLE IF EXISTS `v_users`;
+/*!50001 DROP VIEW IF EXISTS `v_users`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `v_users` AS SELECT 
+ 1 AS `idPersona`,
+ 1 AS `dni`,
+ 1 AS `nombre`,
+ 1 AS `apellido`,
+ 1 AS `genero`,
+ 1 AS `direccion`,
+ 1 AS `email`,
+ 1 AS `telefono`,
+ 1 AS `idDatosUsuario`,
+ 1 AS `idUsuario`,
+ 1 AS `usuario`,
+ 1 AS `estado`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `vista_alumno_x_grupo`
@@ -683,6 +708,232 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Dumping routines for database 'basealumnos'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `proce_updateAlumno` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proce_updateAlumno`(idper int,dniPers varchar(8),nombres varchar(45),apellidos varchar(45),gene varchar(15),direc varchar(60),mail text,tele char(10),
+codigo varchar(25), idEscuelas int, procedencia varchar(45),idCondicionEcon int, formacionSocioEcono longtext,
+fechaInscr date, estadoA varchar(15),idGrupoUniversitario int)
+begin
+-- DECLARACIONES
+
+declare idAlum int;
+declare idProced int;
+declare idAlumnoG int;
+-- ASIGNACIONES -------
+
+set idAlum=(select (idAlumno) from vista_estudiantes where idPersona=idper limit 1);
+set idProced=(select (idProcedencia) from vista_estudiantes where idPersona=idper limit 1);
+set idAlumnoG=(select (idAlumnoGrupo) from vista_estudiantes where idPersona=idper limit 1);
+if((select count(*) from vista_estudiantes where codigo_alumno=codigo and idPersona <> idper) > 0)then
+ SELECT 1 valor;
+else if((select count(*) from vista_estudiantes where dni=dniPers and idPersona <> idper) > 0) THEN
+ SELECT 2 valor;
+ELSE
+update persona set dni=dniPers,nombre=nombres,apellido=apellidos,genero=gene,direccion=direc,email=mail,telefono=tele where idpersona=idper;
+update Procedencia set nombre_procedencia= procedencia where idProcedencia=idProced;
+update alumno set codigo_alumno=codigo, idEscuela=idEscuelas,idCondicionEconomica=idCondicionEcon where idAlumno=idAlum;
+-- Update formacion_socioeconomica set(null,formacionSocioEcono,idAlum);
+update alumnogrupo set fecha_inscripcion=fechaInscr,estado=estadoA where idalumnogrupo=idAlumnoG;
+ SELECT 5 valor;
+end if;
+end if;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `p_insertarAlumno` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertarAlumno`(dniPers varchar(8),nombre varchar(45),apellidos varchar(45),genero varchar(15),direccion varchar(60),email text,telefono char(10),
+codigo varchar(25), idEscuela int, procedencia varchar(45),idCondicionEcon int, formacionSocioEcono longtext,
+fechaInscr date, estado varchar(15), idGrupoUniversitario int)
+begin
+declare idPers int;
+declare idAlum int;
+set idPers=(select (idpersona+1) from persona order by 1 desc limit 1);
+set idAlum=(select (idAlumno+1) from alumno order by 1 desc limit 1);
+if((select count(*) from persona where dni=dniPers)>0)then
+-- Existe persona
+set idPers=(select idpersona from persona where dni=dniPers limit 1);
+else
+-- no existe
+insert into persona values (idPers,dniPers,nombre,apellidos,genero,direccion,email,telefono);
+end if;
+
+if((select count(*) from alumno where codigo_alumno=codigo)>0)then
+-- Existe Alumno
+set idAlum=(select idAlumno from alumno where codigo_alumno=codigo limit 1);
+else
+-- no existe
+insert into Procedencia values (null,procedencia);
+insert into alumno values(idAlum,codigo,idPers,idEscuela,(select idProcedencia from procedencia order by 1 desc limit 1),idCondicionEcon);
+insert into formacion_socioeconomica values(null,formacionSocioEcono,idAlum);
+end if;
+if((select count(*) from alumnogrupo where idAlumno=(select idAlumno from alumno where codigo_alumno=codigo)
+and idgrupo_universitario=idGrupoUniversitario)>0) then
+select 1 valor;
+else
+insert into alumnogrupo values(null,curdate(),estado,idAlum,idGrupoUniversitario);
+select 'Se registró exitosamente';
+end if;
+
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `p_insertarbeneficio` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertarbeneficio`(nombre varchar(45),nroResol varchar(45), fecha_emision date, estadoRes varchar(45),estadoBenTipGrup varchar(45),idTipGrupo int)
+begin
+declare idBen int;
+
+set idBen=(select (idBeneficio+1) from beneficio order by 1 desc limit 1);
+insert into beneficio values (idBen,nombre);
+insert into resolucionxbeneficio values(null,nroResol,fecha_emision,estadoRes,idBen);
+insert into beneficioxtipgrupo values(null,estadoBenTipGrup,idBen,idTipGrupo);
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `p_insertUsuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertUsuario`(dniP varchar(8), nombreP varchar(45), apellidoP varchar(45), generoP varchar(15),
+direccionP varchar(60), emailP text, telefonoP char(10), username varchar(45),passw text, estadoU varchar(45))
+begin
+declare idP int;
+declare idU int;
+if(select count(*) from persona where dni=dniP)>0 then
+set idP=(select (idPersona) from persona where dni=dniP order by 1 desc limit 1);
+else
+insert into persona values(idP, dniP, nombreP, apellidoP, generoP, direccionP, emailP, telefonoP);
+set idP=(select (idPersona) from persona order by 1 desc limit 1);
+end if;
+if(select count(*) from datos_usuario where idPersona=idP)>0 then
+select 1 valor;
+else
+insert into usuario values (null,username,(passw),estadoU);
+set idU=(select (idUsuario) from usuario order by 1 desc limit 1);
+insert into datos_usuario values (null,idU,idP);
+end if;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `p_updatebeneficio` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_updatebeneficio`(idBen int, nombreB varchar(45),nroResol varchar(45), fecha_emisionR date, estadoRes varchar(45),
+estadoBenTipGrup varchar(45),idTipGrupo int)
+begin
+declare idRes int;
+declare idBenxtip int;
+set idRes=(select (idResolucionxbeneficio) from resolucionxbeneficio where idBeneficio=idBen order by 1 desc limit 1);
+set idBenxtip=(select (idBeneficioxtipGrupo) from beneficioxtipgrupo where idBeneficio=idBen and idTipoGrupo=idTipGrupo order by 1 desc limit 1);
+update beneficio set nombre=nombreB where idBeneficio=idBen;
+update resolucionxbeneficio set numero=nroResol,fecha_emision=fecha_emision,estado=estadoRes where idResolucionxbeneficio=idRes;
+update beneficioxtipgrupo set estado=estadoBenTipGrup where idBeneficioxtipGrupo=idBenxtip;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `p_updateUsuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_updateUsuario`(idP int, dniP varchar(8), nombreP varchar(45), apellidoP varchar(45), generoP varchar(15),
+direccionP varchar(60), emailP text, telefonoP char(10), username varchar(45),passw text, estadoU varchar(45))
+begin
+declare idU int;
+set idU=(select (idUsuario) from v_users where idPersona=idP order by 1 desc limit 1);
+update persona set dni=dniP, nombre=nombreP, apellido=apellidoP, genero=generoP, direccion=direccionP, email=emailP, telefono=telefonoP
+where idPersona=idP;
+if(length(passw)>0)then
+update usuario set password=passw,estado=estadoU where idUsuario=idU;
+else
+update usuario set estado=estadoU where idUsuario=idU;
+end if;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Final view structure for view `v_users`
+--
+
+/*!50001 DROP VIEW IF EXISTS `v_users`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `v_users` AS select `p`.`idPersona` AS `idPersona`,`p`.`dni` AS `dni`,`p`.`nombre` AS `nombre`,`p`.`apellido` AS `apellido`,`p`.`genero` AS `genero`,`p`.`direccion` AS `direccion`,`p`.`email` AS `email`,`p`.`telefono` AS `telefono`,`du`.`idDatosUsuario` AS `idDatosUsuario`,`u`.`idUsuario` AS `idUsuario`,`u`.`usuario` AS `usuario`,`u`.`estado` AS `estado` from ((`persona` `p` join `datos_usuario` `du` on((`du`.`idPersona` = `p`.`idPersona`))) join `usuario` `u` on((`u`.`idUsuario` = `du`.`idUsuario`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `vista_alumno_x_grupo`
 --
 
@@ -799,4 +1050,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-21 11:45:08
+-- Dump completed on 2021-09-07 18:43:38
