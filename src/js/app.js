@@ -51,8 +51,6 @@ function eventListeners(){
 
     const busc = document.querySelector('.buscar-inte');
     busc.addEventListener('keyup',buscarRegistro());
-
-
 /*
     const ad = document.querySelector('.administrador');
     ad.addEventListener('click', navegacion);*/

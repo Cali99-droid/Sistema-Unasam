@@ -132,6 +132,15 @@ class Grupo
         return $resultado;
     }
 
+    
+    public function getBeneficios()
+    {
+        $idgrupo = $this->idTipoGrupo;
+        $query = "SELECT idBeneficio FROM beneficioxtipgrupoo WHERE idTipoGrupo = ${idgrupo}";
+        $resultado = self::consulta($query);
+        return $resultado;
+    }
+
     public function setIntegrante($alumno)
     {
 

@@ -1,0 +1,45 @@
+.datos-integrante {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+
+  p {
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .avatar-int {
+    width: 10%;
+  }
+}
+
+.detalles-integrante {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin: 2rem auto;
+
+  h3 {
+    font-weight: $bold;
+    margin: 0;
+    background-color: $verde;
+    color: $blanco;
+    padding: 1rem;
+  }
+
+  .detalle {
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    ul li {
+      border: 1px solid #ddd;
+      margin-top: -1px; /* Prevent double borders */
+      background-color: #f6f6f6;
+      padding: 12px;
+    }
+  }
+}

@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         //mensaje de exito o error
         if ($resultado) {
-            header('Location: /grupos.php');
+            header('Location: ./grupos.php');
         }
     }
 }
@@ -138,9 +138,8 @@ incluirTemplate('barra');
                                 <button type="button" class="boton-acciones borrar">
                                     <i class="fas fa-trash"></i> </button>
 
-                                <input type="hidden" name="id" value="<?php echo $integrante->codigo_alumno; ?>">
-                                <input type="submit" class="mas" value="Ver mas...">
 
+                                <a class="enlace" href="integrante.php?id=<?php  echo $integrante->codigo_alumno;?> &&tip=<?php  echo $grupo->idTipoGrupo;?>">Ver Mas</a>
 
                             </form>
 

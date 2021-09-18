@@ -1,72 +1,85 @@
-@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap");
 
-@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900");
 
 /* Autor @Carlos Orellano Rondan - Orellano428@gmail.com
  https://github.com/Cali99-droid*/
 
- /*Genericos*/
-:root{
-    --primario: #0024a8;
-    --secundario: #7f7481;
+/*Genericos*/
+:root {
+  --primario: #0024a8;
+  --secundario: #7f7481;
 }
-
-
 
 /*Contenedor principal*/
-.contenedor-principa--log{
+.contenedor-principa--log {
   background-color: var(--primario);
-  font-family: 'Lato', sans-serif;
-  width:100%; height:100%; margin:0; padding:0; 
+  font-family: "Lato", sans-serif;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-.video{
-    position: relative;
-    max-height: 50rem;
-    overflow: hidden;   
+.video {
+  position: relative;
+  max-height: 50rem;
+  overflow: hidden;
 }
-.overlay{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#0024a8+0,7db9e8+90,7db9e8+90&0.79+0,0+99 */
-background: -moz-linear-gradient(top,  rgba(0,36,168,0.79) 0%, rgba(125,185,232,0.07) 90%, rgba(125,185,232,0) 99%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top,  rgba(0,36,168,0.79) 0%,rgba(125,185,232,0.07) 90%,rgba(125,185,232,0) 99%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom,  rgba(0,36,168,0.79) 0%,rgba(125,185,232,0.07) 90%,rgba(125,185,232,0) 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c90024a8', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#0024a8+0,7db9e8+90,7db9e8+90&0.79+0,0+99 */
+  background: -moz-linear-gradient(
+    top,
+    rgba(0, 36, 168, 0.79) 0%,
+    rgba(125, 185, 232, 0.07) 90%,
+    rgba(125, 185, 232, 0) 99%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    rgba(0, 36, 168, 0.79) 0%,
+    rgba(125, 185, 232, 0.07) 90%,
+    rgba(125, 185, 232, 0) 99%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 36, 168, 0.79) 0%,
+    rgba(125, 185, 232, 0.07) 90%,
+    rgba(125, 185, 232, 0) 99%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c90024a8', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
+}
+.video video {
+  display: block;
+  width: 100%;
+  margin-top: -20rem;
+}
 
+.contenido-video {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
 }
-.video video{
-    display: block;
-    width: 100%;
-    margin-top: -20rem;   
-}
-
-.contenido-video{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-        
-}
-
 
 /*Pantalla inicial*/
-.principal{
-    text-align: center;
-    color: #fff;
-    width: 100%;
-    margin-top: 30rem;
-    height: 50rem;  
+.principal {
+  text-align: center;
+  color: #fff;
+  width: 100%;
+  margin-top: 30rem;
+  height: 50rem;
 }
 
-.img{
-    width: 15%;
+.img {
+  width: 15%;
 }
 
 /* Full-width input fields */
-.login-text{
+.login-text {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -77,7 +90,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c90024a8', e
 
 /* Set a style for all buttons */
 .titulo--log {
-    width: 100%;
+  width: 100%;
 }
 .titulo--log button {
   background-color: #ff8800;
@@ -87,19 +100,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c90024a8', e
   border: none;
   cursor: pointer;
   width: 20%;
-
 }
 
 .boton-acceder {
-    background-color: #ff8800;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    border-radius: 8px;
-    font-size: 2rem;
+  background-color: #ff8800;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 2rem;
 }
 .boton-acceder:hover {
   opacity: 0.8;
@@ -120,7 +132,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c90024a8', e
 }
 
 img.avatar {
-  width: 20%;
+  width: 10%;
   border-radius: 50%;
 }
 
@@ -135,7 +147,7 @@ span.psw {
 
 /* The Modal (background) */
 .modal {
-   /* Hidden by default */
+  /* Hidden by default */
   display: none;
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -144,14 +156,13 @@ span.psw {
   width: 100%; /* Full width */
   /*height: 100%;  Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
   padding-top: 60px;
 }
 
 /* Modal Content/Box */
 .modal-content {
-   
   background-color: rgb(180, 180, 180);
   margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
 
@@ -178,72 +189,75 @@ span.psw {
 /* Add Zoom Animation */
 .animate {
   -webkit-animation: animatezoom 0.6s;
-  animation: animatezoom 0.6s
+  animation: animatezoom 0.6s;
 }
 
 @-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
-  to {-webkit-transform: scale(1)}
-}
-  
-@keyframes animatezoom {
-  from {transform: scale(0)} 
-  to {transform: scale(1)}
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
 }
 
+@keyframes animatezoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
 
 /*FOTERR*/
-.footer{
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 15.3rem; 
-    background-color: var(--secundario);  
+.footer {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15.3rem;
+  background-color: var(--secundario);
 }
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 768px) {
   span.psw {
-     display: block;
-     float: none;
+    display: block;
+    float: none;
   }
   .cancelbtn {
-     width: 100%;
+    width: 100%;
   }
 
-  .video{
+  .video {
     margin-top: 20rem;
     position: relative;
     height: 200rem;
-    overflow: hidden;   
-   }
-  .video video{
+    overflow: hidden;
+  }
+  .video video {
     display: block;
     width: 100%;
-    margin-top: -3rem;   
-   }
+    margin-top: -3rem;
+  }
 
-   .principal{
+  .principal {
     background-color: var(--primario);
     text-align: center;
     color: #fff;
     width: 100%;
     margin-top: 8rem;
-    height: 0rem;  
+    height: 0rem;
     font-size: 0.9rem;
-   }
+  }
 
+  body {
+    background-color: var(--primario);
+  }
 
-   body{
-       background-color:var(--primario);
-   }  
-
-   .titulo--log button {
+  .titulo--log button {
     padding: 2rem;
     width: 100%;
   }
 }
-
-
-
