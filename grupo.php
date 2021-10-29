@@ -110,7 +110,7 @@ incluirTemplate('barra');
         </div>
     </div>
 
-    <div class=" contenedor-tabla tab-integrantes">
+    <div class="contenedor-tabla">
 
         <table id="mytable">
             <thead>
@@ -118,6 +118,7 @@ incluirTemplate('barra');
                     <th>DNI</th>
                     <th>Nombres</th>
                     <th>Codigo</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
 
                 </tr>
@@ -128,6 +129,7 @@ incluirTemplate('barra');
                         <td><?php echo $integrante->dni; ?></td>
                         <td><?php echo $integrante->nombre . " " . $integrante->apellido; ?></td>
                         <td><?php echo $integrante->codigo_alumno; ?></td>
+                        <td><span class="<?php echo $integrante->estado == 'Activo' ? 'label-ok' : 'label' ?>"><?php echo $integrante->estado; ?></span></td>
                         <td>
                             <form method="POST" class="w-100">
 
@@ -139,7 +141,7 @@ incluirTemplate('barra');
                                     <i class="fas fa-trash"></i> </button>
 
 
-                                <a class="enlace" href="integrante.php?id=<?php  echo $integrante->codigo_alumno;?> &&tip=<?php  echo $grupo->idTipoGrupo;?>">Ver Mas</a>
+                                <a class="enlace" href="integrante.php?id=<?php echo $integrante->codigo_alumno; ?> &&tip=<?php echo $grupo->idTipoGrupo; ?>">Ver Mas</a>
 
                             </form>
 
@@ -149,23 +151,12 @@ incluirTemplate('barra');
 
             </tbody>
         </table>
-
-        <div class="pie-tabla">
-
-            <a href="">Ver Eventos</a>
-
-        </div>
-
     </div>
 
 </div>
 
 </div>
 </div>
-
-
-
-
 
 
 <!--ventana modal-->

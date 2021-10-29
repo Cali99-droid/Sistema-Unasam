@@ -61,7 +61,7 @@ class Estudiante
 
     public function actualizar($id)
     {
-        $query = "CALL proce_updateAlumno('" . $this->idPersona . "' ,'" . $this->dni . "' ,'" . $this->nombre . "','" . $this->apellido . "' ,'" . $this->genero . "','" . $this->direccion . " ','" . $this->email . " ','" . $this->telefono . "',
+        $query = "CALL proce_updateAlumno_dos('" . $this->idPersona . "' ,'" . $this->dni . "' ,'" . $this->nombre . "','" . $this->apellido . "' ,'" . $this->genero . "','" . $this->direccion . " ','" . $this->email . " ','" . $this->telefono . "',
         '" . $this->codigo_alumno . "' , " . $this->idEscuela . " , '" . $this->nombre_procedencia . "' ," . $this->idCondicionEconomica . ", '" . $this->descripcion . "' ,
         '" . $this->fecha_inscripcion . "' , '" . $this->estado . "' , " . $id . ")";
 

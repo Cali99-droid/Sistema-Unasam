@@ -14,7 +14,7 @@
                 <div class=" contenido-video">
                     <div class=" principal">
                         <div class="titulo--log">
-                            <h1>Bienvenido al Sistema de Gestion de Habilidades</h1>
+                            <h1>Bienvenido al Sistema de Gestion de Organizaciones Estudiantiles</h1>
                             <button onclick="document.getElementById('id01').style.display='block'" class="boton-acceder">Acceder</button>
                         </div>
                     </div>  

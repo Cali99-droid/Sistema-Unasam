@@ -3,10 +3,19 @@
 require 'includes/funciones.php';
 incluirTemplate('barra');
 ?>
+<style>
+    .frm {
+        width: 100%;
 
-<h2>Contenido nueva ruta</h2>
+    }
+</style>
+<div class="contenedor-grupos">
+    <div class="titulo-grupos">
+        <h2 class="no-margin">Tabla Demostrativa</h2>
+    </div>
+    <div class="frm">
 
-<?php
+    </div>
+    <?php
 
-incluirTemplate('cierre');
-
+    incluirTemplate('cierre');

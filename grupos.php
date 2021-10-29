@@ -2,6 +2,7 @@
 
 require 'includes/app.php';
 
+use App\Estudiante;
 use App\Grupo;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -79,6 +80,7 @@ incluirTemplate('barra');
                         <div class="container">
                             <h4 class="no-margin"><?php echo $grup->nombre_grupo; ?></h4>
                             <p> <?php echo $grup->getTipo(); ?></p>
+                            <p>Nº Integrantes: <?php echo count(Estudiante::getIntegrantes($grup->idgrupo_universitario)) ?></p>
                         </div>
 
                     </a>

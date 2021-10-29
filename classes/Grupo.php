@@ -132,7 +132,7 @@ class Grupo
         return $resultado;
     }
 
-    
+
     public function getBeneficios()
     {
         $idgrupo = $this->idTipoGrupo;
