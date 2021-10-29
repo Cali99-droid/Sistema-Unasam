@@ -243,4 +243,12 @@ class Beneficio
         }
         return $objeto;
     }
+
+
+    public static function getBeneficiosPorTipo($idTipoGrupo)
+    {
+        $query = "SELECT * FROM vista_beneficios_tipo WHERE idTipoGrupo = " . $idTipoGrupo;
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
 }

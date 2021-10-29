@@ -141,7 +141,7 @@ incluirTemplate('barra');
                                     <i class="fas fa-trash"></i> </button>
 
 
-                                <a class="enlace" href="integrante.php?id=<?php echo $integrante->codigo_alumno; ?> &&tip=<?php echo $grupo->idTipoGrupo; ?>">Ver Mas</a>
+                                <a class="enlace" href="integrante.php?dni=<?php echo $integrante->dni; ?> &tip=<?php echo $grupo->nombre_grupo; ?>&idtipo=<?php echo $grupo->idTipoGrupo; ?>">Ver Mas</a>
 
                             </form>
 

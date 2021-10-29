@@ -1,6 +1,24 @@
 <?php
+
+use App\Beneficio;
+use App\Estudiante;
+
 require 'includes/app.php';
 
+
+$dni = $_GET['dni'];
+$grupo = $_GET['tip'];
+$idTipo = $_GET['idtipo'];
+$integrante = Estudiante::find($dni);
+
+$beneficios = Beneficio::getBeneficiosPorTipo($idTipo);
+
+$cantidadActivo = 0;
+foreach ($beneficios as $beneficio) {
+    if ($beneficio->estado === "ACTIVO") {
+        $cantidadActivo++;
+    }
+}
 
 incluirTemplate('barra');
 ?>
@@ -16,16 +34,16 @@ incluirTemplate('barra');
         </div>
 
         <div class="datos datos--text">
-            <span class="datos__nombre">Carlos Alvarado Robles</span>
-            <p><?php echo $_GET['id'] ?></p>
-            <p>Ing. sistemas</p>
-            <p>Grupo al que pertecnece</p>
+            <span class="datos__nombre"><?php echo $integrante['nombre'] . " " . $integrante['apellido'] ?></span>
+            <p>DNI: <?php echo $integrante['dni'] ?></p>
+            <p><?php echo $integrante["nombre_escuela"] ?></p>
+            <p><?php echo $grupo ?></p>
 
         </div>
 
         <div class="datos datos--general">
-            <p class="info"><strong> Total participaciones:</strong> 10</p>
-            <p class="info"><strong> Total Beneficios:</strong> 10</p>
+            <p class="info"><strong> Total participaciones:</strong> 3</p>
+            <p class="info"><strong> Total Beneficios Activos:</strong> <?php echo $cantidadActivo ?> </p>
         </div>
     </div>
 
@@ -76,25 +94,26 @@ incluirTemplate('barra');
                 <table>
                     <thead>
                         <tr>
-                            <th>Beneficoio</th>
+                            <th>Beneficio</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Alfreds Futterkiste</td>
-                            <td>Maria Anders</td>
-                        </tr>
-                        <tr>
-                            <td>Alfreds Futterkiste</td>
-                            <td>Maria Anders</td>
 
-                        </tr>
-                        <tr>
-                            <td>Berglunds snabbköp</td>
-                            <td>Christina Berglund</td>
+                        <?php foreach ($beneficios as $beneficio) :  ?>
+                            <?php
 
-                        </tr>
+
+
+
+                            ?>
+                            <tr>
+                                <td><?php echo $beneficio->nombre; ?></td>
+
+                                <td><a href="#" class="<?php echo $beneficio->estado == 'ACTIVO' ? 'label-ok' : 'label' ?>"><?php echo $beneficio->estado; ?></a></td>
+                            </tr>
+                        <?php endforeach; ?>
+
                     </tbody>
                 </table>
             </div>
