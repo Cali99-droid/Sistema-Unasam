@@ -2,13 +2,11 @@
 
 namespace App;
 
-
 class Estudiante
 {
     //Base de datos
     protected static $db;
     protected static $columnaDB = ['idPersona', 'idAlumno', 'codigo_alumno', 'dni', 'nombre', 'apellido', 'genero', 'email', 'telefono', 'idEscuela', 'nombre_procedencia', 'idCondicionEconomica', 'descripcion', 'direccion', 'fecha_inscripcion', 'estado', 'idgrupo_universitario'];
-
     //errores
     protected static $errores = [];
 
@@ -117,9 +115,9 @@ class Estudiante
     {
         if ($resultado->valor == '1') {
             // self::$errores[] = 'El DNI ya existe';
-            header('Location: /grupo.php?id=' . $id . "&mensaje=El DNI ya Existe");
+            header('Location: ./grupo.php?id=' . $id . "&mensaje=El DNI ya Existe");
         } else {
-            header('Location: /grupo.php?id=' . $id);
+            header('Location: ./grupo.php?id=' . $id);
         }
     }
 

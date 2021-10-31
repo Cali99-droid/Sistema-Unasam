@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(){
-    eventListeners();
+ 
+   // llamar_modal();
     
 });
 
@@ -38,22 +39,28 @@ function mostrarAdmin(){
         logo.classList.remove('mostrar-logo');
         document.getElementById("sub-item").classList.add("mostrar-sub");
     }
-
-
-      
-
-
 }
 
 function eventListeners(){
     const mobileMenu = document.querySelector('.openbtn');
     mobileMenu.addEventListener('click', navegacion);
-
+    // const btn = document.querySelector('#btn_modal');
+    // btn.addEventListener('click', llamar_modal);
     const busc = document.querySelector('.buscar-inte');
-    busc.addEventListener('keyup',buscarRegistro());
+    busc.addEventListener('keyup',buscarRegistro);
+
+   
 /*
     const ad = document.querySelector('.administrador');
     ad.addEventListener('click', navegacion);*/
+}
+
+function llamar_modal(){
+    Swal.fire(
+        'Good job!',
+        'You clicked the button!',
+        'info'
+      )
 }
 
 function items(){

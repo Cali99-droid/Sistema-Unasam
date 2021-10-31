@@ -43,13 +43,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultado = $grupo->crear();
     //mensaje de exito o error
     if ($resultado) {
-        header('Location: /grupos.php');
+        header('Location: ./grupos.php?estado=ok');
     }
 }
 
 incluirTemplate('barra');
 ?>
 
+<?php
+$resul = $_GET['estado'] ?? null;
+if ($resul) {
+    if ($resul === 'ok') {
+?>
+
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>Éxito!</strong> Grupo insertado correctamente
+        </div>
+<?php
+    }
+}
+
+?>
 <div class="contenedor-grupos">
     <div class="titulo-grupos">
         <h2 class="no-margin">Gestión de Grupos</h2>
@@ -64,6 +79,7 @@ incluirTemplate('barra');
         <div class="nuevo-grupo">
             <button type="button" class="boton-grupo" id="boton-agregar-grupo" onclick="modal('modal-grupo', 'boton-agregar-grupo', 'close-grupo')">
                 <i class="fas fa-plus-circle"></i> Agregar Grupo </button>
+
 
         </div>
     </div>
@@ -114,7 +130,13 @@ incluirTemplate('barra');
 
     </div>
 </div>
-
+<script type="text/javascript">
+    $(document).ready(function() {
+        setTimeout(function() {
+            $(".alert").fadeOut(1500);
+        }, 3000);
+    });
+</script>
 <?php
 
 
