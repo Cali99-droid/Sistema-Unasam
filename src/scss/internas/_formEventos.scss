@@ -1,0 +1,34 @@
+.contenedor-grupos {
+  .formulario-evento {
+    padding: 2rem;
+    width: 95%;
+    margin: 0 auto;
+    @include grid(2, 1rem);
+
+    .entrada {
+      display: flex;
+      flex-direction: column;
+
+      button {
+        @include boton($azul, inline-block);
+      }
+
+      .org {
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+
+    input,
+    select {
+      padding: 12px 20px;
+    }
+
+    label {
+      font-weight: $bold;
+      margin: 8px 0;
+    }
+  }
+}

@@ -105,7 +105,7 @@ class Estudiante
         $query = "CALL p_insertarAlumno ('" . $this->dni . "' ,'" . $this->nombre . "','" . $this->apellido . "' ,'" . $this->genero . "','" . $this->direccion . " ','" . $this->email . " ','" . $this->telefono . "',
         '" . $this->codigo_alumno . "' , " . $this->idEscuela . " , '" . $this->nombre_procedencia . "' ," . $this->idCondicionEconomica . ", '" . $this->descripcion . "' ,
         '" . $this->fecha_inscripcion . "' , '" . $this->estado . "', " . $id . ")";
-
+       
         $resultado = self::consulta($query)->fetch_object();
 
         $this->recarga($resultado, $id);

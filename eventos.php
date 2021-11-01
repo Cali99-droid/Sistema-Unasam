@@ -44,9 +44,9 @@ incluirTemplate('barra');
         </div>
 
         <div class="nuevo-grupo">
-            <button type="button" class="boton-grupo" id="boton-agregar-evento" onclick="modal('modal-agregar-ev', 'boton-agregar-evento', 'close-evento')">
+            <a href="nuevo-evento.php" class="boton-grupo" id="boton-agregar-evento">
                 <i class="fas fa-plus-circle"></i> Agregar Evento
-            </button>
+            </a>
         </div>
     </div>
 
