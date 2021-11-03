@@ -10,6 +10,11 @@ $dni = $_GET['dni'];
 $grupo = $_GET['tip'];
 $idTipo = $_GET['idtipo'];
 $integrante = Estudiante::find($dni);
+$beneficioAsignados = Estudiante::getBeneficiosAsignados($integrante);
+
+
+
+
 
 $beneficios = Beneficio::getBeneficiosPorTipo($idTipo);
 
@@ -34,9 +39,9 @@ incluirTemplate('barra');
         </div>
 
         <div class="datos datos--text">
-            <span class="datos__nombre"><?php echo $integrante['nombre'] . " " . $integrante['apellido'] ?></span>
-            <p>DNI: <?php echo $integrante['dni'] ?></p>
-            <p><?php echo $integrante["nombre_escuela"] ?></p>
+            <span class="datos__nombre"><?php echo $integrante->nombre . " " . $integrante->apellido ?></span>
+            <p>DNI: <?php echo $integrante->dni ?></p>
+            <p><?php echo $integrante->dni ?> </p>
             <p><?php echo $grupo ?></p>
 
         </div>
@@ -87,7 +92,7 @@ incluirTemplate('barra');
         </div>
 
         <div class="detalle">
-            <h3 class="titulo_participacion">Beneficios</h3>
+            <h3 class="titulo_participacion">Beneficios a los que tiene derecho</h3>
 
             <div class="contenedor-tabla contenedor-tabla__perfil">
 
@@ -96,6 +101,7 @@ incluirTemplate('barra');
                         <tr>
                             <th>Beneficio</th>
                             <th>Estado</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -110,9 +116,44 @@ incluirTemplate('barra');
                             <tr>
                                 <td><?php echo $beneficio->nombre; ?></td>
 
-                                <td><a href="#" class="<?php echo $beneficio->estado == 'ACTIVO' ? 'label-ok' : 'label' ?>"><?php echo $beneficio->estado; ?></a></td>
+                                <td><a class="<?php echo $beneficio->estado == 'ACTIVO' ? 'label-ok' : 'label' ?>"><?php echo $beneficio->estado; ?></a></td>
+
+                                <td><button>Asignar</button></td>
                             </tr>
                         <?php endforeach; ?>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="detalle">
+            <h3 class="titulo_participacion">Beneficios Asignados</h3>
+
+            <div class="contenedor-tabla contenedor-tabla__perfil">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha de Asignación</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <?php while ($row = mysqli_fetch_object($beneficioAsignados)) : ?>
+
+
+                            <tr>
+                                <td><?php echo $row->fechefec; ?></td>
+
+                                <td><a href="#" class="<?php echo $row->estado == 'ACTIVO' ? 'label-ok' : 'label' ?>"><?php echo $row->estado; ?></a></td>
+                            </tr>
+                        <?php endwhile; ?>
 
                     </tbody>
                 </table>

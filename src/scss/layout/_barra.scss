@@ -3,17 +3,17 @@
   z-index: 1;
   color: $blanco;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 12px 0 rgba(0, 0, 0, 0.19);
-  width: 20rem;
+  width: 4rem;
   transition: width 0.3s ease-in-out, opacity 0.5s linear, height 0.5s linear;
 }
 
 .contenido-cabecera {
-  visibility: visible;
-  transition: visibility 0.1s ease-out, opacity 0.5s linear, height 0.5s linear;
+  visibility: hidden;
 }
 
 .mostrar-logo {
-  visibility: hidden;
+  visibility: visible;
+  transition: visibility 0.1s ease-out, opacity 0.5s linear, height 0.5s linear;
 }
 .contenedor-logo {
   margin-top: 5rem;
@@ -27,7 +27,7 @@
 }
 
 .ocultar {
-  width: 4rem;
+  width: 20rem;
 }
 
 .texto-unasam {

@@ -6,7 +6,7 @@ class Estudiante
 {
     //Base de datos
     protected static $db;
-    protected static $columnaDB = ['idPersona', 'idAlumno', 'codigo_alumno', 'dni', 'nombre', 'apellido', 'genero', 'email', 'telefono', 'idEscuela', 'nombre_procedencia', 'idCondicionEconomica', 'descripcion', 'direccion', 'fecha_inscripcion', 'estado', 'idgrupo_universitario'];
+    protected static $columnaDB = ['idPersona', 'idAlumno', 'codigo_alumno', 'dni', 'nombre', 'apellido', 'genero', 'email', 'telefono', 'idEscuela', 'nombre_escuela', 'nombre_procedencia', 'idCondicionEconomica', 'descripcion', 'direccion', 'fecha_inscripcion', 'estado', 'idgrupo_universitario'];
     //errores
     protected static $errores = [];
 
@@ -20,6 +20,7 @@ class Estudiante
     public $email;
     public $telefono;
     public $idEscuela;
+    public $nombre_escuela;
     public $idCondicionEconomica;
     public $nombre_procedencia;
     public $descripcion;
@@ -40,6 +41,7 @@ class Estudiante
         $this->email = $args['email'] ?? '';
         $this->telefono = $args['telefono'] ?? '';
         $this->idEscuela = $args['idEscuela'] ?? '';
+        $this->nombre_escuela = $args['nombre_escuela'] ?? '';
         $this->nombre_procedencia = $args['nombre_procedencia'] ?? '';
         $this->idCondicionEconomica = $args['idCondicionEconomica'] ?? '';
         $this->descripcion = $args['descripcion'] ?? '';
@@ -105,7 +107,7 @@ class Estudiante
         $query = "CALL p_insertarAlumno ('" . $this->dni . "' ,'" . $this->nombre . "','" . $this->apellido . "' ,'" . $this->genero . "','" . $this->direccion . " ','" . $this->email . " ','" . $this->telefono . "',
         '" . $this->codigo_alumno . "' , " . $this->idEscuela . " , '" . $this->nombre_procedencia . "' ," . $this->idCondicionEconomica . ", '" . $this->descripcion . "' ,
         '" . $this->fecha_inscripcion . "' , '" . $this->estado . "', " . $id . ")";
-       
+
         $resultado = self::consulta($query)->fetch_object();
 
         $this->recarga($resultado, $id);
@@ -194,8 +196,8 @@ class Estudiante
     public static function find($dni)
     {
         $query = "SELECT * FROM vista_Estudiantes WHERE dni = " . $dni;
-        $resultado = self::consulta($query)->fetch_assoc();
-        return $resultado;
+        $resultado = self::consultarSQL($query);
+        return $resultado[0];
     }
     // trae un grupo
     public static function getIntegrantes($id)
@@ -244,5 +246,26 @@ class Estudiante
         }
 
         return $objeto;
+    }
+
+    public   function getIdAlumnoGrupo()
+    {
+
+        $query = "SELECT idAlumnoGrupo FROM alumnogrupo WHERE idAlumno = " . $this->idAlumno . " AND idgrupo_universitario = " . $this->idgrupo_universitario;
+
+        $resultado = self::consulta($query)->fetch_object();
+
+        return $resultado;
+    }
+
+    public static function getBeneficiosAsignados(Estudiante $est)
+    {
+        $alumnoGrupo = $est->getIdAlumnoGrupo();
+
+        $query = "SELECT * FROM beneficioalumno WHERE idAlumnoGrupo = " . $alumnoGrupo->idAlumnoGrupo;
+
+        $resultado = self::consulta($query);
+
+        return $resultado;
     }
 }

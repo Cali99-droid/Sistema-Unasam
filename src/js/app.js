@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function(){
-   eventListeners();  
+
+   eventListeners();
+    
 });
 
 
@@ -30,11 +32,11 @@ function navegacion(){
 function mostrarAdmin(){
     const contenedor = document.querySelector('.contenedor-barra');
     const logo = document.querySelector('.contenido-cabecera');
-    if(!contenedor.classList.contains('ocultar')){
+    if(contenedor.classList.contains('ocultar')){
         document.getElementById("sub-item").classList.toggle("mostrar-sub"); 
     }else{
-        contenedor.classList.remove('ocultar');
-        logo.classList.remove('mostrar-logo');
+        contenedor.classList.add('ocultar');
+        logo.classList.add('mostrar-logo');
         document.getElementById("sub-item").classList.add("mostrar-sub");
     }
 }
