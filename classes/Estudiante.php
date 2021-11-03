@@ -253,7 +253,7 @@ class Estudiante
 
         $query = "SELECT idAlumnoGrupo FROM alumnogrupo WHERE idAlumno = " . $this->idAlumno . " AND idgrupo_universitario = " . $this->idgrupo_universitario;
 
-        $resultado = self::consulta($query)->fetch_object();
+        $resultado = self::consulta($query)->fetch_assoc();
 
         return $resultado;
     }
@@ -262,10 +262,30 @@ class Estudiante
     {
         $alumnoGrupo = $est->getIdAlumnoGrupo();
 
-        $query = "SELECT * FROM beneficioalumno WHERE idAlumnoGrupo = " . $alumnoGrupo->idAlumnoGrupo;
+        $query = "SELECT * FROM vista_beneficioAlumnos WHERE idAlumnoGrupo = " . $alumnoGrupo['idAlumnoGrupo'];
 
         $resultado = self::consulta($query);
 
         return $resultado;
+    }
+
+    public static function asignarBeneficio($idAlumnoGrupo, $idbeneficioXtipo)
+    {
+        $query = "CALL proc_insrtBenAlumno ('" . $idAlumnoGrupo . "','" . $idbeneficioXtipo . "', 4 ,6) ";
+        $resultado = self::consulta($query)->fetch_object();
+        return $resultado;
+    }
+
+    public static function actualizarEstadoBeneficio($id)
+    {
+        $query = "SELECT estado FROM beneficioalumno WHERE idBeneficioalumno =  " . $id;
+        $resultado = self::consulta($query)->fetch_object();
+        if ($resultado->estado == 'COMPLETADO') {
+            $quer = "UPDATE beneficioalumno SET estado = 'PENDIENTE'  WHERE idbeneficioalumno = " . $id;
+        } else {
+            $quer = "UPDATE beneficioalumno SET estado = 'CUMPLIDO', fechefec = CURDATE() WHERE idbeneficioalumno = " . $id;
+        }
+
+        $res = self::consulta($quer);
     }
 }

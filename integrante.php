@@ -10,11 +10,9 @@ $dni = $_GET['dni'];
 $grupo = $_GET['tip'];
 $idTipo = $_GET['idtipo'];
 $integrante = Estudiante::find($dni);
+$id = $integrante->getIdAlumnoGrupo();
+//debugear($id['idAlumnoGrupo']);
 $beneficioAsignados = Estudiante::getBeneficiosAsignados($integrante);
-
-
-
-
 
 $beneficios = Beneficio::getBeneficiosPorTipo($idTipo);
 
@@ -51,7 +49,9 @@ incluirTemplate('barra');
             <p class="info"><strong> Total Beneficios Activos:</strong> <?php echo $cantidadActivo ?> </p>
         </div>
     </div>
-
+    <div class="hrh">
+        <hr>
+    </div>
     <div class="detalles-integrante">
         <div class="detalle">
             <h3 class="titulo_participacion">Participaciones</h3>
@@ -90,7 +90,9 @@ incluirTemplate('barra');
             </div>
 
         </div>
-
+        <div class="hrh">
+            <hr>
+        </div>
         <div class="detalle">
             <h3 class="titulo_participacion">Beneficios a los que tiene derecho</h3>
 
@@ -111,14 +113,13 @@ incluirTemplate('barra');
 
 
 
-
                             ?>
                             <tr>
                                 <td><?php echo $beneficio->nombre; ?></td>
 
                                 <td><a class="<?php echo $beneficio->estado == 'ACTIVO' ? 'label-ok' : 'label' ?>"><?php echo $beneficio->estado; ?></a></td>
 
-                                <td><button>Asignar</button></td>
+                                <td><button class="boton-asignar" onclick="asignarBeneficio(<?php echo $beneficio->idBeneficioxtipGrupo ?>, <?php echo $id['idAlumnoGrupo'] ?>)">Asignar</button></td>
                             </tr>
                         <?php endforeach; ?>
 
@@ -130,8 +131,11 @@ incluirTemplate('barra');
 
 
         </div>
-
+        <div class="hrh">
+            <hr>
+        </div>
         <div class="detalle">
+
             <h3 class="titulo_participacion">Beneficios Asignados</h3>
 
             <div class="contenedor-tabla contenedor-tabla__perfil">
@@ -139,8 +143,10 @@ incluirTemplate('barra');
                 <table>
                     <thead>
                         <tr>
+                            <th>Nombre</th>
                             <th>Fecha de Asignación</th>
                             <th>Estado</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -149,9 +155,12 @@ incluirTemplate('barra');
 
 
                             <tr>
+                                <td><?php echo $row->nombre; ?></td>
                                 <td><?php echo $row->fechefec; ?></td>
 
-                                <td><a href="#" class="<?php echo $row->estado == 'ACTIVO' ? 'label-ok' : 'label' ?>"><?php echo $row->estado; ?></a></td>
+                                <td><button id="boton-activar" onclick="actualizarEstadoBeneficio(<?php echo  $row->idBeneficioalumno ?>)" class="<?php echo $row->EstadoBenAlum == 'CUMPLIDO' ? 'label-ok' : 'label' ?>"><?php echo $row->EstadoBenAlum; ?></button></td>
+
+                                <td><button>Quitar</button></td>
                             </tr>
                         <?php endwhile; ?>
 

@@ -354,19 +354,92 @@ function buscarRegistro(){
     });
 }
 
+function asignarBeneficio(idbeneficioXtipo, idAlumnoGrupo){
+  
+    var param = {"idbeneficioXtipo": idbeneficioXtipo, "idAlumnoGrupo": idAlumnoGrupo,"cod": 1}
+    $.ajax({
+        type: "POST",
+        data: param,
+        url: "setDatos.php",
 
+        success: function(r) {
 
-    $(document).ready(function(){
-        $("#buscarRegistro").keyup(function(){
-        _this = this;
-        // Show only matching TR, hide rest of them
-        $.each($("#mytable tbody tr"), function() {
-            if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
-                $(this).hide();
-            else
-                $(this).show();
-        });
-        });
+           if(r == 0){
+      
+              // Swal.fire('ERORR !!', 'EL BENEFICIO YA ESTA ASIGNADO ', 'error');
+               Swal.fire({
+                title: 'ERROR',
+                text: 'EL BENEFICIO YA ESTA ASIGNADO!',
+                icon: 'error',
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+               // denyButtonText: `Don't save`,
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                  window.location.reload();
+                }
+              })
+               
+           }else{
+            Swal.fire({
+                title: 'EXITO',
+                text: 'BENEFICIO ASIGNADO CORRECTAMENTE!',
+                icon: 'success',
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+               // denyButtonText: `Don't save`,
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                  window.location.reload();
+                }
+              })
+           
+            
+           }
+           
+        
+        }
     });
+   
+}
+
+
+function actualizarEstadoBeneficio($id){
+    var param = {"id": $id,"cod": 2};
+    $.ajax({
+        type: "POST",
+        data: param,
+        url: "setDatos.php",
+
+        success: function(r) {
+            Swal.fire({
+                title: 'EXITO',
+                text: 'ESTADO MODIFICADO CON ÉXITO !',
+                icon: 'success',
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+               // denyButtonText: `Don't save`,
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                  window.location.reload();
+                }
+              })
+           
+          
+        
+        }
+    });
+
+}
+
+
+
+ 
 
 

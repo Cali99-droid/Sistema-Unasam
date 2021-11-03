@@ -18,5 +18,6 @@
   }
 }
 
-.borrar {
+.boton-asignar {
+  @include boton($azul, block);
 }
