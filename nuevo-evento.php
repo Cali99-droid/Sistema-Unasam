@@ -25,7 +25,7 @@ incluirTemplate('barra');
                 <div class="org">
                     <label>Organizador</label>
                     <input type="text" id="nombreOrganizador" name="nombreOrganizador" placeholder="Buscar Organizador">
-                    <button>Nuevo Organizador</button>
+                    <button type="button" onclick="modal('modal-org', 'boton-agregar-integrante', 'close-org')">Nuevo Organizador</button>
                     <input type="text" id="cod" name="cod" value="7" hidden>
 
                 </div>
@@ -38,9 +38,11 @@ incluirTemplate('barra');
                 <input type="text" id="grupoBuscado" name="grupoBuscado" placeholder="Escriba nombre de grupo">
 
 
+                <div class="botones-accion">
+                    <button id="btnAgregarIvtc">Guardar</button>
+                    <button id="btnCancelar">Cancelar</button>
+                </div>
 
-                <button id="btnAgregarIvtc">Guardar</button>
-                <button id="btnCancelar">Cancelar</button>
             </div>
         </form>
     </div>
@@ -51,6 +53,24 @@ incluirTemplate('barra');
 </div>
 </div>
 
+<div class="modal-agregar" id="modal-org">
+
+    <div class="contenido-modal-grupo modal-org">
+        <div class="encabezado-modal">
+            <h2 id="titulo_integrante">Nuevo Organizador</h2>
+            <span class=" close close-org">&times;</span>
+
+        </div>
+        <form method="POST" class="formulario-grupo">
+
+            <?php include 'includes/templates/modales/formOrg.php';  ?>
+
+
+
+        </form>
+    </div>
+
+</div>
 
 
 

@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
- 
-   // llamar_modal();
-    
+   eventListeners();  
 });
 
 
