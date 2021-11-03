@@ -19,5 +19,6 @@
 }
 
 .boton-asignar {
-  @include boton($azul, block);
+  @include boton(#008896, block);
+  border-radius: 10px;
 }

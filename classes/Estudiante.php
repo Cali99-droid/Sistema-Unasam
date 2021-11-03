@@ -269,6 +269,19 @@ class Estudiante
         return $resultado;
     }
 
+    public static function getNumBeneficiosAsignados(Estudiante $est)
+    {
+        $alumnoGrupo = $est->getIdAlumnoGrupo();
+
+        $query = "SELECT count(*) cantidad FROM vista_beneficioAlumnos WHERE idAlumnoGrupo = " . $alumnoGrupo['idAlumnoGrupo'] . " AND EstadoBenAlum = 'PENDIENTE' ";
+
+        $resultado = self::consulta($query)->fetch_object();
+
+        return $resultado;
+    }
+
+
+
     public static function asignarBeneficio($idAlumnoGrupo, $idbeneficioXtipo)
     {
         $query = "CALL proc_insrtBenAlumno ('" . $idAlumnoGrupo . "','" . $idbeneficioXtipo . "', 4 ,6) ";
@@ -280,7 +293,7 @@ class Estudiante
     {
         $query = "SELECT estado FROM beneficioalumno WHERE idBeneficioalumno =  " . $id;
         $resultado = self::consulta($query)->fetch_object();
-        if ($resultado->estado == 'COMPLETADO') {
+        if ($resultado->estado == 'CUMPLIDO') {
             $quer = "UPDATE beneficioalumno SET estado = 'PENDIENTE'  WHERE idbeneficioalumno = " . $id;
         } else {
             $quer = "UPDATE beneficioalumno SET estado = 'CUMPLIDO', fechefec = CURDATE() WHERE idbeneficioalumno = " . $id;

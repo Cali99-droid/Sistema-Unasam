@@ -2,10 +2,13 @@
 
 require 'includes/app.php';
 
+
+use App\Evento;
 use App\Estudiante;
 use App\Grupo;
 use Intervention\Image\ImageManagerStatic as Image;
 
+$eventos = Evento::all();
 $id  = $_GET['id'];
 
 $grupo = Grupo::getGrupo($id);
@@ -95,7 +98,7 @@ incluirTemplate('barra');
         <div class=" nuevo-grupo botones-grupo">
 
 
-            <button type="submit" id="boton-agregar-evento" onclick="modal('modal-agregar', 'boton-agregar-evento', 'close-evento')">
+            <button type="submit" id="boton-agregar-evento" onclick="modal('modal-evento', 'boton-agregar-evento', 'close-evento')">
                 <i class="far fa-calendar-plus"></i> Asignar Evento
             </button>
 
@@ -202,10 +205,33 @@ incluirTemplate('barra');
 
 </div>
 
+<div class="modal-agregar" id="modal-evento">
 
+    <div class="contenido-modal-grupo modal-eventos">
+        <div class="encabezado-modal">
+            <h2 id="titulo_integrante">Asignar Evento</h2>
+            <span class=" close close-evento">&times;</span>
+
+        </div>
+        <form method="POST" class="formulario-grupo">
+
+            <?php include 'includes/templates/modales/buscarEvento.php';  ?>
+
+
+
+        </form>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#option').select2();
+
+    });
+</script>
 
 <?php
 
-incluirTemplate('modales/modEvento');
 
 incluirTemplate('cierre');

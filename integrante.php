@@ -15,21 +15,14 @@ $id = $integrante->getIdAlumnoGrupo();
 $beneficioAsignados = Estudiante::getBeneficiosAsignados($integrante);
 
 $beneficios = Beneficio::getBeneficiosPorTipo($idTipo);
+$cantidadActivo = Estudiante::getNumBeneficiosAsignados($integrante)->cantidad;
 
-$cantidadActivo = 0;
-foreach ($beneficios as $beneficio) {
-    if ($beneficio->estado === "ACTIVO") {
-        $cantidadActivo++;
-    }
-}
 
 incluirTemplate('barra');
 ?>
 
 
 <div class="contenedor-grupos">
-
-
 
     <div class="datos-integrante">
         <div class="datos datos--ava">
@@ -43,11 +36,16 @@ incluirTemplate('barra');
             <p><?php echo $grupo ?></p>
 
         </div>
+        <div class="datos">
+            <div class=" datos--general zoom">
+                <p class="info"><strong> Total participaciones:</strong> 3</p>
 
-        <div class="datos datos--general">
-            <p class="info"><strong> Total participaciones:</strong> 3</p>
-            <p class="info"><strong> Total Beneficios Activos:</strong> <?php echo $cantidadActivo ?> </p>
+            </div>
+            <div class=" datos--general zoom">
+                <p class="info"><strong> Total Beneficios Asignados Pendientes:</strong> <?php echo $cantidadActivo ?> </p>
+            </div>
         </div>
+
     </div>
     <div class="hrh">
         <hr>
@@ -119,7 +117,7 @@ incluirTemplate('barra');
 
                                 <td><a class="<?php echo $beneficio->estado == 'ACTIVO' ? 'label-ok' : 'label' ?>"><?php echo $beneficio->estado; ?></a></td>
 
-                                <td><button class="boton-asignar" onclick="asignarBeneficio(<?php echo $beneficio->idBeneficioxtipGrupo ?>, <?php echo $id['idAlumnoGrupo'] ?>)">Asignar</button></td>
+                                <td><button class="boton-asignar" onclick="asignarBeneficio(<?php echo $beneficio->idBeneficioxtipGrupo ?>, <?php echo $id['idAlumnoGrupo'] ?>)"> <i class="fas fa-plus-circle"></i> Asignar</button></td>
                             </tr>
                         <?php endforeach; ?>
 
@@ -158,7 +156,7 @@ incluirTemplate('barra');
                                 <td><?php echo $row->nombre; ?></td>
                                 <td><?php echo $row->fechefec; ?></td>
 
-                                <td><button id="boton-activar" onclick="actualizarEstadoBeneficio(<?php echo  $row->idBeneficioalumno ?>)" class="<?php echo $row->EstadoBenAlum == 'CUMPLIDO' ? 'label-ok' : 'label' ?>"><?php echo $row->EstadoBenAlum; ?></button></td>
+                                <td><a type="button" id="boton-activar" onclick="actualizarEstadoBeneficio(<?php echo  $row->idBeneficioalumno ?>)" class="<?php echo $row->EstadoBenAlum == 'CUMPLIDO' ? 'label-ok ' : 'label' ?>"><?php echo $row->EstadoBenAlum; ?></a></td>
 
                                 <td><button>Quitar</button></td>
                             </tr>

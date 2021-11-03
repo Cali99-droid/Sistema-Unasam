@@ -7,7 +7,7 @@ class Evento
 {
     //Base de datos
     protected static $db;
-    protected static $columnaDB = ['idEventosrealizados', 'nombre_evento', 'fecha_inicio', 'fecha_final'];
+    protected static $columnaDB = ['idEventosrealizados', 'nombre_evento', 'fecha_inicio', 'fecha_final', 'idorganizador', 'organizador', 'contacto'];
 
     //errores
     protected static $errores = [];
@@ -16,6 +16,9 @@ class Evento
     public $nombre_evento;
     public $fecha_inicio;
     public $fecha_final;
+    public $idorganizador;
+    public $organizador;
+    public $contacto;
 
 
 
@@ -25,6 +28,9 @@ class Evento
         $this->nombre_evento = $args['nombre_evento'] ?? '';
         $this->fecha_inicio = $args['fecha_inicio'] ?? '';
         $this->fecha_final = $args['fecha_final'] ?? '';
+        $this->idorganizador = $args['idorganizador'] ?? '';
+        $this->organizador = $args['organizador'] ?? '';
+        $this->contacto = $args['contacto'] ?? '';
     }
 
     //definir la conexion a la bd
@@ -156,7 +162,7 @@ class Evento
     // lista todas los grupos
     public static function all()
     {
-        $query = "SELECT * FROM Eventos_realizados";
+        $query = "SELECT * FROM vista_eventos";
         $resultado = self::consultarSQL($query);
         return $resultado;
     }
