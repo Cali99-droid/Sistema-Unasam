@@ -92,7 +92,7 @@ incluirTemplate('barra');
     <div class="acciones-grupo">
         <div class="buscar">
             <i class="fas fa-search"></i>
-            <input type="text" placeholder="Buscar" class="buscar-inte" id="buscarRegistro">
+            <input type="text" placeholder="Buscar" class="busqueda" id="buscarIntegrante">
         </div>
 
         <div class=" nuevo-grupo botones-grupo">
@@ -207,17 +207,20 @@ incluirTemplate('barra');
 
 <div class="modal-agregar" id="modal-evento">
 
-    <div class="contenido-modal-grupo modal-eventos">
+    <div class="contenido-modal-grupo  contenv fedor-grupos modal-eventos">
         <div class="encabezado-modal">
             <h2 id="titulo_integrante">Asignar Evento</h2>
             <span class=" close close-evento">&times;</span>
 
         </div>
-        <form method="POST" class="formulario-grupo">
+        <form method="POST" class="formulario-evento">
 
-            <?php include 'includes/templates/modales/buscarEvento.php';  ?>
+            <?php include 'includes/templates/modales/buscarEvento.php'; ?>
+        </form>
+    </div>
 
-
+    <div>
+        <form action="">
 
         </form>
     </div>

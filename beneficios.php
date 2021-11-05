@@ -3,6 +3,7 @@
 require 'includes/app.php';
 
 use App\Beneficio;
+use App\Grupo;
 use App\TipoGrupo;
 
 $beneficios = Beneficio::all();
@@ -43,7 +44,7 @@ incluirTemplate('barra');
     <div class="acciones-grupo">
         <div class="buscar">
             <i class="fas fa-search"></i>
-            <input type="text" placeholder="Buscar" id="buscarRegistro" class="buscar-ben">
+            <input type="text" placeholder="Buscar" id="buscarBene" class="busqueda">
         </div>
 
         <div class="nuevo-grupo">
@@ -69,10 +70,10 @@ incluirTemplate('barra');
             <tbody>
                 <?php foreach ($beneficios as $beneficio) : ?>
                     <tr>
-                        <td><?php echo $beneficio->getBeneficio(); ?></td>
+                        <td><?php echo $beneficio->nombre; ?></td>
                         <td><?php echo $beneficio->numero; ?></td>
                         <td><?php echo  $beneficio->fecha_emision; ?></td>
-                        <td><?php echo $beneficio->estadoresolucion; ?></td>
+                        <td><?php echo $beneficio->estado; ?></td>
                         <td>
 
 
@@ -84,8 +85,7 @@ incluirTemplate('barra');
                             <input type="hidden" name="id" value="<?php echo $beneficio->idBeneficio; ?>">
                             <button type="button" class="boton-acciones borrar">
                                 <i class="fas fa-trash"></i> </button>
-
-
+                            <button onclick="modalAsignar(<?php echo $beneficio->idBeneficio; ?>, '<?php echo $beneficio->nombre; ?>','modal-asignar-grupo', 'boton-agregar-beneficio', 'asig')">Asignar a Grupos</button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -124,7 +124,31 @@ incluirTemplate('barra');
     </div>
 </div>
 
+<div class="modal-agregar" id="modal-asignar-grupo">
 
+
+    <div class="modal-beneficio contenido-modal-grupo ">
+        <div class="encabezado-modal">
+            <h2>Asignar Beneficio: <span id="nombreBeneficio"></span></h2>
+            <span class="close asig">&times;</span>
+
+        </div>
+        <form class="asignar-grupo">
+
+            <?php include 'includes/templates/modales/asignarGrupo.php'; ?>
+
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#idTipoGrupo').select2();
+
+    });
+</script>
 <?php
 //
 

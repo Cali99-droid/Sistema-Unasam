@@ -6,7 +6,7 @@ class Beneficio
 {
     //Base de datos
     protected static $db;
-    protected static $columnaDB = ['idResolucionxbeneficio', 'numero', 'fecha_emision', 'estadoresolucion', 'idBeneficio', 'nombre', 'idBeneficioxtipGrupo', 'estado', 'nombre_tipo', 'idTipoGrupo'];
+    protected static $columnaDB = ['idResolucionxbeneficio', 'numero', 'fecha_emision', 'estado', 'idBeneficio', 'nombre'];
 
     //errores
     protected static $errores = [];
@@ -16,13 +16,10 @@ class Beneficio
     public $idResolucionxbeneficio;
     public $numero;
     public $fecha_emision;
-    public $estadoresolucion;
+    public $estado;
     public $idBeneficio;
     public $nombre;
-    public $idBeneficioxtipGrupo;
-    public $estado;
-    public $nombre_tipo;
-    public $idTipoGrupo;
+
 
 
 
@@ -31,14 +28,10 @@ class Beneficio
     {
         $this->idResolucionxbeneficio = $args['idResolucionxbeneficio'] ?? '';
         $this->numero = $args['numero'] ?? '';
-        $this->fecha_emision = $args['fecha_emision'] ?? '';
-        $this->estadoresolucion = $args['estadoresolucion'] ?? '';
+        $this->fecha_emision = $args['fecha_emision'] ?? 'null';
+        $this->estado = $args['estado'] ?? '';
         $this->idBeneficio = $args['idBeneficio'] ?? '';
         $this->nombre = $args['nombre'] ?? '';
-        $this->idBeneficioxtipGrupo = $args['idBeneficioxtipGrupo'] ?? '';
-        $this->estado = $args['estado'] ?? '';
-        $this->nombre_tipo = $args['nombre_tipo'] ?? '';
-        $this->idTipoGrupo = $args['idTipoGrupo'] ?? '';
     }
 
     //definir la conexion a la bd
@@ -53,12 +46,12 @@ class Beneficio
         //sanitizar datos
         $atributos = $this->sanitizarAtributos();
         //insertar en la base de da
-        $query = "CALL p_insertarbeneficio( '" . $this->nombre . "','" . $this->numero . "', '" . $this->fecha_emision . "', '" . $this->estadoresolucion . "','" . $this->estado . "'," . $this->idTipoGrupo . ")";
+        $query = "CALL p_insertarbeneficio( '" . $this->nombre . "','" . $this->numero . "', '" . $this->fecha_emision . "', '" . $this->estado . "')";
 
         $resultado = self::$db->query($query);
 
         if ($resultado) {
-            header('Location: /beneficios.php');
+            header('Location: ./beneficios.php');
         }
     }
 
@@ -71,12 +64,12 @@ class Beneficio
             $valores[] = "{$key}='{$value}'";
         }
 
-        $query = "CALL p_updatebeneficio('" . $this->idBeneficio . "', '" . $this->nombre . "','" . $this->numero . "', '" . $this->fecha_emision . "', '" . $this->estadoresolucion . "','" . $this->estado . "'," . $this->idTipoGrupo . ")";
+        $query = "CALL p_updatebeneficio('" . $this->idBeneficio . "', '" . $this->nombre . "','" . $this->numero . "', '" . $this->fecha_emision . "', '" . $this->estado . "')";
 
 
         $resultado = self::$db->query($query);
         if ($resultado) {
-            header('Location: /beneficios.php');
+            header('Location: ./beneficios.php');
         }
     }
 
@@ -193,13 +186,13 @@ class Beneficio
     // lista todas los grupos
     public static function all()
     {
-        $query = "SELECT * FROM vista_beneficios_tipo";
+        $query = "SELECT * FROM vista_beneficios";
         $resultado = self::consultarSQL($query);
         return $resultado;
     }
     public static function find($id)
     {
-        $query = "SELECT * FROM vista_beneficios_tipo WHERE idBeneficio = " . $id;
+        $query = "SELECT * FROM vista_beneficios WHERE idBeneficio = " . $id;
         $resultado = self::consulta($query)->fetch_assoc();
         return $resultado;
     }
@@ -249,6 +242,13 @@ class Beneficio
     {
         $query = "SELECT * FROM vista_beneficios_tipo WHERE idTipoGrupo = " . $idTipoGrupo;
         $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
+    public static function asignarBeneficio($estado, $idBeneficio, $idTipoGrupo)
+    {
+        $query = "CALL proc_insertBenefTipo('" . $estado . "'," . $idBeneficio . "," . $idTipoGrupo . ")";
+        $resultado = self::consulta($query)->fetch_object();
         return $resultado;
     }
 }

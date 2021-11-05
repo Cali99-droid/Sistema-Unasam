@@ -1,11 +1,9 @@
 document.addEventListener('DOMContentLoaded', function(){
 
    eventListeners();
+ 
   
 });
-
-
-
 
 
 function navegacion(){
@@ -46,8 +44,20 @@ function eventListeners(){
     mobileMenu.addEventListener('click', navegacion);
     // const btn = document.querySelector('#btn_modal');
     // btn.addEventListener('click', llamar_modal);
-    const busc = document.querySelector('.buscar-inte');
-    busc.addEventListener('keyup',buscarRegistro);
+    //busca beneficio
+    const buscarBeneficio = document.getElementById('buscarBene');
+    if(buscarBeneficio != null){
+    buscarBeneficio.addEventListener('keyup',buscarRegistro);
+    }
+    //busca integrante
+    const busc = document.getElementById('buscarIntegrante');
+    if(busc != null){
+        busc.addEventListener('keyup',buscarRegistro);
+    }
+    
+    
+   
+
 
    
 /*
@@ -341,7 +351,7 @@ function actualizarSemestre(id, modal_se, boton_se, close_se){
 function buscarRegistro(){
 
     $(document).ready(function(){
-        $("#buscarRegistro").keyup(function(){
+        $(".busqueda").keyup(function(){
         _this = this;
         // Show only matching TR, hide rest of them
         $.each($("#mytable tbody tr"), function() {
@@ -435,6 +445,56 @@ function actualizarEstadoBeneficio($id){
         
         }
     });
+
+}
+
+function modalAsignar(idbeneficio,nombre,modal_asigBen, boton_agregar_usu, close_usu){
+
+    modal(modal_asigBen, boton_agregar_usu, close_usu);
+    $(document).ready(function(){
+
+        $("#idbeneficio").val(idbeneficio);
+        $("#nombreBeneficio").text(nombre);
+   
+    
+      });
+
+}
+function asignarBeneficioGrupo(){
+    var idbeneficio = document.getElementById('idbeneficio').value;
+    var idTipoGrupo = document.getElementById('idTipoGrupo').value;
+    var estado = document.getElementById('estadoGrupo').value;
+    var param = {"idbeneficio": idbeneficio, "idTipoGrupo": idTipoGrupo,"estado": estado ,"cod": 3}
+  
+
+    $.ajax({
+        type: "POST",
+        data: param,
+        url: "setDatos.php",
+
+        success: function(r) {
+    
+           if(r == 0){
+      
+              // Swal.fire('ERORR !!', 'EL BENEFICIO YA ESTA ASIGNADO ', 'error');
+               Swal.fire({
+                title: 'AVISO',
+                text: 'EL BENEFICIO YA EXISTE Y FUE ACTUALIZADO',
+                icon: 'success', 
+               })
+            }else{
+            Swal.fire({
+                title: 'EXITO',
+                text: 'BENEFICIO ASIGNADO CORRECTAMENTE!',
+                icon: 'success',
+              })
+
+           }
+           
+        
+        }
+    });
+    
 
 }
 

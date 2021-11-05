@@ -2,6 +2,7 @@
 
 use App\Beneficio;
 use App\Estudiante;
+use App\Invitacion;
 
 require 'includes/app.php';
 
@@ -17,6 +18,7 @@ $beneficioAsignados = Estudiante::getBeneficiosAsignados($integrante);
 $beneficios = Beneficio::getBeneficiosPorTipo($idTipo);
 $cantidadActivo = Estudiante::getNumBeneficiosAsignados($integrante)->cantidad;
 
+$invitaciones = Invitacion::getInvitacionesPorGrupo($integrante->idgrupo_universitario);
 
 incluirTemplate('barra');
 ?>
@@ -59,30 +61,34 @@ incluirTemplate('barra');
                     <thead>
                         <tr>
                             <th>Evento</th>
-                            <th>Fecha de Inicio</th>
-                            <th>Fecha Final</th>
+                            <th>Fecha y Hora de Invitacion</th>
                             <th>Estado</th>
+                            <th>Observacion</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Alfreds Futterkiste</td>
-                            <td>Maria Anders</td>
-                            <td>Germany</td>
-                            <td>Germany</td>
-                        </tr>
-                        <tr>
-                            <td>Berglunds snabbköp</td>
-                            <td>Christina Berglund</td>
-                            <td>Sweden</td>
-                            <td>Germany</td>
-                        </tr>
-                        <tr>
-                            <td>Centro comercial Moctezuma</td>
-                            <td>Francisco Chang</td>
-                            <td>Mexico</td>
-                            <td>Germany</td>
-                        </tr>
+
+                        <?php foreach ($invitaciones as $invitacion) :  ?>
+                            <?php
+
+
+
+                            ?>
+                            <tr>
+                                <td><?php echo $invitacion->getEvento()['nombre_evento']; ?></td>
+                                <td><?php echo $invitacion->fechaHoraInvitacion; ?></td>
+
+
+                                <td><a class="<?php echo $invitacion->getEstado()->estado == 'VIGENTE' ? 'label-ok' : 'label' ?>"><?php echo  $invitacion->getEstado()->estado; ?></a></td>
+
+                                <td><?php echo $invitacion->Observacion; ?></td>
+
+                                <td><button class="boton-asignar"> <i class="fas fa-plus-circle"></i> Asignar Asistencia</button></td>
+
+                            </tr>
+                        <?php endforeach; ?>
+
                     </tbody>
                 </table>
             </div>

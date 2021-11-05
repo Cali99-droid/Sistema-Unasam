@@ -51,6 +51,25 @@
       margin: 8px 0;
     }
   }
+
+  .evento-accion {
+    display: flex;
+    width: 100%;
+    align-content: center;
+    align-items: center;
+    .boton-evento {
+      margin-left: 2rem;
+    }
+    .lista-eventos {
+      width: 200px;
+    }
+  }
+}
+
+.modal-agregar {
+  .modal-eventos {
+    width: 43%;
+  }
 }
 
 .modal-org {

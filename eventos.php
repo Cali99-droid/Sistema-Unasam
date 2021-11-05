@@ -77,6 +77,7 @@ incluirTemplate('barra');
                             <input type="hidden" name="id" value="<?php echo $evento->idEventosrealizados; ?>">
                             <button type="button" class="boton-acciones borrar">
                                 <i class="fas fa-trash"></i> </button>
+                            <button>Invitar Grupos</button>
 
 
                         </td>

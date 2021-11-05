@@ -27,7 +27,9 @@ switch ($cod) {
         break;
         //traer beneficio
     case 3:
-        // echo json_encode(Beneficio::find($_POST['id']));;
+        $resultado = Beneficio::asignarBeneficio($_POST['estado'], $_POST['idbeneficio'], $_POST['idTipoGrupo']);
+        echo $resultado->valor;
+
         break;
     case 4:
         //  echo json_encode(Evento::find($_POST['id']));;

@@ -11,7 +11,6 @@ class Evento
 
     //errores
     protected static $errores = [];
-
     public $idEventosrealizados;
     public $nombre_evento;
     public $fecha_inicio;
