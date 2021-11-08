@@ -98,17 +98,24 @@ class Beneficio
     }
 
 
-    public function getTipoGrupo(): string
+    public function getTipoGrupo($tipo): string
     {
-        $beneficio = $this->idBeneficio;
-        $query = "SELECT  * FROM vista_benef_tipo WHERE idTipoGrupo = ${beneficio}";
+
+        $query = "SELECT  * FROM vista_benef_tipo WHERE idTipoGrupo = " . $tipo;
         $resultado = self::consulta($query)->fetch_assoc();
 
-        if (isset($resultado)) {
-            return $resultado['idTipoGrupo'];
-        } else {
-            return '';
-        }
+
+        return $resultado['idTipoGrupo'];
+    }
+
+    public function getIdBeneXTipo($tipo): string
+    {
+
+        $query = "SELECT  * FROM vista_benef_tipo WHERE idTipoGrupo = " . $tipo . " AND idBeneficio =  " . $this->idBeneficio;
+        $resultado = self::consulta($query)->fetch_assoc();
+
+
+        return $resultado['idBeneficioxtipGrupo'];
     }
 
 

@@ -16,6 +16,7 @@ $beneficioAsignados = Estudiante::getBeneficiosAsignados($integrante);
 $participaciones = $integrante->getParticipaciones();
 
 $beneficios = Beneficio::getBeneficiosPorTipo($idTipo);
+
 $cantidadActivo = Estudiante::getNumBeneficiosAsignados($integrante)->cantidad;
 
 $invitaciones = Invitacion::getInvitacionesPorGrupo($integrante->idgrupo_universitario);
@@ -155,17 +156,13 @@ incluirTemplate('barra');
                         <tbody>
 
                             <?php foreach ($beneficios as $beneficio) :  ?>
-                                <?php
 
-
-
-                                ?>
                                 <tr>
                                     <td><?php echo $beneficio->nombre; ?></td>
 
                                     <td><a class="<?php echo $beneficio->estado == 'ACTIVO' ? 'label-ok' : 'label' ?>"><?php echo $beneficio->estado; ?></a></td>
 
-                                    <td><button class="boton-asignar" onclick="asignarBeneficio(<?php echo $beneficio->idBeneficioxtipGrupo ?>, <?php echo $id['idAlumnoGrupo'] ?>)"> <i class="fas fa-plus-circle"></i> Asignar</button></td>
+                                    <td><button class="boton-asignar" onclick="asignarBeneficio(<?php echo $beneficio->getIdBeneXTipo($idTipo) ?>, <?php echo $id['idAlumnoGrupo'] ?>)"> <i class="fas fa-plus-circle"></i> Asignar</button></td>
                                 </tr>
                             <?php endforeach; ?>
 
