@@ -499,6 +499,206 @@ function asignarBeneficioGrupo(){
 }
 
 
+function invitarGrupo(idevento,nombre_evento,modal_invi, boton_agregar_usu, close_usu){
+
+    modal(modal_invi, boton_agregar_usu, close_usu);
+    $(document).ready(function(){
+
+        $("#idevento").val(idevento);
+        $("#nombreEvento").text(nombre_evento);
+   
+    
+      });
+
+}
+
+
+function asignarInvitacionGrupo(){
+    var idevento = document.getElementById('idevento').value;
+    var idGrupo = document.getElementById('idGrupo').value;
+    var fechaHoraInvitacion = document.getElementById('fechaHoraInvitacion').value;
+    var Observacion = document.getElementById('Observacion').value;
+    var param = {"invitacion[idEventosrealizados]": idevento, "invitacion[idgrupo_universitario]": idGrupo,"invitacion[fechaHoraInvitacion]": fechaHoraInvitacion ,"invitacion[Observacion]":Observacion,"cod": 4}
+  
+
+    $.ajax({
+        type: "POST",
+        data: param,
+        url: "setDatos.php",
+
+        success: function(r) {
+    
+           if(r == 0){
+      
+              // Swal.fire('ERORR !!', 'EL BENEFICIO YA ESTA ASIGNADO ', 'error');
+               Swal.fire({
+                title: 'AVISO',
+                text: 'El grupo ya esta invitado',
+                icon: 'success', 
+               })
+            }else{
+            Swal.fire({
+                title: 'EXITO',
+                text: 'INVITACION ASIGNADA CORRECTAMENTE!',
+                icon: 'success',
+              })
+
+           }
+           
+        
+        }
+    });
+    
+
+}
+
+
+function crearOrganizador(){
+    var nombre = document.getElementById('nombre_org').value;
+    var contacto = document.getElementById('contacto').value;
+    var param = {"nombre": nombre, "contacto": contacto, "cod": 5};
+    $.ajax({
+        type: "POST",
+        data: param,
+        url: "setDatos.php",
+
+        success: function(r) {
+ 
+           if(r == 0){
+      
+              // Swal.fire('ERORR !!', 'EL BENEFICIO YA ESTA ASIGNADO ', 'error');
+               Swal.fire({
+                title: 'ERROR',
+                text: 'Error en la creacion',
+                icon: 'error', 
+               })
+            }else{
+            Swal.fire({
+                title: 'EXITO',
+                text: 'ORGANIZACION CREADA CORRECTAMENTE!',
+                icon: 'success',
+              })
+
+              $("#nombre_org").val('');
+              $("#contacto").val('');
+
+           }
+           
+        
+        }
+    });
+
+}
+
+function crearEvento(){
+    $(document).ready(function(){
+        param = $('#form-evento').serialize();
+        param += '&cod=6';
+        $.ajax({
+            type: "POST",
+            data: param,
+            url: "setDatos.php",
+    
+            success: function(r) {
+
+               if(r == 0){
+          
+                  // Swal.fire('ERORR !!', 'EL BENEFICIO YA ESTA ASIGNADO ', 'error');
+                   Swal.fire({
+                    title: 'AVISO',
+                    text: 'EL NOMBRE DEL EVENTO SE REPITE',
+                    icon: 'error', 
+                   })
+                }else{
+                Swal.fire({
+                    title: 'EXITO',
+                    text: 'EVENTO CREADO CORRECTAMENTE!',
+                    icon: 'success',
+                  })
+    
+                  $("#nombre_org").val('');
+                  $("#contacto").val('');
+    
+               }
+               
+            
+            }
+        });
+    });  
+}
+
+
+function asignarAsistencia(idinvitacion,idAlumnoGrupo,modal_asis, boton_agregar_usu, close_usu ){
+    modal(modal_asis, boton_agregar_usu, close_usu);
+
+    $(document).ready(function(){
+
+        $("#idinvitacion").val(idinvitacion);
+        $("#idAlumnoGrupo").val(idAlumnoGrupo);
+        
+    
+      });
+    
+}
+
+
+function confirmarAsistencia(){
+    var idinvitacion = document.getElementById("idinvitacion").value;
+    var idAlumnoGrupo =  document.getElementById("idAlumnoGrupo").value;
+    var tipo = document.getElementById("tipo").value;
+    var param = {"idinvitacion": idinvitacion, "idAlumnoGrupo": idAlumnoGrupo, "tipo":tipo, "cod": 7};
+    $.ajax({
+        type: "POST",
+        data: param,
+        url: "setDatos.php",
+
+        success: function(r) {
+        console.log(r);
+           if(r == 0){
+      
+              // Swal.fire('ERORR !!', 'EL BENEFICIO YA ESTA ASIGNADO ', 'error');
+               Swal.fire({
+                title: 'ERROR',
+                text: 'Error ',
+                icon: 'error', 
+               })
+            }else{
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'La Asistencia fue confirmada',
+                showConfirmButton: false,
+                timer: 1500
+
+              })
+
+              $("#tipo").val('');
+              
+           }
+           
+        
+        }
+    });
+
+}
+
+function openPage(pageName, elmnt, color) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+    }
+    document.getElementById(pageName).style.display = "block";
+    elmnt.style.backgroundColor = color;
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+ 
 
  
 

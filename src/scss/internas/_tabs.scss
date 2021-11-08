@@ -1,0 +1,46 @@
+/* Style tab links */
+.tabs {
+  margin-top: 2rem;
+}
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  color: $negro;
+  display: none;
+  padding: 50px 20px;
+  height: 100%;
+  h3 {
+    font-weight: $bold;
+    margin: 0;
+  }
+}
+/*
+#invitacion {
+  background-color: #005b82;
+}
+#participacion {
+  background-color: #008896;
+}
+#beneficiosDerecho {
+  background-color: #00b490;
+}
+#beneficiosAsig {
+  background-color: #86da7c;
+}
+
+*/

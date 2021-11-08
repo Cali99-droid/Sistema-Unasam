@@ -301,4 +301,13 @@ class Estudiante
 
         $res = self::consulta($quer);
     }
+
+    public function getParticipaciones()
+    {
+        $id = $this->getIdAlumnoGrupo();
+        $query = "select nombre_grupo, estado from vista_asistenciaAlumno where idAlumnoGrupo = '" . $id['idAlumnoGrupo'] . "' ;";
+
+        $resultado = self::consulta($query);
+        return $resultado;
+    }
 }

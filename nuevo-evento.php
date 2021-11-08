@@ -1,6 +1,10 @@
 <?php
 
+use App\Evento;
+
 require 'includes/app.php';
+$organizadores = Evento::getOrganizadores();
+
 incluirTemplate('barra');
 ?>
 
@@ -11,22 +15,27 @@ incluirTemplate('barra');
 
     <!-- DIVISIONES DEL NUEVO FORMULARIO -->
     <div>
-        <form class="formulario-evento" method="POST">
+        <form class="formulario-evento" id="form-evento" method="POST">
             <div class="entrada">
                 <label for="nombre_evento">Nombre del Evento</label>
-                <input type="text" name="nombre_evento" id="nombre_evento">
+                <input type="text" name="evento[nombre_evento]" id="nombre_evento">
 
                 <label for="fecha_inicio">Fecha inicio</label>
-                <input type="date" name="fecha_inicio" id="fecha_inicio">
+                <input type="date" name="evento[fecha_inicio]" id="fecha_inicio">
 
                 <label for="fecha_final">Fecha fin</label>
-                <input type="date" name="fecha_final" id="fecha_final">
+                <input type="date" name="evento[fecha_final]" id="fecha_final">
 
                 <div class="org">
                     <label>Organizador</label>
-                    <input type="text" id="nombreOrganizador" name="nombreOrganizador" placeholder="Buscar Organizador">
+                    <select class="js-example-basic-single " id="idorganizador" name="evento[idorganizador]">
+                        <?php while ($org = $organizadores->fetch_object()) : ?>
+                            <option value="<?php echo $org->idorganizador ?>"><?php echo $org->organizador ?></option>
+                        <?php endwhile; ?>
+                    </select>
+
                     <button type="button" onclick="modal('modal-org', 'boton-agregar-integrante', 'close-org')">Nuevo Organizador</button>
-                    <input type="text" id="cod" name="cod" value="7" hidden>
+
 
                 </div>
 
@@ -34,12 +43,8 @@ incluirTemplate('barra');
             </div>
 
             <div class="entrada">
-                <label>Asignar Grupo</label>
-                <input type="text" id="grupoBuscado" name="grupoBuscado" placeholder="Escriba nombre de grupo">
-
-
                 <div class="botones-accion">
-                    <button id="btnAgregarIvtc">Guardar</button>
+                    <button id="btnAgregarEvento" onclick="crearEvento()" type="button">Guardar</button>
                     <button id="btnCancelar">Cancelar</button>
                 </div>
 
@@ -61,17 +66,20 @@ incluirTemplate('barra');
             <span class=" close close-org">&times;</span>
 
         </div>
-        <form method="POST" class="formulario-grupo">
+        <form class="formulario-grupo">
 
             <?php include 'includes/templates/modales/formOrg.php';  ?>
-
-
 
         </form>
     </div>
 
 </div>
+<script>
+    $(document).ready(function() {
+        $('#idorganizador').select2();
 
+    });
+</script>
 
 
 

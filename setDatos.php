@@ -5,6 +5,7 @@ use App\Estudiante;
 use App\TipoGrupo;
 use App\Beneficio;
 use App\Evento;
+use App\Invitacion;
 use App\User;
 
 //$estudiante=new Estudiante();
@@ -32,9 +33,25 @@ switch ($cod) {
 
         break;
     case 4:
+        $invitacion = new Invitacion($_POST['invitacion']);
+        $resultado = $invitacion->crear();
+        echo $resultado->valor;
         //  echo json_encode(Evento::find($_POST['id']));;
         break;
     case 5:
-        // echo json_encode(User::find($_POST['dni']));
+        $resultado = Evento::setOrganizador($_POST['nombre'], $_POST['contacto']);
+        echo $resultado;
+        break;
+
+    case 6:
+        $evento = new Evento($_POST['evento']);
+        $resultado = $evento->crear()->fetch_object();
+        echo $resultado->valor;
+        break;
+
+    case 7:
+        $invitacion = Invitacion::find($_POST['idinvitacion']);
+        $resultado = $invitacion->confirmarAsistencia($_POST['idAlumnoGrupo'], $_POST['tipo']);
+        echo $resultado;
         break;
 }

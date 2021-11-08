@@ -44,11 +44,7 @@ class Evento
         //sanitizar datos
         $atributos = $this->sanitizarAtributos();
         //insertar en la base de da
-        $query = "INSERT INTO Eventos_realizados(";
-        $query .= join(', ', array_keys($atributos));
-        $query .= " ) VALUES(' ";
-        $query .= join("', '", array_values($atributos));
-        $query .= " ')";
+        $query = "CALL proc_insertEvent('" . $this->nombre_evento . "','" . $this->fecha_inicio . "','" . $this->fecha_final . "'," . $this->idorganizador . ");";
 
         $resultado = self::$db->query($query);
 
@@ -211,5 +207,19 @@ class Evento
         }
 
         return $objeto;
+    }
+
+    public static function getOrganizadores()
+    {
+        $query = "SELECT * FROM organizador";
+        $resultado = self::consulta($query);
+        return $resultado;
+    }
+
+    public static function setOrganizador($nombre, $contacto)
+    {
+        $query = "INSERT INTO organizador VALUES(null, '" . $nombre . "', '" . $contacto . "')";
+        $resultado = self::consulta($query);
+        return $resultado;
     }
 }

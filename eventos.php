@@ -3,9 +3,10 @@
 require 'includes/app.php';
 
 use App\Evento;
-
+use App\Grupo;
 
 $eventos = Evento::all();
+$grupos = Grupo::all();
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -77,7 +78,14 @@ incluirTemplate('barra');
                             <input type="hidden" name="id" value="<?php echo $evento->idEventosrealizados; ?>">
                             <button type="button" class="boton-acciones borrar">
                                 <i class="fas fa-trash"></i> </button>
-                            <button>Invitar Grupos</button>
+
+
+                            <button onclick="invitarGrupo(
+                                <?php echo $evento->idEventosrealizados; ?>,
+                               '<?php echo $evento->nombre_evento; ?>',
+                               'modal_invitar', 
+                                'boton_agregar_usu', 
+                                'inv')">Invitar Grupos</button>
 
 
                         </td>
@@ -96,7 +104,29 @@ incluirTemplate('barra');
 </div>
 </div>
 
+<div class="modal-agregar" id="modal_invitar">
 
+    <div class="contenido-modal-grupo  contenedor-grupos modal-eventos">
+        <div class="encabezado-modal">
+            <h2 id="titulo_integrante">Invitar Grupo al evento:<span id="nombreEvento"></span></h2>
+            <span class=" close inv">&times;</span>
+
+        </div>
+        <form class="formulario-invitacion">
+
+            <?php include 'includes/templates/modales/asignarInvitacion.php'; ?>
+        </form>
+    </div>
+
+
+
+</div>
+<script>
+    $(document).ready(function() {
+        $('#idGrupo').select2();
+
+    });
+</script>
 <?php
 
 incluirTemplate('modales/modEvento');

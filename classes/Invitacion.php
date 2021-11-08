@@ -22,12 +22,19 @@ class Invitacion
     public function __construct($args = [])
     {
         $this->idinvitacion = $args['idinvitacion'] ?? '';
-        $this->fechaRegistro = $args['fechaRegistro'] ?? '';
+        $this->fechaRegistro = getdate();
         $this->fechaHoraInvitacion = $args['fechaHoraInvitacion'] ?? '';
-        $this->estado = $args['estado'] ?? '';
+        $this->estado = 'VIGENTE';
         $this->Observacion = $args['Observacion'] ?? '';
         $this->idEventosrealizados = $args['idEventosrealizados'] ?? '';
         $this->idgrupo_universitario = $args['idgrupo_universitario'] ?? '';
+    }
+
+    public function crear()
+    {
+        $query = "CALL proc_insertInvitacion('" . $this->fechaHoraInvitacion . "','" . $this->Observacion . "'," . $this->idEventosrealizados . ", " . $this->idgrupo_universitario . ")";
+        $resultado = self::$db->query($query)->fetch_object();
+        return $resultado;
     }
 
 
@@ -53,6 +60,13 @@ class Invitacion
         $query = "SELECT * FROM invitacion";
         $resultado = self::consultarSQL($query);
         return $resultado;
+    }
+
+    public static function find($idinvitacion)
+    {
+        $query = "SELECT * FROM invitacion WHERE idinvitacion = " . $idinvitacion;
+        $resultado = self::consultarSQL($query);
+        return array_shift($resultado);
     }
 
     public static function getInvitacionesPorGrupo($id)
@@ -100,6 +114,14 @@ class Invitacion
     {
         $query = "SELECT func_EstadoInvitacion('" . $this->idinvitacion  . "', '" . $this->fechaHoraInvitacion . "') estado";
         $resultado = self::$db->query($query)->fetch_object();
+        return $resultado;
+    }
+
+
+    public  function confirmarAsistencia($idAlumnoGrupo, $tipo)
+    {
+        $query = "INSERT INTO participacionalumno VALUES(null, '" . $tipo . "', '" . $idAlumnoGrupo . "', 6, 4, '" . $this->idinvitacion . "'  )";
+        $resultado = self::$db->query($query);
         return $resultado;
     }
 }

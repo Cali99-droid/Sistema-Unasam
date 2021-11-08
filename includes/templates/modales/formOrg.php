@@ -4,4 +4,4 @@
 <input type="tel" name="contacto" id="contacto">
 <input type="hidden" name="cod" value="1" id="valor">
 <input type="hidden" name="idOrganizador" value='' id="idOrganizador">
-<button class="" type="submit">Aceptar</button>
+<button class="" type="button" onclick="crearOrganizador()">Aceptar</button>
