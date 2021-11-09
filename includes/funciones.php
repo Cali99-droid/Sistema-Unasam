@@ -17,11 +17,10 @@ function s($html): string
 
 
 //
-function debugear($varable)
+function debugear($variable)
 {
     echo '<pre>';
-    var_dump($varable);
+    var_dump($variable);
     echo '</pre>';
-
     exit;
 }

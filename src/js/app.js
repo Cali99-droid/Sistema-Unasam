@@ -387,9 +387,7 @@ function asignarBeneficio(idbeneficioXtipo, idAlumnoGrupo){
                // denyButtonText: `Don't save`,
               }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                  window.location.reload();
-                }
+                document.getElementById("ben").click();
               })
                
            }else{
@@ -400,11 +398,13 @@ function asignarBeneficio(idbeneficioXtipo, idAlumnoGrupo){
                 showDenyButton: false,
                 showCancelButton: false,
                 confirmButtonText: 'Aceptar',
+
                // denyButtonText: `Don't save`,
               }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                  window.location.reload();
+                  //window.location.reload();
+                  document.getElementById("ben").click();
                 }
               })
            
@@ -659,7 +659,7 @@ function confirmarAsistencia(){
               // Swal.fire('ERORR !!', 'EL BENEFICIO YA ESTA ASIGNADO ', 'error');
                Swal.fire({
                 title: 'ERROR',
-                text: 'Error ',
+                text: 'El estudiante ya participó en el evento ',
                 icon: 'error', 
                })
             }else{
@@ -695,8 +695,6 @@ function openPage(pageName, elmnt, color) {
     document.getElementById(pageName).style.display = "block";
     elmnt.style.backgroundColor = color;
 }
-
-// Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
  
 

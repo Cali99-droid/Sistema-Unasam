@@ -4,7 +4,7 @@ require 'includes/app.php';
 use App\User;
 
 $users = User::all();
-
+$user = new User();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($_POST['cod'] == 1) {

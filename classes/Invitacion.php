@@ -120,8 +120,8 @@ class Invitacion
 
     public  function confirmarAsistencia($idAlumnoGrupo, $tipo)
     {
-        $query = "INSERT INTO participacionalumno VALUES(null, '" . $tipo . "', '" . $idAlumnoGrupo . "', 6, 4, '" . $this->idinvitacion . "'  )";
-        $resultado = self::$db->query($query);
+        $query = "CALL proc_insertaParticipacion('" . $tipo . "', '" . $idAlumnoGrupo . "', 6, 4, '" . $this->idinvitacion . "'  )";
+        $resultado = self::$db->query($query)->fetch_object();
         return $resultado;
     }
 }

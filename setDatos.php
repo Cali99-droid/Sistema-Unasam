@@ -52,6 +52,6 @@ switch ($cod) {
     case 7:
         $invitacion = Invitacion::find($_POST['idinvitacion']);
         $resultado = $invitacion->confirmarAsistencia($_POST['idAlumnoGrupo'], $_POST['tipo']);
-        echo $resultado;
+        echo $resultado->valor;
         break;
 }

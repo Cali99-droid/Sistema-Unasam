@@ -305,7 +305,7 @@ class Estudiante
     public function getParticipaciones()
     {
         $id = $this->getIdAlumnoGrupo();
-        $query = "select nombre_grupo, estado from vista_asistenciaAlumno where idAlumnoGrupo = '" . $id['idAlumnoGrupo'] . "' ;";
+        $query = "SELECT * FROM vista_asistenciaAlumno WHERE idAlumnoGrupo = '" . $id['idAlumnoGrupo'] . "' ;";
 
         $resultado = self::consulta($query);
         return $resultado;

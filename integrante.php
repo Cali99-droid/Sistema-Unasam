@@ -56,7 +56,7 @@ incluirTemplate('barra');
             <button class="tablink" onclick="openPage('invitacion', this, ' #005b82')">Invitaciones</button>
             <button class="tablink" onclick="openPage('participacion', this, ' #005b82')" id="defaultOpen">Participaciones</button>
             <button class="tablink" onclick="openPage('beneficiosDerecho', this, '#008896')">Derechos</button>
-            <button class="tablink" onclick="openPage('beneficiosAsig', this, '#008896')">Beneficios</button>
+            <button id="ben" class="tablink" onclick="openPage('beneficiosAsig', this, '#008896')">Beneficios</button>
         </div>
 
 
@@ -114,7 +114,7 @@ incluirTemplate('barra');
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-
+                                <th>Evento</th>
                                 <th>Estado</th>
 
                                 <th>Acciones</th>
@@ -122,10 +122,11 @@ incluirTemplate('barra');
                         </thead>
                         <tbody>
 
-                            <?php while ($row = mysqli_fetch_object($participaciones)) :  ?>
+                            <?php while ($row = mysqli_fetch_object($participaciones)) : ?>
 
                                 <tr>
-                                    <td><?php echo $row->nombre_grupo ?></td>
+                                    <td><?php echo $row->nombre_grupo; ?></td>
+                                    <td><?php echo $row->nombre_evento; ?></td>
                                     <td><?php echo $row->estado; ?></td>
                                     <td><button class="boton-asignar"><i class="fas fa-plus-circle"></i> Accion</button></td>
 
