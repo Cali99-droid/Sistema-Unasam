@@ -130,7 +130,7 @@ CREATE TABLE `beneficioalumno` (
   CONSTRAINT `BeneficioxtipGrupo1` FOREIGN KEY (`idBeneficioxtipGrupo`) REFERENCES `beneficioxtipgrupo` (`idBeneficioxtipGrupo`),
   CONSTRAINT `Semestre1` FOREIGN KEY (`idSemestre`) REFERENCES `semestre` (`idSemestre`),
   CONSTRAINT `Usuario3` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +139,7 @@ CREATE TABLE `beneficioalumno` (
 
 LOCK TABLES `beneficioalumno` WRITE;
 /*!40000 ALTER TABLE `beneficioalumno` DISABLE KEYS */;
-INSERT INTO `beneficioalumno` VALUES (1,'CUMPLIDO',12,'2021-11-03',16,4,6),(2,'CUMPLIDO',12,'2021-11-03',17,4,6),(3,'CUMPLIDO',12,'2021-11-08',18,4,6),(4,'CUMPLIDO',12,'2021-11-08',19,4,6),(5,'PENDIENTE',12,'2021-11-03',20,4,6),(6,'PENDIENTE',13,'2021-11-03',21,4,6);
+INSERT INTO `beneficioalumno` VALUES (1,'CUMPLIDO',12,'2021-11-03',16,4,6),(2,'CUMPLIDO',12,'2021-11-03',17,4,6),(3,'CUMPLIDO',12,'2021-11-08',18,4,6),(4,'CUMPLIDO',12,'2021-11-08',19,4,6),(5,'PENDIENTE',12,'2021-11-08',20,4,6),(6,'PENDIENTE',13,'2021-11-03',21,4,6),(7,'PENDIENTE',14,NULL,32,4,6),(8,'CUMPLIDO',13,'2021-11-08',29,4,6),(9,'PENDIENTE',13,NULL,33,4,6),(10,'PENDIENTE',13,NULL,30,4,6),(11,'PENDIENTE',13,NULL,31,4,6),(12,'PENDIENTE',13,NULL,28,4,6);
 /*!40000 ALTER TABLE `beneficioalumno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,7 +213,7 @@ CREATE TABLE `datos_usuario` (
   KEY `Persona1_idx` (`idPersona`),
   CONSTRAINT `Persona1` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`),
   CONSTRAINT `Usuario2` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,7 +222,7 @@ CREATE TABLE `datos_usuario` (
 
 LOCK TABLES `datos_usuario` WRITE;
 /*!40000 ALTER TABLE `datos_usuario` DISABLE KEYS */;
-INSERT INTO `datos_usuario` VALUES (1,1,1),(2,2,2),(3,3,12),(4,4,2),(5,5,2);
+INSERT INTO `datos_usuario` VALUES (1,1,1),(2,2,2),(3,3,12),(4,4,2),(5,5,2),(6,6,19);
 /*!40000 ALTER TABLE `datos_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,7 +269,7 @@ CREATE TABLE `eventos_realizados` (
   PRIMARY KEY (`idEventosrealizados`),
   KEY `fk_eventos_realizados_organizador1_idx` (`idorganizador`),
   CONSTRAINT `fk_eventos_realizados_organizador1` FOREIGN KEY (`idorganizador`) REFERENCES `organizador` (`idorganizador`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -278,7 +278,7 @@ CREATE TABLE `eventos_realizados` (
 
 LOCK TABLES `eventos_realizados` WRITE;
 /*!40000 ALTER TABLE `eventos_realizados` DISABLE KEYS */;
-INSERT INTO `eventos_realizados` VALUES (6,'Evento 1','2021-11-03','2021-11-15',1),(7,'Evento 2','2021-11-06','2021-11-12',2),(8,'EVENTO 3','2021-11-06','2021-11-19',3),(9,'EVENTO 4','2021-11-12','2021-11-19',1),(10,'EVENTO 5','2021-11-13','2021-11-28',4);
+INSERT INTO `eventos_realizados` VALUES (6,'Evento 1','2021-11-03','2021-11-15',1),(7,'Evento 2','2021-11-06','2021-11-12',2),(8,'EVENTO 3','2021-11-06','2021-11-19',3),(9,'EVENTO 4','2021-11-12','2021-11-19',1),(10,'EVENTO 5','2021-11-13','2021-11-28',4),(11,'Evento 6','2021-11-08','2021-11-19',4);
 /*!40000 ALTER TABLE `eventos_realizados` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -383,7 +383,7 @@ CREATE TABLE `invitacion` (
   KEY `fk_invitacion_grupo_universitario1_idx` (`idgrupo_universitario`),
   CONSTRAINT `fk_invitacion_eventos_realizados1` FOREIGN KEY (`idEventosrealizados`) REFERENCES `eventos_realizados` (`idEventosrealizados`),
   CONSTRAINT `fk_invitacion_grupo_universitario1` FOREIGN KEY (`idgrupo_universitario`) REFERENCES `grupo_universitario` (`idgrupo_universitario`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -392,7 +392,7 @@ CREATE TABLE `invitacion` (
 
 LOCK TABLES `invitacion` WRITE;
 /*!40000 ALTER TABLE `invitacion` DISABLE KEYS */;
-INSERT INTO `invitacion` VALUES (1,'2021-11-12','2021-11-16 00:00:00','NO CUMPLIDO','Danza de Huaraz',6,33),(2,'2021-11-05','2021-11-08 18:38:00','VIGENTE','ninguna',6,34),(3,'2021-11-05','2021-11-05 22:43:00','VIGENTE','nueva observacion',7,32),(4,'2021-11-07','2021-11-27 23:52:00','VIGENTE','niguna',10,33);
+INSERT INTO `invitacion` VALUES (1,'2021-11-12','2021-11-16 00:00:00','NO CUMPLIDO','Danza de Huaraz',6,33),(2,'2021-11-05','2021-11-08 18:38:00','VIGENTE','ninguna',6,34),(3,'2021-11-05','2021-11-05 22:43:00','VIGENTE','nueva observacion',7,32),(4,'2021-11-07','2021-11-27 23:52:00','VIGENTE','niguna',10,33),(5,'2021-11-08','2021-11-09 22:32:00','VIGENTE','ningun',11,32),(6,'2021-11-08','2021-11-09 22:49:00','VIGENTE','ninguna',11,34);
 /*!40000 ALTER TABLE `invitacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -444,7 +444,7 @@ CREATE TABLE `participacionalumno` (
   CONSTRAINT `fk_participacionalumno_invitacion1` FOREIGN KEY (`idinvitacion`) REFERENCES `invitacion` (`idinvitacion`),
   CONSTRAINT `Semestre2` FOREIGN KEY (`idSemestre`) REFERENCES `semestre` (`idSemestre`),
   CONSTRAINT `Usuario1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -453,7 +453,7 @@ CREATE TABLE `participacionalumno` (
 
 LOCK TABLES `participacionalumno` WRITE;
 /*!40000 ALTER TABLE `participacionalumno` DISABLE KEYS */;
-INSERT INTO `participacionalumno` VALUES (1,'presencial',13,6,4,1),(3,'presencial',13,6,4,4);
+INSERT INTO `participacionalumno` VALUES (1,'presencial',13,6,4,1),(3,'presencial',13,6,4,4),(4,'presencial',12,6,4,5),(5,'presencial',14,6,4,6),(6,'presencial',12,6,4,3);
 /*!40000 ALTER TABLE `participacionalumno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -474,7 +474,7 @@ CREATE TABLE `persona` (
   `email` text NOT NULL,
   `telefono` char(10) NOT NULL,
   PRIMARY KEY (`idPersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -483,7 +483,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (13,'12346543','Claudia Alejandra','Briceño Pulache','Masculino','Los Planos       ','Correo@correo.com ','615445'),(14,'1122325','Claudia Alejandra','Rosales','Masculino','Los Planos              ','Correo@correo.com ','123123'),(15,'7185785','Juan','Luna','MASCULINO','jr. Alisos','co','95848758'),(16,'7185786','Juan','Luna','MASCULINO','jr. Alisos','co','95848758'),(17,'96365488','Julio','Medina Luna','Masculino','Av. Los Angeles  ','Correo@correo.com ','963589644'),(18,'14569777','Mario','Rosales Rosas','Masculino','Av. Los Angeles ','Correo@correo.com ','963963963');
+INSERT INTO `persona` VALUES (13,'12346543','Claudia Alejandra','Briceño Pulache','Masculino','Los Planos       ','Correo@correo.com ','615445'),(14,'1122325','Claudia Alejandra','Rosales','Masculino','Los Planos              ','Correo@correo.com ','123123'),(15,'7185785','Juan','Luna','MASCULINO','jr. Alisos','co','95848758'),(16,'7185786','Juan','Luna','MASCULINO','jr. Alisos','co','95848758'),(17,'96365488','Julio','Medina Luna','Masculino','Av. Los Angeles  ','Correo@correo.com ','963589644'),(18,'14569777','Mario','Rosales Rosas','Masculino','Av. Los Angeles ','Correo@correo.com ','963963963'),(19,'71658894','Miguel','Silva Zapata','MASCULINO','AV. los programadores','miguel@dev.com','963256541');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -677,6 +677,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `nombre_grupo`,
  1 AS `idinvitacion`,
  1 AS `idEventosrealizados`,
+ 1 AS `nombre_evento`,
  1 AS `estado`*/;
 SET character_set_client = @saved_cs_client;
 
@@ -981,6 +982,34 @@ update alumnogrupo set fecha_inscripcion=fechaInscr,estado=estadoA where idalumn
  SELECT 5 valor;
 end if;
 end if;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `proc_insertaParticipacion` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_insertaParticipacion`(tipoparticipacion varchar(25), idAlumnog int,idUsu int, idSemest int, idInv int)
+begin
+if(select count(*) from participacionalumno where idinvitacion=idInv and idAlumnoGrupo=idAlumnog)>0 then
+select 0 valor;
+else
+if(idSemest=0)then
+insert into participacionalumno values(null,tipoparticipacion,idAlumnog,idUsu,null,idInv);
+else
+insert into participacionalumno values(null,tipoparticipacion,idAlumnog,idUsu,idSemest,idInv);
+end if;
+select 1 valor;
+END IF;
 end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1311,7 +1340,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vista_asistenciaalumno` AS select `a`.`idAlumnoGrupo` AS `idAlumnoGrupo`,`gu`.`idgrupo_universitario` AS `idgrupo_universitario`,`gu`.`nombre_grupo` AS `nombre_grupo`,`i`.`idinvitacion` AS `idinvitacion`,`i`.`idEventosrealizados` AS `idEventosrealizados`,`func_EstadoParticipacionAlumno`(`i`.`idinvitacion`,`a`.`idAlumnoGrupo`) AS `estado` from ((`alumnogrupo` `a` left join `grupo_universitario` `gu` on((`a`.`idgrupo_universitario` = `gu`.`idgrupo_universitario`))) join `invitacion` `i`) where (`gu`.`idgrupo_universitario` is not null) order by `a`.`idAlumnoGrupo` */;
+/*!50001 VIEW `vista_asistenciaalumno` AS select `a`.`idAlumnoGrupo` AS `idAlumnoGrupo`,`gu`.`idgrupo_universitario` AS `idgrupo_universitario`,`gu`.`nombre_grupo` AS `nombre_grupo`,`i`.`idinvitacion` AS `idinvitacion`,`er`.`idEventosrealizados` AS `idEventosrealizados`,`er`.`nombre_evento` AS `nombre_evento`,`func_EstadoParticipacionAlumno`(`i`.`idinvitacion`,`a`.`idAlumnoGrupo`) AS `estado` from (((`alumnogrupo` `a` left join `grupo_universitario` `gu` on((`a`.`idgrupo_universitario` = `gu`.`idgrupo_universitario`))) join `invitacion` `i` on((`i`.`idgrupo_universitario` = `gu`.`idgrupo_universitario`))) join `eventos_realizados` `er` on((`er`.`idEventosrealizados` = `i`.`idEventosrealizados`))) where (`gu`.`idgrupo_universitario` is not null) order by `a`.`idAlumnoGrupo` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1469,4 +1498,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-08  0:25:07
+-- Dump completed on 2021-11-08 23:10:39
