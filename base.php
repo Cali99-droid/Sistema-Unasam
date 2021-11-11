@@ -70,7 +70,10 @@
 
                 </div>
             </div>
-            <h3>Espacio para añadir contenido</h3>
+            <div>
+                <h3>Espacio para añadir contenido</h3>
+            </div>
+
         </div>
     </div>
     <script src="build/js/bundle.min.js"></script>

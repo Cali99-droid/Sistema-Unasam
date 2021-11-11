@@ -36,8 +36,9 @@
 
                     <a href="index.php" title="Tnicio"><i class='bx bxs-home' style='color:#e1e1e1'></i>Inicio</a>
                     <a href="grupos.php" title="Grupos"><i class='bx bx-group'></i>Grupos</a>
-                    <a href="beneficios.php" title="Beneficios"><i class='bx bx-medal'></i> Beneficios</a>
+                    <a href="beneficios.php" title="Beneficios"><i class='bx bx-medal'></i>Beneficios</a>
                     <a href="eventos.php" title="Eventos"><i class='bx bxs-calendar'></i>Eventos</a>
+                    <a href="reportes.php" title="Eventos"><i class="bx bxs-file"></i>Reportes</a>
                     <div class="item">
                         <a href="javascript:void(0)" class="administrador" onclick="mostrarAdmin()"><i class="fas fa-user-tie" title="Administrador"></i>Administrador</a>
                         <div class="sub-item " id="sub-item">
