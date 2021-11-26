@@ -97,7 +97,7 @@ class Grupo
     public function setImagen($imagen)
     {
 
-        if (!is_null($this->idgrupo_universitario)) {
+        if (!is_null($this->id)) {
             //comprobar si existe el archivo
             $this->borrarImagen();
         }

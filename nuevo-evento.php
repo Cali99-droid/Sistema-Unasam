@@ -1,11 +1,5 @@
 <?php
 
-use App\Evento;
-
-require 'includes/app.php';
-$organizadores = Evento::getOrganizadores();
-
-incluirTemplate('barra');
 ?>
 
 <div class="contenedor-grupos">
@@ -80,10 +74,3 @@ incluirTemplate('barra');
 
     });
 </script>
-
-
-
-<?php
-
-
-incluirTemplate('cierre');
