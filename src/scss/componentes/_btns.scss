@@ -1,0 +1,58 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.btn-asignar {
+  border: none;
+  background-color: v.$azul;
+  color: v.$blanco;
+  padding: 0.5rem;
+
+  border-radius: 5px;
+
+  &:hover {
+    background-color: darken($color: v.$azul, $amount: 8);
+    cursor: pointer;
+  }
+}
+.btn_mod {
+  display: inline-block;
+}
+/*** esto pertenece a el formulario de roles 'roles/form.php' ****/
+.privilegios {
+  div {
+    text-transform: uppercase;
+    display: grid;
+    grid-template-columns: repeat(2, 0.5fr);
+    align-items: center;
+  }
+}
+.contenido-form-per {
+  width: 95%;
+  margin: 0 auto;
+  @include m.tablet {
+    width: 50%;
+    margin: 0 auto;
+  }
+  h3 {
+    font-weight: v.$bold;
+  }
+  .formulario-perfil {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+    @include m.tablet {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    input,
+    select {
+      padding: 12px 20px;
+    }
+
+    label {
+      font-weight: v.$bold;
+      margin: 8px 0;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,600;1,700&display=swap");
+
+// Fuentes
+$fuente_principal: "Open Sans", sans-serif;
+
+// Tamaño de Media Queries
+$telefono: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+
+// Colores
+$azul: #2266b4; //#229eb4; //#0052B8; #2266b4
+$negro: #000000;
+$amarillo: #007b7c; //#e08709;
+$rojo: #d38fc9;
+$verde: #71b100;
+$verdeClaro: #73e047cb;
+$blanco: #ffffff;
+$gris: #e1e1e1;
+$grisOscuro: #333333;
+$grisMedio: #fff; //#0052B8;//rgb(92, 92, 92); #0053b8be
+
+$separacion: 5rem;
+
+// Fuentes
+
+$delgada: 300;
+$regular: 400;
+$bold: 700;
+$black: 900;

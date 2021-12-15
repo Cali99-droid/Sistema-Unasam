@@ -80,3 +80,197 @@
 </body>
 
 </html>
+
+
+
+<script type="text/javascript">
+    google.charts.load('current', {
+        'packages': ['corechart']
+    });
+    google.charts.load('current', {
+        'packages': ['bar']
+    });
+    google.charts.load('current', {
+        'packages': ['bar']
+    });
+    google.charts.load("current", {
+        packages: ["corechart"]
+    });
+    google.charts.load("current", {
+        packages: ["corechart"]
+    });
+    google.charts.load("current", {
+        packages: ["corechart"]
+    });
+
+    google.charts.setOnLoadCallback(dibujaBeneficiosPen);
+    google.charts.setOnLoadCallback(dibujaEstadoBeneficios);
+    google.charts.setOnLoadCallback(dibujaFecha);
+    google.charts.setOnLoadCallback(dibujaTop);
+    google.charts.setOnLoadCallback(drawStuff);
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Facultad', 'Participaciones'],
+            <?php
+            while ($fila = $participantes->fetch_assoc()) {
+                echo "['" . $fila["nombre"] . "'," . $fila["cantidad"] . "],";
+            }
+            ?>
+        ]);
+
+        var options = {
+            title: 'Participantes por Grupo'
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+
+    }
+
+
+    function drawStuff() {
+        var data = new google.visualization.arrayToDataTable([
+            ['Grupo', 'Cantidad de Invitaciones'],
+            <?php
+            while ($fila = $invitaciones->fetch_assoc()) {
+                echo "['" . $fila["nombre_grupo"] . "'," . $fila["CantidadInvitaciones"] . "],";
+            }
+            ?>
+
+        ]);
+
+        var options = {
+            width: 350,
+            legend: {
+                position: 'none'
+            },
+            chart: {
+                title: 'Invitaciones por Grupo',
+                subtitle: 'Cantidad de Invitaciones'
+            },
+            axes: {
+                x: {
+                    0: {
+
+                    } // Top x-axis.
+                }
+            },
+            bar: {
+                groupWidth: "90%"
+            }
+        };
+
+        var chart2 = new google.charts.Bar(document.getElementById('piechart1'));
+        // Convert the Classic options to Material options.
+        chart2.draw(data, google.charts.Bar.convertOptions(options));
+    };
+
+    function dibujaTop() {
+        var data = new google.visualization.arrayToDataTable([
+            ['Escuelas', 'Cantidad de Participaciones', {
+                role: 'style'
+            }],
+            <?php
+            while ($fila = $top->fetch_assoc()) {
+                echo "['" . $fila["nombre_escuela"] . "'," . $fila["cantidad"] . ",'random_color()'],";
+            }
+            ?>
+
+        ]);
+
+        var options = {
+            title: 'Chess opening moves',
+            width: 300,
+            legend: {
+                position: 'none'
+            },
+            chart: {
+                title: 'Participaciones',
+                subtitle: 'Cantidad de Participación por escuelas'
+            },
+            bars: 'horizontal', // Required for Material Bar Charts.
+            axes: {
+                x: {
+                    0: {
+                        side: 'top',
+                        label: 'Porcentaje'
+                    } // Top x-axis.
+                }
+            },
+            bar: {
+                groupWidth: "90%"
+            }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('piechart2'));
+        chart.draw(data, options);
+    };
+
+    function dibujaFecha() {
+        var data = google.visualization.arrayToDataTable([
+            ['X', 'Cantidad de Participaciones'],
+            <?php
+            while ($fila = $particionesFecha->fetch_assoc()) {
+                echo "['" . $fila["Inicio"] . "'," . $fila["Cantidad"] . "],";
+            }
+            ?>
+
+        ]);
+
+        var options = {
+            legend: 'none',
+            colors: ['#15A0C8'],
+            pointSize: 30,
+            pointShape: {
+                type: 'circle',
+                rotation: 180
+            }
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('piechart3'));
+        chart.draw(data, options);
+    }
+
+    function dibujaEstadoBeneficios() {
+        var data = google.visualization.arrayToDataTable([
+            ['Beneficios', 'Catidad de Completados'],
+            <?php
+            while ($fila = $estadoBeneficios->fetch_assoc()) {
+                echo "['" . $fila["nombre"] . "'," . $fila["cantidad"] . "],";
+            }
+            ?>
+
+        ]);
+
+        var options = {
+            title: 'Beneficios Cumplidos',
+            pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart4'));
+        chart.draw(data, options);
+    }
+
+
+    function dibujaBeneficiosPen() {
+        var data = google.visualization.arrayToDataTable([
+            ['Beneficios', 'Catidad de Completados'],
+            <?php
+            while ($fila = $beneficiosPendientes->fetch_assoc()) {
+                echo "['" . $fila["nombre"] . "'," . $fila["cantidad"] . "],";
+            }
+            ?>
+
+        ]);
+
+        var options = {
+            title: 'Beneficios Pendientes',
+            pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart5'));
+        chart.draw(data, options);
+    }
+</script>

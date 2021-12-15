@@ -1,26 +1,9 @@
-<?php
+<?php 
 
 require 'funciones.php';
-require 'config/database.php';
+require 'database.php';
 require __DIR__ . '/../vendor/autoload.php';
-
-//conectar a la base de dato
-$db = conectarDB();
-
-use App\Grupo;
-use App\Beneficio;
-use App\Estudiante;
-use App\TipoGrupo;
-use App\Evento;
-use App\Invitacion;
-use App\User;
-use App\Semestre;
-
-Grupo::setDB($db);
-Beneficio::setDB($db);
-Estudiante::setDB($db);
-TipoGrupo::setDB($db);
-Evento::setDB($db);
-User::setDB($db);
-Semestre::setDB($db);
-Invitacion::setDB($db);
+date_default_timezone_set("America/Lima");
+// Conectarnos a la base de datos
+use Model\ActiveRecord;
+ActiveRecord::setDB($db);

@@ -1,4 +1,3 @@
 node_modules
-
-
 /vendor/
+includes/database.php

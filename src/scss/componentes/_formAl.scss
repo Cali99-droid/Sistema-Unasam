@@ -1,0 +1,24 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+.contenedor-al {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+
+ 
+  @include m.tablet {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    width: 100%;
+  }
+  .columna-al {
+    div {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .esc-sel {
+    width: 100%;
+  }
+}

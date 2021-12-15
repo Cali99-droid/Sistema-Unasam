@@ -1,11 +1,11 @@
 <?php
-require 'includes/app.php';
 
-use App\Estudiante;
-use App\TipoGrupo;
-use App\Beneficio;
-use App\Evento;
-use App\User;
+use Model\Integrante;
+use Model\TipoGrupo;
+
+
+
+
 
 //$estudiante=new Estudiante();
 
@@ -17,20 +17,20 @@ $cod = $_POST['cod'];
 switch ($cod) {
     case 1:
         //buscar estudiantes
-        echo json_encode(Estudiante::find($_POST['dni']));
+        echo json_encode(Integrante::where('dni', $_POST['dni']));
         break;
     case 2:
         //buacar tipo
-        echo json_encode(TipoGrupo::getTipo($_POST['id']));
+        // echo json_encode(TipoGrupo::getTipo($_POST['id']));
         break;
         //traer beneficio
     case 3:
-        echo json_encode(Beneficio::find($_POST['id']));;
+        //echo json_encode(Beneficio::find($_POST['id']));;
         break;
     case 4:
-        echo json_encode(Evento::find($_POST['id']));;
+        // echo json_encode(Evento::find($_POST['id']));;
         break;
     case 5:
-        echo json_encode(User::find($_POST['dni']));
+        // echo json_encode(User::find($_POST['dni']));
         break;
 }

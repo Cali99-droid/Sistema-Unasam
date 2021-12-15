@@ -1,0 +1,19 @@
+@import "base/normalize";
+@import "base/variables";
+@import "base/mixins";
+@import "base/globales";
+@import "base/utilidades";
+@import "layout/barra";
+@import "layout/principal";
+@import "layout/cuerpo";
+@import "base/tablas";
+@import "base/botones";
+@import "base/alertas";
+/*Internas*/
+@import "internas/grupos";
+@import "internas/beneficios";
+@import "internas/usuarios";
+@import "internas/grupo";
+@import "internas/integrante";
+@import "internas/formEventos";
+@import "internas/tabs";

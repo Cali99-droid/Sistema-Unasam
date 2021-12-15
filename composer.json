@@ -1,19 +1,24 @@
 {
-    "name": "carlos/sistema",
-    "description": "sistema unasam",
+    "name": "carlosorellano/app_unasam",
+    "description": "proyecto php 8 mvc gulp sass unasam",
     "type": "project",
+    
+    "autoload": {
+        "psr-4": {
+            "MVC\\": "./",
+            "Controllers\\": "./controllers",
+            "Model\\": "./models",
+            "Classes\\" : "./classes"
+        }
+    },
+    "require": {
+        "intervention/image": "^2.6",
+        "phpmailer/phpmailer": "^6.5"
+    },
     "authors": [
         {
             "name": "Carlos Orellano",
             "email": "orellano428@gmail.com"
         }
-    ],
-    "require": {
-        "intervention/image": "^2.6"
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "./classes"
-        }
-    }
+    ]
 }

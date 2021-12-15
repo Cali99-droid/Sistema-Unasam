@@ -1,0 +1,91 @@
+.contenedor-tabla {
+  overflow-x: scroll;
+  width: 99.2%;
+  height: 40rem;
+
+  padding-top: 3rem;
+  @include tablet {
+    overflow-x: auto;
+    width: 99.2%;
+    height: 40rem;
+    overflow-x: auto;
+    padding-top: 3rem;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 95%;
+    border: 1px solid #ddd;
+    margin: 0 auto;
+    thead {
+      table-layout: fixed;
+      width: auto;
+    }
+    th {
+      background-color: $azul;
+      color: $blanco;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 16px;
+
+      .enlace {
+        text-decoration-line: underline;
+        color: rgb(65, 18, 0);
+      }
+    }
+
+    .acciones {
+      display: flex;
+      i {
+        margin-right: 2rem;
+        cursor: pointer;
+      }
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  }
+}
+
+.contenedor-tabla {
+  &::-webkit-scrollbar {
+    width: 10px; /* Tamaño del scroll en vertical */
+    height: 10px; /* Tamaño del scroll en horizontal */
+
+    /* Ocultar scroll */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+  }
+
+  .label,
+  .label-ok {
+    background-color: #35547f;
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .label-ok {
+    background-color: #0095ff;
+    padding-right: 2rem;
+  }
+}
